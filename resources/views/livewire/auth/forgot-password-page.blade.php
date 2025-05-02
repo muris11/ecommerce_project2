@@ -4,11 +4,11 @@
         <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <div class="p-4 sm:p-7">
             <div class="text-center">
-              <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Forgot password?</h1>
+              <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Lupa Password?</h1>
               <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Remember your password?
+                Ingat Kata Sandi Anda?
                 <a wire:navigate class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/login">
-                  Sign in here
+                  Login Disini
                 </a>
               </p>
             </div>
@@ -19,7 +19,7 @@
                 <div class="grid gap-y-4">
                   <!-- Form Group -->
                   <div>
-                    <label for="email" class="block text-sm mb-2 dark:text-white">Email address</label>
+                    <label for="email" class="block text-sm mb-2 dark:text-white">Alamat Email</label>
                     <div class="relative">
                       <input type="email" id="email" name="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required aria-describedby="email-error">
                       <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
