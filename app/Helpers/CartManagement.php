@@ -33,7 +33,7 @@ class CartManagement
                 $cart_items[] = [
                     'product_id' => $product->id,
                     'name' => $product->name,
-                    'image' => $product->images,
+                    'image' => $product->image[0] ?? null,
                     'quantity' => 1,
                     'unit_amount' => $product->price,
                     'total_amount' => $product->price,
@@ -46,6 +46,46 @@ class CartManagement
         return count($cart_items);
     }
 
+        // Add item to cart with qty
+        static public function addItemToCartWithQty($product_id, $qty = 1)
+        {
+            $cart_items = self::getCartItemsFromCookie();
+    
+            $existing_item_key = null;
+    
+            foreach ($cart_items as $key => $item) {
+                if ($item['product_id'] == $product_id) {
+                    $existing_item_key = $key;
+                    break;
+                }
+            }
+    
+            if ($existing_item_key !== null) {
+                // Item already exists, increment quantity
+                $cart_items[$existing_item_key]['quantity'] = $qty;
+                $cart_items[$existing_item_key]['total_amount'] =
+                    $cart_items[$existing_item_key]['quantity'] * $cart_items[$existing_item_key]['unit_amount'];
+            } else {
+                // Item doesn't exist, add new item
+                $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'image']);
+                if ($product) {
+                    $cart_items[] = [
+                        'product_id' => $product->id,
+                        'name' => $product->name,
+                        'image' => $product->images,
+                        'quantity' => $qty,
+                        'unit_amount' => $product->price,
+                        'total_amount' => $product->price,
+                    ];
+                }
+            }
+    
+            self::addCartItemsToCookie($cart_items);
+    
+            return count($cart_items);
+        }
+
+    
     // Remove item from cart
     static public function removeCartItem($product_id)
     {
@@ -125,7 +165,12 @@ class CartManagement
 
     // Calculate cart total
     static public function calculateGrandTotal($items)
-    {
-        return array_sum(array_column($items, 'total_amount'));
-    }
+{
+    if (!is_array($items)) return 0;
+
+    // Filter hanya elemen array yang valid
+    $filtered = array_filter($items, fn($item) => is_array($item) && isset($item['total_amount']));
+
+    return array_sum(array_column($filtered, 'total_amount'));
+}
 }

@@ -60,7 +60,7 @@
               </div>
               <div class="flex flex-wrap items-center gap-4">
                 <button wire:click="addToCart({{ $product->id }})" class="w-full p-4 bg-blue-500 rounded-md lg:w-auto dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
-                  <span wire:loading.remove>Tambah Ke Keranjang</span><span wire:loading>Menambahkah..</span>
+                  <span wire:loading.remove wire:target="addToCart({{ $product->id }})">Tambah Ke Keranjang</span><span wire:loading wire:target="addToCart({{ $product->id }})">Menambahkah..</span>
               </button>
               </div>
             </div>
