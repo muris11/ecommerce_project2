@@ -159,9 +159,9 @@
                 <table class="w-full">
                     <thead>
                         <tr>
-                            <th class="text-left font-semibold">Product</th>
-                            <th class="text-left font-semibold">Price</th>
-                            <th class="text-left font-semibold">Quantity</th>
+                            <th class="text-left font-semibold">Produk</th>
+                            <th class="text-left font-semibold">Harga</th>
+                            <th class="text-left font-semibold">Kuantitas</th>
                             <th class="text-left font-semibold">Total</th>
                         </tr>
                     </thead>
