@@ -221,7 +221,7 @@
         <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-0">
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 md:grid-cols-2">
 
-                @foreach ($brands as $brand )
+                @foreach ($brands->take(8) as $brand )
                 <div class="bg-white rounded-lg shadow-md dark:bg-gray-800" wire:key="{{ $brand->id }}">
                     <a href="/products?selected_brands[0]={{ $brand->id }}" class="">
                         <img src="{{ url('storage', $brand->image) }}" alt="{{$brand->name}}"

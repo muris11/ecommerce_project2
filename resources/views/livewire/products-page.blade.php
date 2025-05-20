@@ -82,8 +82,8 @@
                                 <select wire:model.live="sort"
                                     class="block w-75 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
                                     <option value="latest">
-                                        Urutkan berdasarkan yang terbaru</option>
-                                    <option value="price">Urutkan berdasarkan Harga</option>
+                                        Urutan Terbaru</option>
+                                    <option value="price">Urutan Harga Terendah</option>
                                 </select>
                             </div>
                         </div>
