@@ -95,3 +95,76 @@ Thank you for considering contributing to this project! Please follow the [contr
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Ecommerce Projek 2
+
+## Buku Panduan dan Instalasi
+
+### Persyaratan Sistem
+
+-   PHP >= 7.4
+-   Composer
+-   MySQL
+-   Web server seperti Apache atau Nginx
+-   Node.js dan npm (untuk pengelolaan aset frontend)
+
+### Langkah Instalasi
+
+1. Clone repository ini:
+
+    ```bash
+    git clone https://github.com/username/ecommerce-projek2.git
+    cd ecommerce-projek2
+    ```
+
+2. Install dependensi PHP menggunakan Composer:
+
+    ```bash
+    composer install
+    ```
+
+3. Salin file `.env.example` menjadi `.env` dan sesuaikan konfigurasi database:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+4. Generate application key:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5. Migrasi database:
+
+    ```bash
+    php artisan migrate
+    ```
+
+6. Install dependensi frontend:
+
+    ```bash
+    npm install
+    ```
+
+7. Compile aset frontend:
+
+    ```bash
+    npm run dev
+    ```
+
+8. Jalankan server lokal:
+
+    ```bash
+    php artisan serve
+    ```
+
+9. Akses aplikasi di browser:
+    ```
+    http://localhost:8000
+    ```
+
+### Demo
+
+Anda dapat melihat demo aplikasi ini melalui tautan berikut:
+[Demo Ecommerce Projek 2](https://demo-ecommerce-projek2.example.com)
