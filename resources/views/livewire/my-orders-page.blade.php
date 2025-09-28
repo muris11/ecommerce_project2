@@ -11,17 +11,17 @@
                                 <thead>
                                     <tr>
                                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                            Order ID</th>
+                                            ID Pesanan</th>
                                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Tanggal</th>
                                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                            Status Order</th>
+                                            Status Pesanan</th>
                                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Status Pembayaran</th>
                                         <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Total</th>
                                         <th class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
-                                            Action</th>
+                                            Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200">
@@ -34,10 +34,10 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                 @php
                                                     $statusClasses = match ($order->status) {
-                                                        'new' => 'bg-blue-100 text-blue-800',
-                                                        'processing' => 'bg-yellow-100 text-yellow-800',
-                                                        'shipped' => 'bg-green-100 text-green-800',
-                                                        'delivered' => 'bg-green-100 text-green-800',
+                                                        'new' => 'bg-blue-100 text-blue-800', // Baru
+                                                        'processing' => 'bg-yellow-100 text-yellow-800', // Diproses
+                                                        'shipped' => 'bg-green-100 text-green-800', // Dikirim
+                                                        'delivered' => 'bg-green-100 text-green-800', // Diterima
                                                         default => 'bg-red-100 text-red-800',
                                                     };
                                                 @endphp

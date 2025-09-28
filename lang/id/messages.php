@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'dashboard' => 'Dasbor',
+    'dashboard' => 'Dasborboard',
     'products' => 'Produk',
     'categories' => 'Kategori',
     'brands' => 'Merek',

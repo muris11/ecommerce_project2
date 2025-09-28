@@ -33,16 +33,15 @@ class ProductDetailPage extends Component
 
         //add product to cart method
         public function addToCart($product_id) {
-            $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity);
-    
-            $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
-    
-            $this->alert('success', 'Berhasil menambahkan produk ke keranjang',[
-                'position' => 'bottom-end',
-                'timer' => 3000,
-                'toast' => true
-            ]);
-        }
+    $product = Product::findOrFail($product_id);
+    $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $product->price);
+    $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+    $this->alert('success', 'Berhasil menambahkan produk ke keranjang',[
+        'position' => 'bottom-end',
+        'timer' => 3000,
+        'toast' => true
+    ]);
+}
 
     public function render()
     {
