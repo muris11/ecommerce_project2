@@ -26,8 +26,8 @@ Follow these steps to set up the project locally:
 1. **Clone the Repository**:
 
     ```bash
-    git clone https://github.com/your-username/ecommerce-projek2.git
-    cd ecommerce-projek2
+    git clone https://github.com/muris11/ecommerce_project2.git
+    cd ecommerce_project2
     ```
 
 2. **Install Dependencies**:
@@ -113,8 +113,8 @@ This project is open-sourced software licensed under the [MIT license](https://o
 1. Clone repository ini:
 
     ```bash
-    git clone https://github.com/username/ecommerce-projek2.git
-    cd ecommerce-projek2
+    git clone https://github.com/muris11/ecommerce_project2.git
+    cd ecommerce_project2
     ```
 
 2. Install dependensi PHP menggunakan Composer:
