@@ -29,7 +29,7 @@ class OrderPlaced extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Placed - Munir Jaya Abadi',
+            subject: '🛍️ Pesanan Berhasil Dibuat - Munir Jaya Abadi',
         );
     }
 
@@ -39,7 +39,7 @@ class OrderPlaced extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.orders.placed',
+            view: 'mail.orders.placed',
             with: [
                 'url' => route('my-orders.show', $this->order),
             ]

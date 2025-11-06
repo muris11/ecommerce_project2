@@ -10,10 +10,13 @@ class ListBrands extends ListRecords
 {
     protected static string $resource = BrandResource::class;
 
+    protected ?string $heading = 'Daftar Merek';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah Merek'),
         ];
     }
 }

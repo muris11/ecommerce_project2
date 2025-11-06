@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Munir Jaya Abadi')
             ->colors([
                 'primary' => Color::Amber,
             ])

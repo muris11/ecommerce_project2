@@ -33,7 +33,7 @@ class CartManagement
                 $cart_items[] = [
                     'product_id' => $product->id,
                     'name' => $product->name,
-                    'image' => $product->image,
+                    'image' => $product->first_image,
                     'quantity' => 1,
                     'unit_amount' => $product->price,
                     'total_amount' => $product->price,
@@ -46,44 +46,48 @@ class CartManagement
         return count($cart_items);
     }
 
-        // Add item to cart with qty
-        static public function addItemToCartWithQty($product_id, $qty = 1)
-        {
-            $cart_items = self::getCartItemsFromCookie();
-    
-            $existing_item_key = null;
-    
-            foreach ($cart_items as $key => $item) {
-                if ($item['product_id'] == $product_id) {
-                    $existing_item_key = $key;
-                    break;
-                }
+    // Add item to cart with qty
+    static public function addItemToCartWithQty($product_id, $qty = 1)
+    {
+        $cart_items = self::getCartItemsFromCookie();
+
+        $existing_item_key = null;
+
+        foreach ($cart_items as $key => $item) {
+            if ($item['product_id'] == $product_id) {
+                $existing_item_key = $key;
+                break;
             }
-    
-            if ($existing_item_key !== null) {
-                // Item already exists, increment quantity
-                $cart_items[$existing_item_key]['quantity'] = $qty;
-                $cart_items[$existing_item_key]['total_amount'] =
-                    $cart_items[$existing_item_key]['quantity'] * $cart_items[$existing_item_key]['unit_amount'];
-            } else {
-                // Item doesn't exist, add new item
-                $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'image']);
-                if ($product) {
-                    $cart_items[] = [
-                        'product_id' => $product->id,
-                        'name' => $product->name,
-                        'image' => $product->image,
-                        'quantity' => $qty,
-                        'unit_amount' => $product->price,
-                        'total_amount' => $product->price,
-                    ];
-                }
-            }
-    
-            self::addCartItemsToCookie($cart_items);
-    
-            return count($cart_items);
         }
+
+        if ($existing_item_key !== null) {
+            // Item already exists, override quantity
+            $qty = max(1, (int) $qty);
+            $cart_items[$existing_item_key]['quantity'] = $qty;
+            $cart_items[$existing_item_key]['total_amount'] =
+                $qty * $cart_items[$existing_item_key]['unit_amount'];
+        } else {
+            // Item doesn't exist, add new item
+            $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'image']);
+            if ($product) {
+                $unitAmount = (float) $product->price;
+                $qty = max(1, (int) $qty);
+
+                $cart_items[] = [
+                    'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->first_image,
+                    'quantity' => $qty,
+                    'unit_amount' => $unitAmount,
+                    'total_amount' => $unitAmount * $qty,
+                ];
+            }
+        }
+
+        self::addCartItemsToCookie($cart_items);
+
+        return count($cart_items);
+    }
 
     
     // Remove item from cart
@@ -110,9 +114,13 @@ class CartManagement
         Cookie::queue('cart_items', json_encode($cart_items), 60 * 24 * 30); // 30 hari
     }
 
-    // Clear cart items from cookie
-    static public function clearCartItems()
-    {
+    //clear cart items from cookie
+    static public function clearCartItems(){
+        Cookie::queue(Cookie::forget('cart_items'));
+    }
+
+    //clear cart items from cookies (alias)
+    static public function clearCartItemsFromCookies(){
         Cookie::queue(Cookie::forget('cart_items'));
     }
 
@@ -173,4 +181,27 @@ class CartManagement
 
     return array_sum(array_column($filtered, 'total_amount'));
 }
+
+    // Fix cart items with broken images
+    static public function fixCartImages()
+    {
+        $cart_items = self::getCartItemsFromCookie();
+        $updated = false;
+        
+        foreach ($cart_items as $key => $item) {
+            if (isset($item['product_id'])) {
+                $product = Product::find($item['product_id']);
+                if ($product && $item['image'] !== $product->first_image) {
+                    $cart_items[$key]['image'] = $product->first_image;
+                    $updated = true;
+                }
+            }
+        }
+        
+        if ($updated) {
+            self::addCartItemsToCookie($cart_items);
+        }
+        
+        return $cart_items;
+    }
 }

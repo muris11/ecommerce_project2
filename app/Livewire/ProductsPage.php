@@ -12,14 +12,15 @@ use Livewire\Attributes\Title;
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Navbar;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Traits\WithAlert;
 
 
-#[Title('Products - Munir Jaya Abadi')]
+#[Title('Produk - Munir Jaya Abadi')]
 class ProductsPage extends Component{
 
     use WithPagination;
 
-    use LivewireAlert;
+    use LivewireAlert, WithAlert;
 
 
     #[Url]
@@ -35,7 +36,7 @@ class ProductsPage extends Component{
     public $on_sale;
 
     #[Url]
-    public $price_range = 1000000000;
+    public $price_range = 10000000;
 
     #[Url]
     public $sort = 'latest';
@@ -46,16 +47,15 @@ class ProductsPage extends Component{
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
-        $this->alert('success', 'Berhasil menambahkan produk ke keranjang',[
-            'position' => 'bottom_end',
-            'timer' => 3000,
-            'toast' => true
-        ]);
+        $this->alertSuccess('Berhasil menambahkan produk ke keranjang');
     }
     
     public function render()
     {
-        $productQuery = Product::query()->where('is_active', 1);
+        // Select only needed columns for better performance
+        $productQuery = Product::query()
+            ->select('id', 'name', 'slug', 'image', 'price', 'is_active', 'is_featured', 'on_sale', 'category_id', 'brand_id')
+            ->where('is_active', 1);
 
         if(!empty($this->selected_categories)) {
             $productQuery->whereIn('category_id', $this->selected_categories);
@@ -85,10 +85,19 @@ class ProductsPage extends Component{
             $productQuery->orderBy('price');
         }
 
+        // Cache brands and categories for better performance
+        $brands = cache()->remember('filter_brands', 3600, function () {
+            return Brand::where('is_active', 1)->get(['id', 'name', 'slug']);
+        });
+
+        $categories = cache()->remember('filter_categories', 3600, function () {
+            return Category::where('is_active', 1)->get(['id', 'name', 'slug']);
+        });
+
         return view('livewire.products-page', [
             'products' => $productQuery->paginate(9),
-            'brands' => Brand::where('is_active', 1)->get(['id', 'name', 'slug']),
-            'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
+            'brands' => $brands,
+            'categories' => $categories,
         ]);
     }
 }

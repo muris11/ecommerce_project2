@@ -18,22 +18,25 @@ class Order extends Model
         'currency',
         'shipping_amount',
         'shipping_method',
+        'shipping_destination_id',
+        'shipping_destination_name',
+        'shipping_courier',
+        'shipping_service',
+        'shipping_cost',
+        'shipping_etd',
+        'waybill',
         'notes',
     ];
 
-    public function user() {
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function items() {
+    public function items(){
         return $this->hasMany(OrderItem::class);
     }
 
     public function address(){
         return $this->hasOne(Address::class);
-    }
-
-    public function orders() {
-        return $this->hasMany(Order::class);
     }
 }

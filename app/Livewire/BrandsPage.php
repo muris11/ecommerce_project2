@@ -6,7 +6,7 @@ use App\Models\Brand;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Halaman Merk - Munir Jaya Abadi')]
+#[Title('Halaman Merek - Munir Jaya Abadi')]
 class BrandsPage extends Component
 {
     public function render()

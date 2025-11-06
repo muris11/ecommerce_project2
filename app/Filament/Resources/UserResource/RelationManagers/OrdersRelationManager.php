@@ -21,6 +21,12 @@ class OrdersRelationManager extends RelationManager
 {
     protected static string $relationship = 'orders';
 
+    protected static ?string $title = 'Riwayat Pesanan';
+
+    protected static ?string $label = 'Pesanan';
+
+    protected static ?string $pluralLabel = 'Pesanan';
+
     public function form(Form $form): Form
     {
         return $form
@@ -35,60 +41,130 @@ class OrdersRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 TextColumn::make('id')
-                ->label('Order ID')
-                ->searchable(),
+                    ->label('ID Pesanan')
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('grand_total')
-                ->money('IDR'),
+                    ->label('Total Pembayaran')
+                    ->money('IDR')
+                    ->sortable(),
+
+                TextColumn::make('shipping_amount')
+                    ->label('Ongkir')
+                    ->money('IDR')
+                    ->sortable()
+                    ->toggleable(),
 
                 TextColumn::make('status')
-                ->badge()
-                ->color(fn (string $state): string => match ($state){
-                    'new' => 'info',
-                    'processing' => 'warning',
-                    'shipped' => 'success',
-                    'delivered' => 'success',
-                    'canceled' => 'danger',
-                })
-                ->icon(fn (string $state): string => match ($state){
-                    'new' => 'heroicon-m-sparkles',
-                    'processing' => 'heroicon-m-arrow-path',
-                    'shipped' => 'heroicon-m-truck',
-                    'delivered' => 'heroicon-m-check-badge',
-                    'canceled' => 'heroicon-m-x-circle',
-                })
-                ->sortable(),
+                    ->label('Status Pesanan')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state){
+                        'new' => 'info',
+                        'processing' => 'warning',
+                        'shipped' => 'primary',
+                        'delivered' => 'success',
+                        'canceled' => 'danger',
+                    })
+                    ->icon(fn (string $state): string => match ($state){
+                        'new' => 'heroicon-m-sparkles',
+                        'processing' => 'heroicon-m-arrow-path',
+                        'shipped' => 'heroicon-m-truck',
+                        'delivered' => 'heroicon-m-check-badge',
+                        'canceled' => 'heroicon-m-x-circle',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'new' => 'Baru',
+                        'processing' => 'Diproses',
+                        'shipped' => 'Dikirim',
+                        'delivered' => 'Selesai',
+                        'canceled' => 'Dibatalkan',
+                        default => $state,
+                    })
+                    ->sortable(),
 
                 TextColumn::make('payment_method')
-                ->sortable()
-                ->searchable(),
+                    ->label('Metode Pembayaran')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'cod' => 'warning',
+                        'stripe' => 'success',
+                        'midtrans' => 'info',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'cod' => 'COD',
+                        'stripe' => 'Stripe',
+                        'midtrans' => 'Midtrans',
+                        default => strtoupper($state),
+                    })
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('payment_status')
-                ->sortable()
-                ->badge()
-                ->searchable(),
+                    ->label('Status Pembayaran')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'paid' => 'success',
+                        'failed' => 'danger',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'pending' => 'Menunggu',
+                        'paid' => 'Lunas',
+                        'failed' => 'Gagal',
+                        default => $state,
+                    })
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('created_at')
-                ->label('Order Date')
-                ->dateTime()
+                    ->label('Tanggal Pesanan')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Status Pesanan')
+                    ->options([
+                        'new' => 'Baru',
+                        'processing' => 'Diproses',
+                        'shipped' => 'Dikirim',
+                        'delivered' => 'Selesai',
+                        'canceled' => 'Dibatalkan',
+                    ]),
+                
+                Tables\Filters\SelectFilter::make('payment_status')
+                    ->label('Status Pembayaran')
+                    ->options([
+                        'pending' => 'Menunggu',
+                        'paid' => 'Lunas',
+                        'failed' => 'Gagal',
+                    ]),
             ])
             ->headerActions([
                 // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Action::make('View Order')
-                ->url(fn (Order $record):string => OrderResource::getUrl('view',['record' => $record]))
-                ->color('info')
-                ->icon('heroicon-o-eye'),
-                Tables\Actions\DeleteAction::make(),
+                Action::make('view_order')
+                    ->label('Lihat Detail')
+                    ->url(fn (Order $record):string => OrderResource::getUrl('view',['record' => $record]))
+                    ->color('info')
+                    ->icon('heroicon-o-eye'),
+                
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
                 ]),
-            ]);
+            ])
+            ->emptyStateHeading('Belum ada pesanan')
+            ->emptyStateDescription('Pengguna ini belum pernah melakukan pemesanan')
+            ->emptyStateIcon('heroicon-o-shopping-bag')
+            ->defaultSort('created_at', 'desc');
     }
 }

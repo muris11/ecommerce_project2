@@ -15,7 +15,8 @@ class CartPage extends Component
 
     public function mount()
     {
-        $items = CartManagement::getCartItemsFromCookie();
+        // Fix any broken cart images first
+        $items = CartManagement::fixCartImages();
         $this->cart_items = is_array($items) ? $items : [];
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }

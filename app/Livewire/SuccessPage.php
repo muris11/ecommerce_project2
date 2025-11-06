@@ -18,9 +18,9 @@ class SuccessPage extends Component
 
     public function render()
     {
-
         $latest_order = Order::with('address')->where('user_id', Auth::user()->id)->latest()->first();
 
+        // Handle Stripe payments
         if($this->session_id) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
             $session_info = Session::retrieve($this->session_id);
@@ -35,6 +35,33 @@ class SuccessPage extends Component
             }
         }
 
+        // Handle Midtrans payments
+        // For Midtrans, we assume if user reaches success page, payment was successful
+        if($latest_order && $latest_order->payment_method == 'midtrans' && $latest_order->payment_status == 'pending') {
+            $latest_order->payment_status = 'paid';
+            $latest_order->save();
+            
+            \Illuminate\Support\Facades\Log::info('Order payment status updated to paid', [
+                'order_id' => $latest_order->id,
+                'payment_method' => 'midtrans'
+            ]);
+
+            // Send order confirmation email
+            try {
+                \Illuminate\Support\Facades\Mail::to($latest_order->user->email)
+                    ->send(new \App\Mail\OrderPlaced($latest_order));
+                
+                \Illuminate\Support\Facades\Log::info('Order confirmation email sent', [
+                    'order_id' => $latest_order->id,
+                    'email' => $latest_order->user->email
+                ]);
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to send order confirmation email', [
+                    'order_id' => $latest_order->id,
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
 
         return view('livewire.success-page' ,[
             'order' => $latest_order

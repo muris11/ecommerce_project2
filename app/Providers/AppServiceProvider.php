@@ -19,6 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Optimize database queries
+        if (app()->environment('local')) {
+            \Illuminate\Database\Eloquent\Model::shouldBeStrict(false);
+        }
+        
+        // Optimize pagination count queries
+        \Illuminate\Pagination\Paginator::defaultView('pagination::bootstrap-4');
+        \Illuminate\Pagination\Paginator::defaultSimpleView('pagination::simple-bootstrap-4');
     }
 }

@@ -10,10 +10,23 @@ class EditCategory extends EditRecord
 {
     protected static string $resource = CategoryResource::class;
 
+    protected ?string $heading = 'Edit Kategori';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->label('Hapus'),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Kategori berhasil diperbarui';
     }
 }

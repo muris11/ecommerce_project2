@@ -2,186 +2,269 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
+use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
-use Filament\Forms\Set;
-use App\Models\Category;
+use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Tables\Actions\DeleteBulkAction;
-use App\Filament\Resources\ProductResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Filament\Resources\ProductResource\Pages\EditProduct;
-use App\Filament\Resources\ProductResource\Pages\ListProducts;
-use App\Filament\Resources\ProductResource\Pages\CreateProduct;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static ?string $navigationLabel = 'Produk';
+
+    protected static ?string $modelLabel = 'Produk';
+
+    protected static ?string $pluralModelLabel = 'Produk';
 
     protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationGroup = 'Toko';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Group::make()->schema([
-                    Section::make('Product Information')->schema([
-                        TextInput::make('name')
-                        ->required()
-                        ->maxLength(255)
-                        ->live(onBlur: true)
-                        ->afterStateUpdated(function(string $operation, $state, Set $set){
-                            if($operation !== 'create'){
-                                return;
-                            }
-                            $set('slug', Str::slug($state));
-                        }),
-
-                        TextInput::make('slug')
-                        ->required()
-                        ->maxLength(255)
-                        ->disabled()
-                        ->dehydrated()
-                        ->unique(Product::class, 'slug', ignoreRecord: true),
-
-                        MarkdownEditor::make('description')
-                        ->columnSpanFull()
-                        ->fileAttachmentsDirectory('products')
-                    ])->columns(2),
-
-                    Section::make('Images')->schema([
-                        FileUpload::make('image')
-                        ->multiple()
-                        ->directory('products')
-                        ->maxFiles(5)
-                        ->reorderable()
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Informasi Produk')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Nama Produk')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
+                                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                                    ),
+                                
+                                Forms\Components\TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->disabled()
+                                    ->dehydrated()
+                                    ->unique(Product::class, 'slug', ignoreRecord: true),
+                                
+                                Forms\Components\MarkdownEditor::make('description')
+                                    ->label('Deskripsi Produk')
+                                    ->columnSpanFull()
+                                    ->fileAttachmentsDirectory('products'),
+                            ])
+                            ->columns(2),
+                        
+                        Forms\Components\Section::make('Gambar Produk')
+                            ->schema([
+                                Forms\Components\FileUpload::make('image')
+                                    ->label('Gambar')
+                                    ->multiple()
+                                    ->disk('public')
+                                    ->directory('products')
+                                    ->visibility('public')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->maxSize(2048)
+                                    ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg', 'image/webp'])
+                                    ->maxFiles(5)
+                                    ->reorderable()
+                                    ->panelLayout('grid')
+                                    ->helperText('Upload maksimal 5 gambar produk (Maks. 2MB per gambar)')
+                                    ->columnSpanFull(),
+                            ]),
                     ])
-                ])->columnSpan(2),
-
-                Group::make()->schema([
-                    Section::make('Price')->schema([
-                        TextInput::make('price')
-                        ->numeric()
-                        ->required()
-                        ->prefix('IDR')
-                    ]),
-
-                    Section::make('Associations')->schema([
-                        Select::make('category_id')
-                        ->required()
-                        ->searchable()
-                        ->preload()
-                        ->relationship('category', 'name'),
-
-                        Select::make('brand_id')
-                        ->required()
-                        ->searchable()
-                        ->preload()
-                        ->relationship('brand', 'name')
-                    ]),
-
-                    Section::make('Status')->schema([
-                        Toggle::make('in_stock')
-                        ->required()
-                        ->default(true),
-
-                        Toggle::make('is_active')
-                        ->required()
-                        ->default(true),
-
-                        Toggle::make('is_featured')
-                        ->required(),
-
-                        Toggle::make('on_sale')
-                        ->required(),
+                    ->columnSpan(2),
+                
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Harga')
+                            ->schema([
+                                Forms\Components\TextInput::make('price')
+                                    ->label('Harga Produk')
+                                    ->numeric()
+                                    ->required()
+                                    ->prefix('IDR')
+                                    ->placeholder('0'),
+                            ]),
+                        
+                        Forms\Components\Section::make('Kategori & Merek')
+                            ->schema([
+                                Forms\Components\Select::make('category_id')
+                                    ->label('Kategori')
+                                    ->required()
+                                    ->searchable()
+                                    ->preload()
+                                    ->relationship('category', 'name', fn ($query) => $query->where('is_active', true))
+                                    ->native(false),
+                                
+                                Forms\Components\Select::make('brand_id')
+                                    ->label('Merek')
+                                    ->required()
+                                    ->searchable()
+                                    ->preload()
+                                    ->relationship('brand', 'name', fn ($query) => $query->where('is_active', true))
+                                    ->native(false),
+                            ]),
+                        
+                        Forms\Components\Section::make('Status')
+                            ->schema([
+                                Forms\Components\Toggle::make('in_stock')
+                                    ->label('Stok Tersedia')
+                                    ->default(true)
+                                    ->required(),
+                                
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label('Status Aktif')
+                                    ->default(true)
+                                    ->required(),
+                                
+                                Forms\Components\Toggle::make('is_featured')
+                                    ->label('Produk Unggulan')
+                                    ->default(false)
+                                    ->required(),
+                                
+                                Forms\Components\Toggle::make('on_sale')
+                                    ->label('Sedang Diskon')
+                                    ->default(false)
+                                    ->required(),
+                            ]),
                     ])
-
-                ])->columnSpan(1)
-
-            ])->columns(3);
+                    ->columnSpan(1),
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                ->searchable(),
-
-                TextColumn::make('category.name')
-                ->sortable(),
-
-                TextColumn::make('brand.name')
-                ->sortable(),
-
-                TextColumn::make('price')
-                ->money('IDR')
-                ->sortable(),
-
-                IconColumn::make('is_featured')
-                ->boolean(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
+                    ->disk('public')
+                    ->size(60)
+                    ->circular()
+                    ->defaultImageUrl(url('images/no-image.png'))
+                    ->getStateUsing(fn ($record) => 
+                        is_array($record->image) && !empty($record->image) ? $record->image[0] : null
+                    ),
                 
-                IconColumn::make('on_sale')
-                ->boolean(),
-
-                IconColumn::make('in_stock')
-                ->boolean(),
-
-                IconColumn::make('is_active')
-                ->boolean(),
-
-                TextColumn::make('created_at')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-
-                TextColumn::make('updated_at')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Produk')
+                    ->searchable()
+                    ->sortable(),
+                
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Kategori')
+                    ->searchable()
+                    ->sortable(),
+                
+                Tables\Columns\TextColumn::make('brand.name')
+                    ->label('Merek')
+                    ->searchable()
+                    ->sortable(),
+                
+                Tables\Columns\TextColumn::make('price')
+                    ->label('Harga')
+                    ->money('IDR')
+                    ->sortable(),
+                
+                Tables\Columns\IconColumn::make('is_featured')
+                    ->label('Unggulan')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-star')
+                    ->falseIcon('heroicon-o-star')
+                    ->trueColor('warning')
+                    ->falseColor('gray'),
+                
+                Tables\Columns\IconColumn::make('on_sale')
+                    ->label('Diskon')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-tag')
+                    ->falseIcon('heroicon-o-tag')
+                    ->trueColor('success')
+                    ->falseColor('gray'),
+                
+                Tables\Columns\IconColumn::make('in_stock')
+                    ->label('Stok')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
+                
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Status')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
+                
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('category')
-                ->relationship('category', 'name'),
-
-                SelectFilter::make('brand')
-                ->relationship('brand', 'name'),
+                Tables\Filters\SelectFilter::make('category')
+                    ->label('Kategori')
+                    ->relationship('category', 'name'),
+                
+                Tables\Filters\SelectFilter::make('brand')
+                    ->label('Merek')
+                    ->relationship('brand', 'name'),
+                
+                Tables\Filters\TernaryFilter::make('is_featured')
+                    ->label('Unggulan')
+                    ->placeholder('Semua Produk')
+                    ->trueLabel('Unggulan')
+                    ->falseLabel('Tidak Unggulan'),
+                
+                Tables\Filters\TernaryFilter::make('on_sale')
+                    ->label('Diskon')
+                    ->placeholder('Semua Produk')
+                    ->trueLabel('Sedang Diskon')
+                    ->falseLabel('Tidak Diskon'),
+                
+                Tables\Filters\TernaryFilter::make('in_stock')
+                    ->label('Stok')
+                    ->placeholder('Semua Stok')
+                    ->trueLabel('Tersedia')
+                    ->falseLabel('Habis'),
+                
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Status')
+                    ->placeholder('Semua Status')
+                    ->trueLabel('Aktif')
+                    ->falseLabel('Tidak Aktif'),
             ])
             ->actions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make(),
-                    DeleteAction::make(),
-                ])
+                Tables\Actions\EditAction::make()
+                    ->label('Edit'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Hapus Yang Dipilih'),
                 ]),
-            ]);
+            ])
+            ->emptyStateHeading('Belum ada produk')
+            ->emptyStateDescription('Silakan tambahkan produk pertama Anda')
+            ->emptyStateIcon('heroicon-o-shopping-bag');
     }
 
     public static function getRelations(): array
