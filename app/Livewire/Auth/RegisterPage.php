@@ -7,10 +7,14 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Traits\WithAlert;
 
-#[Title('Register')]
+#[Title('Daftar - Munir Jaya Abadi')]
 class RegisterPage extends Component
 {
+    use LivewireAlert, WithAlert;
+
     public $name;
     public $email;
     public $password;
@@ -21,6 +25,14 @@ class RegisterPage extends Component
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:6|max:255',
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'name.max' => 'Nama maksimal 255 karakter',
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar, silakan gunakan email lain',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 6 karakter',
         ]);
 
         // save to database
@@ -32,6 +44,8 @@ class RegisterPage extends Component
 
         // login user
         Auth::login($user);
+
+        $this->alertSuccess('Selamat datang, ' . $user->name . '! Akun Anda berhasil dibuat.');
 
         // redirect to dashboard
         return redirect()->intended();

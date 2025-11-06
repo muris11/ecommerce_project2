@@ -2,234 +2,144 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\InteractsWithImages;
+use App\Http\Controllers\Api\Concerns\TransformsProducts;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use InteractsWithImages;
+    use TransformsProducts;
+
     public function index(Request $request): JsonResponse
     {
-        $query = Category::query();
+        $perPage = (int) $request->integer('per_page', 0);
+        $perPage = $perPage > 0 ? min($perPage, 100) : 0;
 
-        // Filter by active categories only for public API
-        $query->where('is_active', true);
+        $query = Category::query()
+            ->where('is_active', 1)
+            ->withCount(['products as products_count' => fn ($q) => $q->where('is_active', 1)]);
 
-        // Search functionality
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where('name', 'like', "%{$search}%");
+        if ($search = $request->string('search')->trim()) {
+            $query->where('name', 'like', '%' . $search . '%');
         }
 
-        // Include product count
-        if ($request->boolean('with_products_count')) {
-            $query->withCount('products');
-        }
+        $sort = $request->input('sort', 'name');
+        match ($sort) {
+            'latest' => $query->orderByDesc('created_at'),
+            default => $query->orderBy('name'),
+        };
 
-        // Sorting
-        $sortBy = $request->get('sort_by', 'name');
-        $sortOrder = $request->get('sort_order', 'asc');
+        if ($perPage > 0) {
+            $paginator = $query->paginate($perPage)->withQueryString();
 
-        $allowedSorts = ['name', 'created_at', 'updated_at'];
-        if (in_array($sortBy, $allowedSorts)) {
-            $query->orderBy($sortBy, $sortOrder);
-        }
+            $data = $paginator->getCollection()
+                ->map(fn (Category $category) => $this->transformCategory($category))
+                ->all();
 
-        // Pagination
-        $perPage = min($request->get('per_page', 15), 50);
-        $categories = $query->paginate($perPage);
-
-        return response()->json([
-            'success' => true,
-            'data' => $categories
-        ]);
-    }
-
-    public function show($slug): JsonResponse
-    {
-        $category = Category::where('slug', $slug)
-            ->where('is_active', true)
-            ->withCount('products')
-            ->first();
-
-        if (!$category) {
             return response()->json([
-                'success' => false,
-                'message' => 'Category not found'
-            ], 404);
+                'data' => $data,
+                'meta' => [
+                    'current_page' => $paginator->currentPage(),
+                    'per_page' => $paginator->perPage(),
+                    'total' => $paginator->total(),
+                    'last_page' => $paginator->lastPage(),
+                    'has_more_pages' => $paginator->hasMorePages(),
+                ],
+            ]);
         }
 
+        $categories = $query->get();
+
+        $data = $categories
+            ->map(fn (Category $category) => $this->transformCategory($category))
+            ->all();
+
         return response()->json([
-            'success' => true,
-            'data' => $category
+            'data' => $data,
         ]);
     }
 
-    public function products(Request $request, $slug): JsonResponse
+    public function show(Request $request, Category $category): JsonResponse
     {
-        $category = Category::where('slug', $slug)
-            ->where('is_active', true)
-            ->first();
+        abort_if(!$category->is_active, 404);
 
-        if (!$category) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Category not found'
-            ], 404);
+        $category->loadCount(['products as products_count' => fn ($q) => $q->where('is_active', 1)]);
+
+        $data = $this->transformCategory($category);
+
+        if ($request->boolean('with_products')) {
+            $perPage = (int) $request->integer('per_page', 12);
+            $perPage = $perPage > 0 ? min($perPage, 50) : 12;
+
+            $productQuery = $category->products()
+                ->where('is_active', 1)
+                ->with([
+                    'category:id,name,slug',
+                    'brand:id,name,slug',
+                ]);
+
+            if ($request->boolean('featured')) {
+                $productQuery->where('is_featured', 1);
+            }
+
+            if ($request->boolean('on_sale')) {
+                $productQuery->where('on_sale', 1);
+            }
+
+            if ($request->filled('min_price')) {
+                $productQuery->where('price', '>=', (float) $request->input('min_price'));
+            }
+
+            if ($request->filled('max_price')) {
+                $productQuery->where('price', '<=', (float) $request->input('max_price'));
+            }
+
+            $sort = $request->input('sort', 'latest');
+            match ($sort) {
+                'price_asc' => $productQuery->orderBy('price'),
+                'price_desc' => $productQuery->orderByDesc('price'),
+                'oldest' => $productQuery->orderBy('created_at'),
+                default => $productQuery->latest(),
+            };
+
+            $paginator = $productQuery->paginate($perPage)->withQueryString();
+
+            $products = $paginator->getCollection()
+                ->map(fn ($product) => $this->transformProduct($product))
+                ->all();
+
+            $data['products'] = [
+                'data' => $products,
+                'meta' => [
+                    'current_page' => $paginator->currentPage(),
+                    'per_page' => $paginator->perPage(),
+                    'total' => $paginator->total(),
+                    'last_page' => $paginator->lastPage(),
+                    'has_more_pages' => $paginator->hasMorePages(),
+                ],
+            ];
         }
-
-        $query = $category->products()->with(['brand'])->where('is_active', true);
-
-        // Search within category products
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by brand
-        if ($request->has('brand_id')) {
-            $query->where('brand_id', $request->get('brand_id'));
-        }
-
-        // Filter by price range
-        if ($request->has('min_price')) {
-            $query->where('price', '>=', $request->get('min_price'));
-        }
-
-        if ($request->has('max_price')) {
-            $query->where('price', '<=', $request->get('max_price'));
-        }
-
-        // Sorting
-        $sortBy = $request->get('sort_by', 'name');
-        $sortOrder = $request->get('sort_order', 'asc');
-
-        $allowedSorts = ['name', 'price', 'created_at'];
-        if (in_array($sortBy, $allowedSorts)) {
-            $query->orderBy($sortBy, $sortOrder);
-        }
-
-        $perPage = min($request->get('per_page', 15), 50);
-        $products = $query->paginate($perPage);
 
         return response()->json([
-            'success' => true,
-            'data' => [
-                'category' => $category,
-                'products' => $products
-            ]
+            'data' => $data,
         ]);
     }
 
-    // // Admin methods
-    // public function store(Request $request): JsonResponse
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'image' => 'nullable|string',
-    //         'is_active' => 'boolean',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Validation errors',
-    //             'errors' => $validator->errors()
-    //         ], 422);
-    //     }
-
-    //     $data = $request->all();
-    //     $data['slug'] = Str::slug($request->name);
-
-    //     // Ensure unique slug
-    //     $originalSlug = $data['slug'];
-    //     $count = 1;
-    //     while (Category::where('slug', $data['slug'])->exists()) {
-    //         $data['slug'] = $originalSlug . '-' . $count;
-    //         $count++;
-    //     }
-
-    //     $category = Category::create($data);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Category created successfully',
-    //         'data' => $category
-    //     ], 201);
-    // }
-
-    // public function update(Request $request, Category $category): JsonResponse
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'sometimes|required|string|max:255',
-    //         'image' => 'nullable|string',
-    //         'is_active' => 'boolean',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Validation errors',
-    //             'errors' => $validator->errors()
-    //         ], 422);
-    //     }
-
-    //     $data = $request->all();
-
-    //     // Update slug if name is changed
-    //     if ($request->has('name') && $request->name !== $category->name) {
-    //         $data['slug'] = Str::slug($request->name);
-
-    //         // Ensure unique slug
-    //         $originalSlug = $data['slug'];
-    //         $count = 1;
-    //         while (Category::where('slug', $data['slug'])->where('id', '!=', $category->id)->exists()) {
-    //             $data['slug'] = $originalSlug . '-' . $count;
-    //             $count++;
-    //         }
-    //     }
-
-    //     $category->update($data);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Category updated successfully',
-    //         'data' => $category
-    //     ]);
-    // }
-
-    // public function destroy(Category $category): JsonResponse
-    // {
-    //     // Check if category has products
-    //     if ($category->products()->count() > 0) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Cannot delete category with products'
-    //         ], 422);
-    //     }
-
-    //     $category->delete();
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Category deleted successfully'
-    //     ]);
-    // }
-
-    // public function toggleActive(Category $category): JsonResponse
-    // {
-    //     $category->update(['is_active' => !$category->is_active]);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Category status updated successfully',
-    //         'data' => $category
-    //     ]);
-    // }
+    private function transformCategory(Category $category): array
+    {
+        return [
+            'id' => $category->id,
+            'slug' => $category->slug,
+            'name' => $category->name,
+            'image_url' => $this->makeStorageUrl($category->image),
+            'products_count' => $category->products_count ?? 0,
+            'created_at' => optional($category->created_at)->toIso8601String(),
+            'updated_at' => optional($category->updated_at)->toIso8601String(),
+        ];
+    }
 }
+

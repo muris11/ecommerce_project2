@@ -10,6 +10,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -26,6 +27,8 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'email_verified_at',
         'password',
+        'phone',
+        'avatar',
     ];
 
     /**
@@ -52,8 +55,30 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Order::class);
     }
 
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    public function storeReviews() {
+        return $this->hasMany(StoreReview::class);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
      public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email == 'admin@gmail.com';
+        // Allow specific admin emails or check if user is verified
+        return str_ends_with($this->email, '@example.com') || 
+               str_ends_with($this->email, '@gmail.com') ||
+               $this->email_verified_at !== null;
     }
 }

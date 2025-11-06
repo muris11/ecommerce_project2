@@ -56,7 +56,7 @@
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
                         <h3 class="text-xl font-medium text-gray-800 dark:text-gray-200">
-                            {{ $address->created_at->format('d-m-Y') }}
+                            {{ $order->created_at->format('d-m-Y') }}
                         </h3>
                     </div>
                 </div>
@@ -92,15 +92,15 @@
                             }
                             if ($order->status == 'processing') {
                                 $status =
-                                    '<span class="bg-yellow-500 py-1 px-3 rounded text-white shadow">Proses</span>';
+                                    '<span class="bg-yellow-500 py-1 px-3 rounded text-white shadow">Diproses</span>';
                             }
                             if ($order->status == 'shipped') {
                                 $status =
-                                    '<span class="bg-green-500 py-1 px-3 rounded text-white shadow">Dikirim</span>';
+                                    '<span class="bg-indigo-500 py-1 px-3 rounded text-white shadow">Dikirim</span>';
                             }
                             if ($order->status == 'delivered') {
                                 $status =
-                                    '<span class="bg-green-700 py-1 px-3 rounded text-white shadow">Terkirim</span>';
+                                    '<span class="bg-green-700 py-1 px-3 rounded text-white shadow">Selesai</span>';
                             }
                             if ($order->status == 'canceled') {
                                 $status =
@@ -141,11 +141,11 @@
                             $payment_status = '';
                             if ($order->payment_status == 'pending') {
                                 $payment_status = '<span
-                            class="bg-blue-500 py-1 px-3 rounded text-white shadow">Tertunda</span>';
+                            class="bg-yellow-500 py-1 px-3 rounded text-white shadow">Menunggu</span>';
                             }
                             if ($order->payment_status == 'paid') {
                                 $payment_status = '<span
-                            class="bg-green-500 py-1 px-3 rounded text-white shadow">Dibayar</span>';
+                            class="bg-green-500 py-1 px-3 rounded text-white shadow">Lunas</span>';
                             }
                             if ($order->payment_status == 'failed') {
                                 $payment_status =
@@ -160,6 +160,46 @@
         <!-- End Card -->
     </div>
     <!-- End Grid -->
+
+    <!-- Shipping Info Card (if exists) -->
+    @if ($order->shipping_method || $order->shipping_amount > 0)
+        <div class="bg-white rounded-lg shadow-md p-6 mt-4">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+                Informasi Pengiriman
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                @if ($order->shipping_method)
+                    <div>
+                        <p class="text-sm text-gray-600">Metode Pengiriman</p>
+                        <p class="font-semibold text-gray-800">{{ $order->shipping_method }}</p>
+                    </div>
+                @endif
+                @if ($order->shipping_etd)
+                    <div>
+                        <p class="text-sm text-gray-600">Estimasi Pengiriman</p>
+                        <p class="font-semibold text-gray-800">{{ $order->shipping_etd }}</p>
+                    </div>
+                @endif
+                @if ($order->shipping_amount > 0)
+                    <div>
+                        <p class="text-sm text-gray-600">Biaya Pengiriman</p>
+                        <p class="font-semibold text-blue-600">{{ Number::currency($order->shipping_amount, 'IDR') }}
+                        </p>
+                    </div>
+                @endif
+                @if ($order->shipping_destination_name)
+                    <div class="md:col-span-3">
+                        <p class="text-sm text-gray-600">Tujuan Pengiriman</p>
+                        <p class="font-semibold text-gray-800">{{ $order->shipping_destination_name }}</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
 
     <div class="flex flex-col md:flex-row gap-4 mt-4">
         <div class="md:w-3/4">
@@ -179,8 +219,10 @@
                             <tr wire:key="{{ $item->id }}">
                                 <td class="py-4">
                                     <div class="flex items-center">
-                                        <img class="h-16 w-16 mr-4" src="{{ url('storage', $item->product->image[0]) }}"
-                                            alt="{{ $item->product->name }}">
+                                        <img class="h-16 w-16 mr-4 object-cover rounded"
+                                            src="{{ is_array($item->product->image) && !empty($item->product->image) ? url('storage', $item->product->image[0]) : url('images/no-image.png') }}"
+                                            alt="{{ $item->product->name }}" loading="lazy" width="64"
+                                            height="64">
                                         <span class="font-semibold">{{ $item->product->name }}</span>
                                     </div>
                                 </td>
@@ -215,20 +257,32 @@
                 <h2 class="text-lg font-semibold mb-4">Ringkasan Pesanan</h2>
                 <div class="flex justify-between mb-2">
                     <span>Subtotal</span>
-                    <span>{{ Number::currency($item->order->grand_total, 'IDR') }}</span>
+                    <span>{{ Number::currency($order->grand_total - $order->shipping_amount, 'IDR') }}</span>
                 </div>
                 <div class="flex justify-between mb-2">
                     <span>Pajak</span>
                     <span>{{ Number::currency(0, 'IDR') }}</span>
                 </div>
                 <div class="flex justify-between mb-2">
-                    <span>Pengiriman</span>
-                    <span>{{ Number::currency(0, 'IDR') }}</span>
+                    <span>Ongkos Kirim</span>
+                    <span>{{ Number::currency($order->shipping_amount ?? 0, 'IDR') }}</span>
                 </div>
+                @if ($order->shipping_method)
+                    <div class="flex justify-between mb-2 text-sm text-gray-600">
+                        <span>Metode Pengiriman:</span>
+                        <span class="font-medium">{{ $order->shipping_method }}</span>
+                    </div>
+                @endif
+                @if ($order->shipping_etd)
+                    <div class="flex justify-between mb-2 text-sm text-gray-600">
+                        <span>Estimasi:</span>
+                        <span>{{ $order->shipping_etd }}</span>
+                    </div>
+                @endif
                 <hr class="my-2">
                 <div class="flex justify-between mb-2">
-                    <span class="font-semibold">Jumlah Keseluruhan</span>
-                    <span class="font-semibold">{{ Number::currency($item->order->grand_total, 'IDR') }}</span>
+                    <span class="font-semibold">Total</span>
+                    <span class="font-semibold">{{ Number::currency($order->grand_total, 'IDR') }}</span>
                 </div>
 
                 @if ($order->payment_status === 'pending' && $order->payment_method === 'midtrans')

@@ -46,44 +46,48 @@ class CartManagement
         return count($cart_items);
     }
 
-        // Add item to cart with qty
-        static public function addItemToCartWithQty($product_id, $qty = 1)
-        {
-            $cart_items = self::getCartItemsFromCookie();
-    
-            $existing_item_key = null;
-    
-            foreach ($cart_items as $key => $item) {
-                if ($item['product_id'] == $product_id) {
-                    $existing_item_key = $key;
-                    break;
-                }
+    // Add item to cart with qty
+    static public function addItemToCartWithQty($product_id, $qty = 1)
+    {
+        $cart_items = self::getCartItemsFromCookie();
+
+        $existing_item_key = null;
+
+        foreach ($cart_items as $key => $item) {
+            if ($item['product_id'] == $product_id) {
+                $existing_item_key = $key;
+                break;
             }
-    
-            if ($existing_item_key !== null) {
-                // Item already exists, increment quantity
-                $cart_items[$existing_item_key]['quantity'] = $qty;
-                $cart_items[$existing_item_key]['total_amount'] =
-                    $cart_items[$existing_item_key]['quantity'] * $cart_items[$existing_item_key]['unit_amount'];
-            } else {
-                // Item doesn't exist, add new item
-                $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'image']);
-                if ($product) {
-                    $cart_items[] = [
-                        'product_id' => $product->id,
-                        'name' => $product->name,
-                        'image' => $product->first_image,
-                        'quantity' => $qty,
-                        'unit_amount' => $product->price,
-                        'total_amount' => $product->price,
-                    ];
-                }
-            }
-    
-            self::addCartItemsToCookie($cart_items);
-    
-            return count($cart_items);
         }
+
+        if ($existing_item_key !== null) {
+            // Item already exists, override quantity
+            $qty = max(1, (int) $qty);
+            $cart_items[$existing_item_key]['quantity'] = $qty;
+            $cart_items[$existing_item_key]['total_amount'] =
+                $qty * $cart_items[$existing_item_key]['unit_amount'];
+        } else {
+            // Item doesn't exist, add new item
+            $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'image']);
+            if ($product) {
+                $unitAmount = (float) $product->price;
+                $qty = max(1, (int) $qty);
+
+                $cart_items[] = [
+                    'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->first_image,
+                    'quantity' => $qty,
+                    'unit_amount' => $unitAmount,
+                    'total_amount' => $unitAmount * $qty,
+                ];
+            }
+        }
+
+        self::addCartItemsToCookie($cart_items);
+
+        return count($cart_items);
+    }
 
     
     // Remove item from cart

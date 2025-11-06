@@ -2,234 +2,144 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\InteractsWithImages;
+use App\Http\Controllers\Api\Concerns\TransformsProducts;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    use InteractsWithImages;
+    use TransformsProducts;
+
     public function index(Request $request): JsonResponse
     {
-        $query = Brand::query();
+        $perPage = (int) $request->integer('per_page', 0);
+        $perPage = $perPage > 0 ? min($perPage, 100) : 0;
 
-        // Filter by active brands only for public API
-        $query->where('is_active', true);
+        $query = Brand::query()
+            ->where('is_active', 1)
+            ->withCount(['products as products_count' => fn ($q) => $q->where('is_active', 1)]);
 
-        // Search functionality
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where('name', 'like', "%{$search}%");
+        if ($search = $request->string('search')->trim()) {
+            $query->where('name', 'like', '%' . $search . '%');
         }
 
-        // Include product count
-        if ($request->boolean('with_products_count')) {
-            $query->withCount('products');
-        }
+        $sort = $request->input('sort', 'name');
+        match ($sort) {
+            'latest' => $query->orderByDesc('created_at'),
+            default => $query->orderBy('name'),
+        };
 
-        // Sorting
-        $sortBy = $request->get('sort_by', 'name');
-        $sortOrder = $request->get('sort_order', 'asc');
+        if ($perPage > 0) {
+            $paginator = $query->paginate($perPage)->withQueryString();
 
-        $allowedSorts = ['name', 'created_at', 'updated_at'];
-        if (in_array($sortBy, $allowedSorts)) {
-            $query->orderBy($sortBy, $sortOrder);
-        }
+            $data = $paginator->getCollection()
+                ->map(fn (Brand $brand) => $this->transformBrand($brand))
+                ->all();
 
-        // Pagination
-        $perPage = min($request->get('per_page', 15), 50);
-        $brands = $query->paginate($perPage);
-
-        return response()->json([
-            'success' => true,
-            'data' => $brands
-        ]);
-    }
-
-    public function show($slug): JsonResponse
-    {
-        $brand = Brand::where('slug', $slug)
-            ->where('is_active', true)
-            ->withCount('products')
-            ->first();
-
-        if (!$brand) {
             return response()->json([
-                'success' => false,
-                'message' => 'Brand not found'
-            ], 404);
+                'data' => $data,
+                'meta' => [
+                    'current_page' => $paginator->currentPage(),
+                    'per_page' => $paginator->perPage(),
+                    'total' => $paginator->total(),
+                    'last_page' => $paginator->lastPage(),
+                    'has_more_pages' => $paginator->hasMorePages(),
+                ],
+            ]);
         }
 
+        $brands = $query->get();
+
+        $data = $brands
+            ->map(fn (Brand $brand) => $this->transformBrand($brand))
+            ->all();
+
         return response()->json([
-            'success' => true,
-            'data' => $brand
+            'data' => $data,
         ]);
     }
 
-    public function products(Request $request, $slug): JsonResponse
+    public function show(Request $request, Brand $brand): JsonResponse
     {
-        $brand = Brand::where('slug', $slug)
-            ->where('is_active', true)
-            ->first();
+        abort_if(!$brand->is_active, 404);
 
-        if (!$brand) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Brand not found'
-            ], 404);
+        $brand->loadCount(['products as products_count' => fn ($q) => $q->where('is_active', 1)]);
+
+        $data = $this->transformBrand($brand);
+
+        if ($request->boolean('with_products')) {
+            $perPage = (int) $request->integer('per_page', 12);
+            $perPage = $perPage > 0 ? min($perPage, 50) : 12;
+
+            $productQuery = $brand->products()
+                ->where('is_active', 1)
+                ->with([
+                    'category:id,name,slug',
+                    'brand:id,name,slug',
+                ]);
+
+            if ($request->boolean('featured')) {
+                $productQuery->where('is_featured', 1);
+            }
+
+            if ($request->boolean('on_sale')) {
+                $productQuery->where('on_sale', 1);
+            }
+
+            if ($request->filled('min_price')) {
+                $productQuery->where('price', '>=', (float) $request->input('min_price'));
+            }
+
+            if ($request->filled('max_price')) {
+                $productQuery->where('price', '<=', (float) $request->input('max_price'));
+            }
+
+            $sort = $request->input('sort', 'latest');
+            match ($sort) {
+                'price_asc' => $productQuery->orderBy('price'),
+                'price_desc' => $productQuery->orderByDesc('price'),
+                'oldest' => $productQuery->orderBy('created_at'),
+                default => $productQuery->latest(),
+            };
+
+            $paginator = $productQuery->paginate($perPage)->withQueryString();
+
+            $products = $paginator->getCollection()
+                ->map(fn ($product) => $this->transformProduct($product))
+                ->all();
+
+            $data['products'] = [
+                'data' => $products,
+                'meta' => [
+                    'current_page' => $paginator->currentPage(),
+                    'per_page' => $paginator->perPage(),
+                    'total' => $paginator->total(),
+                    'last_page' => $paginator->lastPage(),
+                    'has_more_pages' => $paginator->hasMorePages(),
+                ],
+            ];
         }
-
-        $query = $brand->products()->with(['category'])->where('is_active', true);
-
-        // Search within brand products
-        if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by category
-        if ($request->has('category_id')) {
-            $query->where('category_id', $request->get('category_id'));
-        }
-
-        // Filter by price range
-        if ($request->has('min_price')) {
-            $query->where('price', '>=', $request->get('min_price'));
-        }
-
-        if ($request->has('max_price')) {
-            $query->where('price', '<=', $request->get('max_price'));
-        }
-
-        // Sorting
-        $sortBy = $request->get('sort_by', 'name');
-        $sortOrder = $request->get('sort_order', 'asc');
-
-        $allowedSorts = ['name', 'price', 'created_at'];
-        if (in_array($sortBy, $allowedSorts)) {
-            $query->orderBy($sortBy, $sortOrder);
-        }
-
-        $perPage = min($request->get('per_page', 15), 50);
-        $products = $query->paginate($perPage);
 
         return response()->json([
-            'success' => true,
-            'data' => [
-                'brand' => $brand,
-                'products' => $products
-            ]
+            'data' => $data,
         ]);
     }
 
-//     // Admin methods
-//     public function store(Request $request): JsonResponse
-//     {
-//         $validator = Validator::make($request->all(), [
-//             'name' => 'required|string|max:255',
-//             'image' => 'nullable|string',
-//             'is_active' => 'boolean',
-//         ]);
-
-//         if ($validator->fails()) {
-//             return response()->json([
-//                 'success' => false,
-//                 'message' => 'Validation errors',
-//                 'errors' => $validator->errors()
-//             ], 422);
-//         }
-
-//         $data = $request->all();
-//         $data['slug'] = Str::slug($request->name);
-
-//         // Ensure unique slug
-//         $originalSlug = $data['slug'];
-//         $count = 1;
-//         while (Brand::where('slug', $data['slug'])->exists()) {
-//             $data['slug'] = $originalSlug . '-' . $count;
-//             $count++;
-//         }
-
-//         $brand = Brand::create($data);
-
-//         return response()->json([
-//             'success' => true,
-//             'message' => 'Brand created successfully',
-//             'data' => $brand
-//         ], 201);
-//     }
-
-//     public function update(Request $request, Brand $brand): JsonResponse
-//     {
-//         $validator = Validator::make($request->all(), [
-//             'name' => 'sometimes|required|string|max:255',
-//             'image' => 'nullable|string',
-//             'is_active' => 'boolean',
-//         ]);
-
-//         if ($validator->fails()) {
-//             return response()->json([
-//                 'success' => false,
-//                 'message' => 'Validation errors',
-//                 'errors' => $validator->errors()
-//             ], 422);
-//         }
-
-//         $data = $request->all();
-
-//         // Update slug if name is changed
-//         if ($request->has('name') && $request->name !== $brand->name) {
-//             $data['slug'] = Str::slug($request->name);
-
-//             // Ensure unique slug
-//             $originalSlug = $data['slug'];
-//             $count = 1;
-//             while (Brand::where('slug', $data['slug'])->where('id', '!=', $brand->id)->exists()) {
-//                 $data['slug'] = $originalSlug . '-' . $count;
-//                 $count++;
-//             }
-//         }
-
-//         $brand->update($data);
-
-//         return response()->json([
-//             'success' => true,
-//             'message' => 'Brand updated successfully',
-//             'data' => $brand
-//         ]);
-//     }
-
-//     public function destroy(Brand $brand): JsonResponse
-//     {
-//         // Check if brand has products
-//         if ($brand->products()->count() > 0) {
-//             return response()->json([
-//                 'success' => false,
-//                 'message' => 'Cannot delete brand with products'
-//             ], 422);
-//         }
-
-//         $brand->delete();
-
-//         return response()->json([
-//             'success' => true,
-//             'message' => 'Brand deleted successfully'
-//         ]);
-//     }
-
-//     public function toggleActive(Brand $brand): JsonResponse
-//     {
-//         $brand->update(['is_active' => !$brand->is_active]);
-
-//         return response()->json([
-//             'success' => true,
-//             'message' => 'Brand status updated successfully',
-//             'data' => $brand
-//         ]);
-//     }
+    private function transformBrand(Brand $brand): array
+    {
+        return [
+            'id' => $brand->id,
+            'slug' => $brand->slug,
+            'name' => $brand->name,
+            'image_url' => $this->makeStorageUrl($brand->image),
+            'products_count' => $brand->products_count ?? 0,
+            'created_at' => optional($brand->created_at)->toIso8601String(),
+            'updated_at' => optional($brand->updated_at)->toIso8601String(),
+        ];
+    }
 }
+

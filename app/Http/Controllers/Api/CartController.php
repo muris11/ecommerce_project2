@@ -2,264 +2,143 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\CartManagement;
+use App\Http\Controllers\Api\Concerns\InteractsWithImages;
+use App\Http\Controllers\Api\Concerns\TransformsProducts;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class CartController extends Controller
 {
+    use InteractsWithImages;
+    use TransformsProducts;
+
     public function index(Request $request): JsonResponse
     {
-        $cartItems = $this->getCartItems($request);
-        $cartData = $this->calculateCartData($cartItems);
+        $items = CartManagement::fixCartImages();
 
-        return response()->json([
-            'success' => true,
-            'data' => $cartData
-        ]);
+        return $this->cartResponse($items, $request->boolean('with_products'));
     }
 
-    public function add(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1|max:100'
+        $validated = $request->validate([
+            'product_id' => ['required', 'integer', 'exists:products,id'],
+            'quantity' => ['sometimes', 'integer', 'min:1', 'max:100'],
+            'with_products' => ['sometimes', 'boolean'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation errors',
-                'errors' => $validator->errors()
-            ], 422);
+        $product = Product::where('id', $validated['product_id'])
+            ->where('is_active', 1)
+            ->first();
+
+        if (!$product || !$product->in_stock) {
+            throw ValidationException::withMessages([
+                'product_id' => ['Product is not available.'],
+            ]);
         }
 
-        $product = Product::findOrFail($request->product_id);
+        $quantity = $validated['quantity'] ?? 1;
 
-        if (!$product->is_active || !$product->in_stock) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Product is not available'
-            ], 422);
-        }
+        CartManagement::addItemToCartWithQty($product->id, $quantity);
+        $items = CartManagement::fixCartImages();
 
-        $cartItems = $this->getCartItems($request);
+        return $this->cartResponse($items, $request->boolean('with_products'));
+    }
 
-        // Check if product already exists in cart
-        $existingItemKey = null;
-        foreach ($cartItems as $key => $item) {
-            if ($item['product_id'] == $request->product_id) {
-                $existingItemKey = $key;
-                break;
-            }
-        }
+    public function update(Request $request, int $productId): JsonResponse
+    {
+        $validated = $request->validate([
+            'quantity' => ['required', 'integer', 'min:0', 'max:100'],
+            'with_products' => ['sometimes', 'boolean'],
+        ]);
 
-        if ($existingItemKey !== null) {
-            // Update quantity of existing item
-            $cartItems[$existingItemKey]['quantity'] += $request->quantity;
+        $quantity = $validated['quantity'];
+
+        if ($quantity === 0) {
+            CartManagement::removeCartItem($productId);
         } else {
-            // Add new item to cart
-            $cartItems[] = [
-                'product_id' => $request->product_id,
-                'quantity' => $request->quantity,
-                'added_at' => now()->toISOString()
-            ];
+            $product = Product::where('id', $productId)->where('is_active', 1)->first();
+
+            if (!$product || !$product->in_stock) {
+                throw ValidationException::withMessages([
+                    'product_id' => ['Product is not available.'],
+                ]);
+            }
+
+            CartManagement::addItemToCartWithQty($product->id, $quantity);
         }
 
-        $response = response()->json([
-            'success' => true,
-            'message' => 'Product added to cart successfully',
-            'data' => $this->calculateCartData($cartItems)
-        ]);
+        $items = CartManagement::fixCartImages();
 
-        return $this->setCartCookie($response, $cartItems);
+        return $this->cartResponse($items, $request->boolean('with_products'));
     }
 
-    public function update(Request $request, $productId): JsonResponse
+    public function destroy(Request $request, int $productId): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'quantity' => 'required|integer|min:1|max:100'
-        ]);
+        CartManagement::removeCartItem($productId);
+        $items = CartManagement::fixCartImages();
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation errors',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $cartItems = $this->getCartItems($request);
-
-        $itemFound = false;
-        foreach ($cartItems as $key => $item) {
-            if ($item['product_id'] == $productId) {
-                $cartItems[$key]['quantity'] = $request->quantity;
-                $itemFound = true;
-                break;
-            }
-        }
-
-        if (!$itemFound) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Product not found in cart'
-            ], 404);
-        }
-
-        $response = response()->json([
-            'success' => true,
-            'message' => 'Cart item updated successfully',
-            'data' => $this->calculateCartData($cartItems)
-        ]);
-
-        return $this->setCartCookie($response, $cartItems);
-    }
-
-    public function remove(Request $request, $productId): JsonResponse
-    {
-        $cartItems = $this->getCartItems($request);
-
-        $itemFound = false;
-        foreach ($cartItems as $key => $item) {
-            if ($item['product_id'] == $productId) {
-                unset($cartItems[$key]);
-                $cartItems = array_values($cartItems); // Re-index array
-                $itemFound = true;
-                break;
-            }
-        }
-
-        if (!$itemFound) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Product not found in cart'
-            ], 404);
-        }
-
-        $response = response()->json([
-            'success' => true,
-            'message' => 'Product removed from cart successfully',
-            'data' => $this->calculateCartData($cartItems)
-        ]);
-
-        return $this->setCartCookie($response, $cartItems);
+        return $this->cartResponse($items, $request->boolean('with_products'));
     }
 
     public function clear(Request $request): JsonResponse
     {
-        $response = response()->json([
-            'success' => true,
-            'message' => 'Cart cleared successfully',
-            'data' => $this->calculateCartData([])
-        ]);
+        CartManagement::clearCartItemsFromCookies();
 
-        return $this->setCartCookie($response, []);
+        return $this->cartResponse([], $request->boolean('with_products'));
     }
 
-    public function count(Request $request): JsonResponse
+    private function cartResponse(?array $items, bool $withProducts = false): JsonResponse
     {
-        $cartItems = $this->getCartItems($request);
-        $totalItems = array_sum(array_column($cartItems, 'quantity'));
+        $items = is_array($items) ? array_values($items) : [];
 
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'count' => $totalItems
-            ]
-        ]);
-    }
+        $collection = collect($items);
+        $productIds = $collection->pluck('product_id')->filter()->unique()->all();
 
-    public function total(Request $request): JsonResponse
-    {
-        $cartItems = $this->getCartItems($request);
-        $cartData = $this->calculateCartData($cartItems);
+        $products = Product::with([
+            'category:id,name,slug',
+            'brand:id,name,slug',
+        ])->whereIn('id', $productIds)->get()->keyBy('id');
 
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'subtotal' => $cartData['subtotal'],
-                'total_items' => $cartData['total_items']
-            ]
-        ]);
-    }
+        $data = $collection
+            ->map(function (array $item) use ($products, $withProducts) {
+                $product = $products->get($item['product_id']);
+                $imagePath = $item['image'] ?? null;
 
-    private function getCartItems(Request $request): array
-    {
-        $cartCookie = $request->cookie('cart');
+                if (!$imagePath && $product) {
+                    $images = $this->normalizeImageList($product->image ?? null);
+                    $imagePath = $images[0] ?? null;
+                }
 
-        if (!$cartCookie) {
-            return [];
-        }
-
-        $cartItems = json_decode($cartCookie, true);
-
-        return is_array($cartItems) ? $cartItems : [];
-    }
-
-    private function calculateCartData(array $cartItems): array
-    {
-        if (empty($cartItems)) {
-            return [
-                'items' => [],
-                'total_items' => 0,
-                'subtotal' => 0
-            ];
-        }
-
-        $productIds = array_column($cartItems, 'product_id');
-        $products = Product::whereIn('id', $productIds)
-            ->where('is_active', true)
-            ->where('in_stock', true)
-            ->get()
-            ->keyBy('id');
-
-        $items = [];
-        $subtotal = 0;
-        $totalItems = 0;
-
-        foreach ($cartItems as $cartItem) {
-            $product = $products->get($cartItem['product_id']);
-
-            if ($product) {
-                $itemTotal = $product->price * $cartItem['quantity'];
-                $subtotal += $itemTotal;
-                $totalItems += $cartItem['quantity'];
-
-                $items[] = [
-                    'product_id' => $product->id,
-                    'product' => [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'slug' => $product->slug,
-                        'price' => $product->price,
-                        'image' => $product->first_image,
-                        'category' => $product->category ? $product->category->name : null,
-                        'brand' => $product->brand ? $product->brand->name : null,
-                    ],
-                    'quantity' => $cartItem['quantity'],
-                    'unit_price' => $product->price,
-                    'total_price' => $itemTotal,
-                    'added_at' => $cartItem['added_at'] ?? null
+                $formatted = [
+                    'product_id' => $item['product_id'],
+                    'name' => $item['name'] ?? ($product->name ?? null),
+                    'slug' => $product->slug ?? null,
+                    'quantity' => (int) ($item['quantity'] ?? 0),
+                    'unit_amount' => (float) ($item['unit_amount'] ?? 0),
+                    'total_amount' => (float) ($item['total_amount'] ?? 0),
+                    'image_url' => $this->makeStorageUrl($imagePath),
                 ];
-            }
-        }
 
-        return [
-            'items' => $items,
-            'total_items' => $totalItems,
-            'subtotal' => $subtotal
-        ];
-    }
+                if ($withProducts && $product) {
+                    $formatted['product'] = $this->transformProduct($product);
+                }
 
-    private function setCartCookie($response, array $cartItems)
-    {
-        $cartJson = json_encode($cartItems);
-        $minutes = 60 * 24 * 30; // 30 days
+                return $formatted;
+            })
+            ->values()
+            ->all();
 
-        return $response->withCookie(cookie('cart', $cartJson, $minutes));
+        return response()->json([
+            'data' => $data,
+            'meta' => [
+                'count' => count($data),
+                'grand_total' => (float) CartManagement::calculateGrandTotal($items),
+            ],
+        ]);
     }
 }

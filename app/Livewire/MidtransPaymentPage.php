@@ -19,7 +19,7 @@ class MidtransPaymentPage extends Component
     public function mount($order)
     {
         try {
-            $this->order = Order::with(['user', 'items.product'])->findOrFail($order);
+            $this->order = Order::with(['user', 'items.product', 'address'])->findOrFail($order);
             
             // Validate order data
             if (!$this->order->user) {

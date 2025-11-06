@@ -17,6 +17,7 @@ class Product extends Model
         'image',
         'description',
         'price',
+        'weight',
         'is_active',
         'is_featured',
         'in_stock',
@@ -41,6 +42,10 @@ class Product extends Model
 
     public function orderItems(){
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 
     // Helper method to get first image

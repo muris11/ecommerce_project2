@@ -44,15 +44,70 @@ class MidtransService
             ];
         }
 
-        // Optional
+        // Optional - Build item details
         $item_details = [];
+        $items_subtotal = 0;
+        
         foreach ($order->items as $item) {
+            $itemPrice = (int) $item->unit_amount;
+            $itemQty = (int) $item->quantity;
+            
             $item_details[] = [
-                'id' => 'item-' . $item->product->id,
-                'price' => (int) $item->unit_amount,
-                'quantity' => (int) $item->quantity,
+                'id' => 'ITEM-' . $item->product->id,
+                'price' => $itemPrice,
+                'quantity' => $itemQty,
                 'name' => substr($item->product->name, 0, 50) // Limit name length
             ];
+            
+            $items_subtotal += ($itemPrice * $itemQty);
+        }
+        
+        // CRITICAL: Add shipping cost as separate item
+        if ($order->shipping_amount > 0) {
+            $shippingCost = (int) $order->shipping_amount;
+            
+            // Build shipping label
+            $shippingLabel = 'Ongkir';
+            if ($order->shipping_courier) {
+                $shippingLabel .= ' - ' . strtoupper($order->shipping_courier);
+            }
+            if ($order->shipping_service) {
+                $shippingLabel .= ' ' . $order->shipping_service;
+            }
+            if ($order->shipping_etd) {
+                $shippingLabel .= ' (' . $order->shipping_etd . ')';
+            }
+            
+            $item_details[] = [
+                'id' => 'SHIPPING-' . $order->id,
+                'price' => $shippingCost,
+                'quantity' => 1,
+                'name' => substr($shippingLabel, 0, 50)
+            ];
+            
+            $items_subtotal += $shippingCost;
+        }
+        
+        // Validate: sum of item_details must equal gross_amount
+        if ($items_subtotal != $transaction_details['gross_amount']) {
+            Log::error('Midtrans amount mismatch', [
+                'order_id' => $order->id,
+                'gross_amount' => $transaction_details['gross_amount'],
+                'items_subtotal' => $items_subtotal,
+                'difference' => $transaction_details['gross_amount'] - $items_subtotal,
+                'shipping_amount' => $order->shipping_amount
+            ]);
+            
+            // Adjust to prevent error - add difference as adjustment
+            if (abs($transaction_details['gross_amount'] - $items_subtotal) > 0) {
+                $adjustment = $transaction_details['gross_amount'] - $items_subtotal;
+                $item_details[] = [
+                    'id' => 'ADJUSTMENT-' . $order->id,
+                    'price' => $adjustment,
+                    'quantity' => 1,
+                    'name' => 'Penyesuaian'
+                ];
+            }
         }
 
         // Optional
@@ -76,6 +131,8 @@ class MidtransService
             'midtrans_order_id' => $orderId,
             'gross_amount' => $transaction_details['gross_amount'],
             'items_count' => count($item_details),
+            'item_details' => $item_details,
+            'shipping_amount' => $order->shipping_amount,
             'customer_email' => $customer_details['email']
         ]);
 

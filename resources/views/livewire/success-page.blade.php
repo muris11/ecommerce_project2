@@ -5,7 +5,7 @@
             <div>
                 <h1 class="px-4 mb-8 text-2xl font-semibold tracking-wide text-gray-700 dark:text-gray-300 ">
                     @if ($order->payment_method == 'midtrans')
-                        🎉 Pembayaran Berhasil! Terima kasih atas pesanan Anda.
+                        Pembayaran Berhasil! Terima kasih atas pesanan Anda.
                     @else
                         Terima kasih. Pesanan Anda telah diterima.
                     @endif
@@ -54,7 +54,15 @@
                             @if ($order->payment_method == 'cod')
                                 Cash on Delivery
                             @elseif($order->payment_method == 'midtrans')
-                                Midtrans ({{ ucfirst($order->payment_status) }})
+                                @php
+                                    $paymentStatusLabel = match ($order->payment_status) {
+                                        'pending' => 'Menunggu',
+                                        'paid' => 'Lunas',
+                                        'failed' => 'Gagal',
+                                        default => ucfirst($order->payment_status),
+                                    };
+                                @endphp
+                                Midtrans ({{ $paymentStatusLabel }})
                             @else
                                 Card
                             @endif
@@ -71,7 +79,8 @@
                                 <div class="flex justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Subtotal</p>
                                     <p class="text-base leading-4 text-gray-600 dark:text-gray-400">
-                                        {{ Number::currency($order->grand_total, 'IDR') }}</p>
+                                        {{ Number::currency($order->grand_total - $order->shipping_amount, 'IDR') }}
+                                    </p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Discount
@@ -80,9 +89,9 @@
                                         {{ Number::currency(0, 'IDR') }}</p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
-                                    <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Pengiriman</p>
+                                    <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Ongkos Kirim</p>
                                     <p class="text-base leading-4 text-gray-600 dark:text-gray-400">
-                                        {{ Number::currency(0, 'IDR') }}</p>
+                                        {{ Number::currency($order->shipping_amount ?? 0, 'IDR') }}</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between w-full">
@@ -105,15 +114,26 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <div class="flex flex-col items-center justify-start">
+                                    <div class="flex flex-col items-start justify-start">
                                         <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">
-                                            Pengiriman<br><span class="text-sm font-normal">Pengiriman dengan 24
-                                                Jam</span>
+                                            @if ($order->shipping_method)
+                                                {{ $order->shipping_method }}
+                                            @else
+                                                Standard Shipping
+                                            @endif
+                                            <br>
+                                            <span class="text-sm font-normal">
+                                                @if ($order->shipping_etd)
+                                                    Estimasi: {{ $order->shipping_etd }}
+                                                @else
+                                                    Pengiriman dalam 2-4 hari
+                                                @endif
+                                            </span>
                                         </p>
                                     </div>
                                 </div>
                                 <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">
-                                    {{ Number::currency(0, 'IDR') }}</p>
+                                    {{ Number::currency($order->shipping_amount ?? 0, 'IDR') }}</p>
                             </div>
                         </div>
                     </div>

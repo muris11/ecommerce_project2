@@ -1,168 +1,93 @@
 <div>
+    @push('meta')
+        <meta name="description"
+            content="Belanja beras, pupuk, pestisida, dan kebutuhan pertanian berkualitas di Munir Jaya Abadi. Harga terjangkau, pengiriman cepat.">
+        <meta property="og:title" content="Beranda - Munir Jaya Abadi">
+        <meta property="og:description" content="Toko online produk pertanian berkualitas. Cek katalog dan promo terbaru.">
+        <meta property="og:type" content="website">
+    @endpush
     <!-- Hero Section Start -->
-    <div class="w-full h-screen bg-gradient-to-r from-blue-200 to-cyan-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
-        <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+        class="w-full min-h-screen bg-gradient-to-br from-blue-100 via-cyan-50 to-blue-200 py-10 md:py-20 px-4 sm:px-6 lg:px-8 animate-gradient-x relative overflow-hidden">
+        <!-- Animated Background Blobs -->
+        <div
+            class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000">
+        </div>
+
+        <div class="max-w-[85rem] mx-auto h-full relative z-10">
             <!-- Grid -->
-            <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-                <div>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 xl:gap-20 md:items-center h-full">
+                <div class="order-2 md:order-1 animate-fade-in-up">
                     <h1
-                        class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
-                        Mulai belanja di <span class="text-blue-600">Munir Jaya Abadi</span></h1>
-                    <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Dapatkan beras berkualitas dan obat
+                        class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-5xl xl:text-6xl lg:leading-tight dark:text-white animate-fade-in">
+                        Mulai belanja di <span
+                            class="text-blue-600 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 animate-gradient-x">Munir
+                            Jaya Abadi</span></h1>
+                    <p
+                        class="mt-4 text-base sm:text-lg text-gray-700 dark:text-gray-400 leading-relaxed animate-fade-in animation-delay-200">
+                        Dapatkan beras
+                        berkualitas dan obat
                         pertanian terbaik hanya di Munir Jaya Abadi. Kami menyediakan solusi untuk kebutuhan pertanian
                         Anda dengan harga terjangkau dan pelayanan terbaik.</p>
 
                     <!-- Buttons -->
-                    <div class="mt-7 grid gap-3 w-full sm:inline-flex">
-                        <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/register">
+                    <div
+                        class="mt-6 lg:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in animation-delay-400">
+                        <a class="group py-3 px-6 inline-flex justify-center items-center gap-x-2 text-sm sm:text-base font-semibold rounded-xl border border-transparent bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:pointer-events-none transform"
+                            href="{{ route('register') }}">
                             Mulailah
-                            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="flex-shrink-0 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </a>
-                        <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/contact">
+                        <a class="group py-3 px-6 inline-flex justify-center items-center gap-x-2 text-sm sm:text-base font-semibold rounded-xl border-2 border-gray-800 bg-white text-gray-800 shadow-lg hover:bg-gray-50 hover:shadow-2xl hover:scale-105 transition-all duration-300 dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 transform"
+                            href="{{ route('contact') }}">
                             Hubungi tim penjualan
                         </a>
                     </div>
                     <!-- End Buttons -->
 
-                    <!-- Review -->
-                    <div class="mt-6 lg:mt-10 grid grid-cols-2 gap-x-5">
-                        <!-- Review -->
-                        <div class="py-5">
+                    <!-- Review Statistics -->
+                    <div
+                        class="mt-8 lg:mt-12 p-4 sm:p-6 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm hover:bg-white/70 transition-all duration-300 animate-fade-in animation-delay-600 border border-white/20 hover:shadow-xl hover:scale-105 transform">
+                        <div class="flex items-center gap-3 mb-3">
                             <div class="flex space-x-1">
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <svg class="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 animate-pulse-slow" width="51"
+                                        height="51" viewBox="0 0 51 51" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                @endfor
                             </div>
-
-                            <p class="mt-3 text-sm text-gray-800 dark:text-gray-200">
-                                <span class="font-bold">4.6</span> /5 - from 12k reviews
-                            </p>
-
-                            <div class="mt-5">
-                                <!-- Star -->
-                                <svg class="h-auto w-16 text-gray-800 dark:text-white" width="80" height="27"
-                                    viewBox="0 0 80 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M20.558 9.74046H11.576V12.3752H17.9632C17.6438 16.0878 14.5301 17.7245 11.6159 17.7245C7.86341 17.7245 4.58995 14.7704 4.58995 10.6586C4.58995 6.62669 7.70373 3.51291 11.6159 3.51291C14.6498 3.51291 16.4063 5.42908 16.4063 5.42908L18.2426 3.51291C18.2426 3.51291 15.8474 0.878184 11.4961 0.878184C5.94724 0.838264 1.67578 5.50892 1.67578 10.5788C1.67578 15.5289 5.70772 20.3592 11.6558 20.3592C16.8854 20.3592 20.7177 16.8063 20.7177 11.4969C20.7177 10.3792 20.558 9.74046 20.558 9.74046Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M27.8621 7.78442C24.1894 7.78442 21.5547 10.6587 21.5547 14.012C21.5547 17.4451 24.1096 20.3593 27.9419 20.3593C31.415 20.3593 34.2094 17.7645 34.2094 14.0918C34.1695 9.94011 30.896 7.78442 27.8621 7.78442ZM27.902 10.2994C29.6984 10.2994 31.415 11.7764 31.415 14.0918C31.415 16.4072 29.7383 17.8842 27.902 17.8842C25.906 17.8842 24.3491 16.2874 24.3491 14.0519C24.3092 11.8962 25.8661 10.2994 27.902 10.2994Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M41.5964 7.78442C37.9238 7.78442 35.2891 10.6587 35.2891 14.012C35.2891 17.4451 37.844 20.3593 41.6763 20.3593C45.1493 20.3593 47.9438 17.7645 47.9438 14.0918C47.9038 9.94011 44.6304 7.78442 41.5964 7.78442ZM41.6364 10.2994C43.4328 10.2994 45.1493 11.7764 45.1493 14.0918C45.1493 16.4072 43.4727 17.8842 41.6364 17.8842C39.6404 17.8842 38.0835 16.2874 38.0835 14.0519C38.0436 11.8962 39.6004 10.2994 41.6364 10.2994Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M55.0475 7.82434C51.6543 7.82434 49.0195 10.7784 49.0195 14.0918C49.0195 17.8443 52.0934 20.3992 54.9676 20.3992C56.764 20.3992 57.6822 19.7205 58.4407 18.8822V20.1198C58.4407 22.2754 57.1233 23.5928 55.1273 23.5928C53.2111 23.5928 52.2531 22.1557 51.8938 21.3573L49.4587 22.3553C50.297 24.1517 52.0135 26.0279 55.0874 26.0279C58.4407 26.0279 60.9956 23.9122 60.9956 19.481V8.18362H58.3608V9.26147C57.6423 8.38322 56.5245 7.82434 55.0475 7.82434ZM55.287 10.2994C56.9237 10.2994 58.6403 11.7365 58.6403 14.1317C58.6403 16.6068 56.9636 17.9241 55.2471 17.9241C53.4507 17.9241 51.774 16.4471 51.774 14.1716C51.8139 11.6966 53.5305 10.2994 55.287 10.2994Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M72.8136 7.78442C69.62 7.78442 66.9453 10.2994 66.9453 14.0519C66.9453 18.004 69.9393 20.3593 73.093 20.3593C75.7278 20.3593 77.4044 18.8822 78.3625 17.6048L76.1669 16.1277C75.608 17.006 74.6499 17.8443 73.093 17.8443C71.3365 17.8443 70.5381 16.8862 70.0192 15.9281L78.4423 12.4152L78.0032 11.3772C77.1649 9.46107 75.2886 7.78442 72.8136 7.78442ZM72.8934 10.2196C74.0511 10.2196 74.8495 10.8184 75.2487 11.5768L69.6599 13.9321C69.3405 12.0958 71.097 10.2196 72.8934 10.2196Z"
-                                        fill="currentColor" />
-                                    <path d="M62.9531 19.9999H65.7076V1.47693H62.9531V19.9999Z" fill="currentColor" />
-                                </svg>
-                                <!-- End Star -->
-                            </div>
+                            <span class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200">5.0</span>
                         </div>
-                        <!-- End Review -->
-
-                        <!-- Review -->
-                        <div class="py-5">
-                            <div class="flex space-x-1">
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M27.0352 1.6307L33.9181 16.3633C34.2173 16.6768 34.5166 16.9903 34.8158 16.9903L50.0779 19.1845C50.9757 19.1845 51.275 20.4383 50.6764 21.0652L39.604 32.3498C39.3047 32.6632 39.3047 32.9767 39.3047 33.2901L41.998 49.2766C42.2973 50.217 41.1002 50.8439 40.5017 50.5304L26.4367 43.3208C26.1375 43.3208 25.8382 43.3208 25.539 43.3208L11.7732 50.8439C10.8754 51.1573 9.97763 50.5304 10.2769 49.59L12.9702 33.6036C12.9702 33.2901 12.9702 32.9767 12.671 32.6632L1.29923 21.0652C0.700724 20.4383 0.999979 19.4979 1.89775 19.4979L17.1598 17.3037C17.459 17.3037 17.7583 16.9903 18.0575 16.6768L24.9404 1.6307C25.539 0.69032 26.736 0.69032 27.0352 1.6307Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <svg class="h-4 w-4 text-gray-800 dark:text-gray-200" width="51" height="51"
-                                    viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M49.6867 20.0305C50.2889 19.3946 49.9878 18.1228 49.0846 18.1228L33.7306 15.8972C33.4296 15.8972 33.1285 15.8972 32.8275 15.2613L25.9032 0.317944C25.6021 0 25.3011 0 25 0V42.6046C25 42.6046 25.3011 42.6046 25.6021 42.6046L39.7518 49.9173C40.3539 50.2352 41.5581 49.5994 41.2571 48.6455L38.5476 32.4303C38.5476 32.1124 38.5476 31.7944 38.8486 31.4765L49.6867 20.0305Z"
-                                        fill="transparent" />
-                                    <path
-                                        d="M0.313299 20.0305C-0.288914 19.3946 0.0122427 18.1228 0.915411 18.1228L16.2694 15.8972C16.5704 15.8972 16.8715 15.8972 17.1725 15.2613L24.0968 0.317944C24.3979 0 24.6989 0 25 0V42.6046C25 42.6046 24.6989 42.6046 24.3979 42.6046L10.2482 49.9173C9.64609 50.2352 8.44187 49.5994 8.74292 48.6455L11.4524 32.4303C11.4524 32.1124 11.4524 31.7944 11.1514 31.4765L0.313299 20.0305Z"
-                                        fill="currentColor" />
-                                </svg>
-                            </div>
-
-                            <p class="mt-3 text-sm text-gray-800 dark:text-gray-200">
-                                <span class="font-bold">4.8</span> /5 - from 5k reviews
-                            </p>
-
-                            <div class="mt-5">
-                                <!-- Star -->
-                                <svg class="h-auto w-16 text-gray-800 dark:text-white" width="110" height="28"
-                                    viewBox="0 0 110 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M66.6601 8.35107C64.8995 8.35107 63.5167 8.72875 62.1331 9.48265C62.1331 5.4582 62.1331 1.81143 62.2594 0.554199L53.8321 2.06273V2.81736L54.7124 2.94301C55.8433 3.19431 56.2224 3.82257 56.4715 5.33255C56.725 8.35107 56.5979 24.4496 56.4715 27.0912C58.7354 27.5945 61.1257 27.9722 63.5159 27.9722C70.1819 27.9722 74.2064 23.8213 74.2064 17.281C74.2064 12.1249 70.9366 8.35107 66.6601 8.35107ZM63.7672 26.5878C63.2639 26.5878 62.6342 26.5878 62.258 26.4629C62.1316 24.7023 62.0067 17.281 62.1316 10.7413C62.8862 10.4893 63.3888 10.3637 64.0185 10.3637C66.7872 10.3637 68.2965 13.6335 68.2965 17.6572C68.2957 22.6898 66.4088 26.5878 63.7672 26.5878ZM22.1363 1.0568H0V2.18838L1.25796 2.31403C2.89214 2.56533 3.52184 3.57127 3.77242 5.9608C4.15082 10.4886 4.02445 18.6646 3.77242 22.5619C3.52112 24.9522 2.89287 26.0845 1.25796 26.2087L0 26.4615V27.4674H14.2123V26.4615L12.703 26.2087C11.0681 26.0838 10.4392 24.9522 10.1879 22.5619C10.0615 20.9263 9.93583 18.2847 9.93583 15.0156L12.9543 15.1413C14.8413 15.1413 15.7208 16.6505 16.0985 18.7881H17.2308V9.86106H16.0985C15.7201 11.9993 14.8413 13.5078 12.9543 13.5078L9.93655 13.6342C9.93655 9.35773 10.0622 5.33328 10.1886 2.94374H14.59C17.9869 2.94374 19.7475 5.08125 21.0047 8.85513L22.2626 8.47745L22.1363 1.0568Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M29.3053 8.09998C35.5944 8.09998 38.7385 12.3764 38.7385 18.0358C38.7385 23.4439 35.2167 27.9731 28.9276 27.9731C22.6393 27.9731 19.4951 23.6959 19.4951 18.0358C19.4951 12.6277 23.0162 8.09998 29.3053 8.09998ZM28.9276 9.35793C26.1604 9.35793 25.4058 13.1311 25.4058 18.0358C25.4058 22.8149 26.6637 26.7137 29.1796 26.7137C32.0703 26.7137 32.8264 22.9405 32.8264 18.0358C32.8264 13.2567 31.5699 9.35793 28.9276 9.35793ZM75.8403 18.1622C75.8403 13.0054 79.1101 8.09998 85.5248 8.09998C90.8057 8.09998 93.3224 11.9995 93.3224 17.1555H81.6253C81.4989 21.8089 83.7628 25.2051 88.2913 25.2051C90.3038 25.2051 91.3098 24.7033 92.5685 23.8223L93.0703 24.4505C91.8124 26.2111 89.0459 27.9731 85.5248 27.9731C79.8647 27.9724 75.8403 23.9479 75.8403 18.1622ZM81.6253 15.7726L87.5366 15.6463C87.5366 13.1311 87.159 9.35793 85.0214 9.35793C82.8839 9.35793 81.7502 12.8791 81.6253 15.7726ZM108.291 9.10663C106.782 8.47693 104.77 8.09998 102.506 8.09998C97.8538 8.09998 94.9594 10.8665 94.9594 14.137C94.9594 17.4075 97.0955 18.7904 100.118 19.7971C103.261 20.9279 104.142 21.8089 104.142 23.3182C104.142 24.8275 103.01 26.2103 100.997 26.2103C98.6084 26.2103 96.8464 24.8275 95.4635 21.0536L94.5825 21.3063L94.7089 26.84C96.2181 27.4683 98.9846 27.9724 101.375 27.9724C106.28 27.9724 109.425 25.4557 109.425 21.5576C109.425 18.9161 108.041 17.4075 104.771 16.1489C101.249 14.766 99.992 13.8857 99.992 12.2501C99.992 10.6152 101.126 9.48286 102.635 9.48286C104.897 9.48286 106.407 10.8665 107.54 14.2627L108.42 14.0114L108.291 9.10663ZM55.0883 8.6033C52.9508 7.3468 49.1769 7.97433 47.1651 12.5028L47.29 8.1007L38.8642 9.73561V10.4902L39.7444 10.6159C40.8775 10.7423 41.3794 11.3705 41.5057 13.0062C41.757 16.0247 41.6314 21.3078 41.5057 23.9486C41.3794 25.4564 40.8775 26.2111 39.7444 26.3374L38.8642 26.4638V27.4697H50.5606V26.4638L49.0513 26.3374C47.7941 26.2111 47.4164 25.4564 47.29 23.9486C47.0387 21.5584 47.0387 16.7793 47.1651 13.7608C47.7933 12.8798 50.5606 12.1259 53.0757 13.7608L55.0883 8.6033Z"
-                                        fill="currentColor" />
-                                </svg>
-                                <!-- End Star -->
-                            </div>
-                        </div>
-                        <!-- End Review -->
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                            Dipercaya oleh <span
+                                class="font-semibold text-blue-600">{{ $storeReviews->count() }}+</span> pelanggan
+                            yang puas
+                        </p>
                     </div>
-                    <!-- End Review -->
+                    <!-- End Review Statistics -->
                 </div>
                 <!-- End Col -->
 
-                <div class="relative ms-4">
-                    <img class="w-full rounded-md" src="/images/bg3.png" alt="Image Description">
+                <div class="relative order-1 md:order-2 animate-fade-in-right">
+                    <img class="w-full rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 transform"
+                        src="/images/bg3.png" alt="Munir Jaya Abadi" loading="eager" width="800" height="600">
                     <div
-                        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0">
+                        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-xl mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0 animate-pulse-slow">
                     </div>
 
                     <!-- SVG-->
@@ -197,42 +122,50 @@
     </div>
     <!-- Hero Section End -->
     <!--Brand Section Start -->
-    <section class="py-20">
-        <div class="max-w-xl mx-auto">
-            <div class="text-center ">
+    <section class="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-5xl font-bold dark:text-gray-200"> Cari <span class="text-blue-500">Merk Populer
-                        </span> </h1>
-                    <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
-                        <div class="flex-1 h-2 bg-blue-200">
-                        </div>
-                        <div class="flex-1 h-2 bg-blue-400">
-                        </div>
-                        <div class="flex-1 h-2 bg-blue-600">
-                        </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                        Cari <span class="text-blue-500">Merek Populer</span>
+                    </h1>
+                    <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
+                        <div class="flex-1 h-2 bg-blue-200"></div>
+                        <div class="flex-1 h-2 bg-blue-400"></div>
+                        <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="mb-12 text-base text-center text-gray-500">
+                <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
                     Temukan beragam pilihan beras terbaik dan produk pertanian berkualitas dari merek terpercaya petani
                     lokal dan nasional.
                 </p>
             </div>
-        </div>
-        <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-0">
-            <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 md:grid-cols-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
-                @foreach ($brands->take(8) as $brand )
-                <div class="bg-white rounded-lg shadow-md dark:bg-gray-800" wire:key="{{ $brand->id }}">
-                    <a href="/products?selected_brands[0]={{ $brand->id }}" class="">
-                        <img src="{{ url('storage', $brand->image) }}" alt="{{$brand->name}}"
-                            class="object-cover w-full h-64 rounded-t-lg">
-                    </a>
-                    <div class="p-5 text-center">
-                        <a href="" class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-300">
-                            {{ $brand->name }}
+                @foreach ($brands->take(8) as $brand)
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 dark:bg-gray-800 overflow-hidden group transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up"
+                        wire:key="{{ $brand->id }}" style="animation-delay: {{ $loop->index * 100 }}ms">
+                        <a href="/products?selected_brands[0]={{ $brand->id }}" class="block">
+                            <div class="overflow-hidden relative">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                </div>
+                                <img src="{{ $brand->image ? url('storage', $brand->image) : url('images/no-image.png') }}"
+                                    alt="{{ $brand->name }}"
+                                    class="object-cover w-full h-48 sm:h-56 md:h-64 transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-500"
+                                    loading="lazy" width="300" height="256">
+                            </div>
                         </a>
+                        <div
+                            class="p-4 sm:p-5 text-center bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900">
+                            <a href="/products?selected_brands[0]={{ $brand->id }}"
+                                class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-all duration-300 dark:text-gray-300 dark:hover:text-blue-400 relative inline-block group-hover:scale-110">
+                                {{ $brand->name }}
+                                <span
+                                    class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                            </a>
+                        </div>
                     </div>
-                </div>
                 @endforeach
 
             </div>
@@ -241,610 +174,198 @@
     <!--Brand Section End -->
 
     <!-- Categori Section Start-->
-    <div class="bg-orange-200 py-20">
-        <div class="max-w-xl mx-auto">
-            <div class="text-center ">
+    <section
+        class="bg-gradient-to-br from-orange-100 to-orange-200 dark:from-gray-800 dark:to-gray-900 py-12 sm:py-16 md:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-5xl font-bold dark:text-gray-200"> Cari <span class="text-blue-500"> Kategori
-                        </span> </h1>
-                    <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
-                        <div class="flex-1 h-2 bg-blue-200">
-                        </div>
-                        <div class="flex-1 h-2 bg-blue-400">
-                        </div>
-                        <div class="flex-1 h-2 bg-blue-600">
-                        </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                        Cari <span class="text-blue-500">Kategori</span>
+                    </h1>
+                    <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
+                        <div class="flex-1 h-2 bg-blue-200"></div>
+                        <div class="flex-1 h-2 bg-blue-400"></div>
+                        <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="mb-12 text-base text-center text-gray-500">
+                <p class="text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-400 max-w-3xl mx-auto px-4">
                     Temukan berbagai kategori produk beras dan pertanian sesuai kebutuhan Anda. Belanja lebih mudah
                     dengan pilihan yang terorganisir dan lengkap.
                 </p>
             </div>
-        </div>
 
-        <div class="w-full max-w-[85rem] py-4 px-4 sm:px-6 lg:px-8 mx-auto">
-            <div class="max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-8 mx-auto">
-                <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
-                    @foreach ($categories as $category )
-                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="/products?selected_category[0]={{ $category->id }}" wire:key="{{ $category->id }}">
-                        <div class="p-4 md:p-5">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <img class="h-[5rem] w-[5rem]" src="{{ url('storage', $category->image) }}"
-                                        alt="{{ $category->name }}">
-                                    <div class="ms-3">
+                @foreach ($categories as $category)
+                    <a class="group flex bg-white border-2 border-gray-100 shadow-lg hover:shadow-2xl rounded-2xl hover:border-blue-300 transition-all duration-500 dark:bg-slate-900 dark:border-gray-800 dark:hover:border-blue-600 transform hover:-translate-y-1 hover:scale-102 animate-fade-in-up overflow-hidden relative"
+                        href="/products?selected_category[0]={{ $category->id }}" wire:key="{{ $category->id }}"
+                        style="animation-delay: {{ $loop->index * 100 }}ms">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:to-transparent transition-all duration-500">
+                        </div>
+                        <div class="p-4 sm:p-5 md:p-6 w-full relative z-10">
+                            <div class="flex justify-between items-center gap-3">
+                                <div class="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                                    <div
+                                        class="flex-shrink-0 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                                        <img class="h-16 w-16 sm:h-20 sm:w-20 rounded-xl object-cover shadow-md group-hover:shadow-xl"
+                                            src="{{ $category->image ? url('storage', $category->image) : url('images/no-image.png') }}"
+                                            alt="{{ $category->name }}" loading="lazy">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
                                         <h3
-                                            class="group-hover:text-blue-600 text-2xl font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                                            class="group-hover:text-blue-600 text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 transition-all duration-300 truncate dark:group-hover:text-blue-400 dark:text-gray-200 transform group-hover:translate-x-1">
                                             {{ $category->name }}
                                         </h3>
                                     </div>
                                 </div>
-                                <div class="ps-3">
-                                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-2 transition-all duration-300 dark:group-hover:text-blue-400 animate-bounce-x"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg>
                                 </div>
                             </div>
                         </div>
                     </a>
-                    @endforeach
+                @endforeach
 
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <!-- Categori Section End -->
-
-    <!-- Customer Reviw Section Start -->
-    <section class="py-24 relative">
-        <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-            <h2 class="font-manrope font-bold text-4xl text-black text-center mb-11">Penilaian Pelanggan</h2>
-            <div class="grid grid-cols-12 py-6 border-y border-gray-200 mb-11">
-                <div class="col-span-12 lg:col-span-10 ">
-                    <h5 class="font-manrope font-semibold text-2xl leading-9 text-black text-center">Ulasan
-                        <span class="lg:hidden font-manrope font-semibold text-2xl leading-9 text-black text-center"> &
-                            Rating</span>
-                    </h5>
-                </div>
-                <div class="col-span-12 lg:col-span-2 max-lg:hidden">
-                    <h5 class="font-manrope font-semibold text-2xl leading-9 text-black text-center">Rating</h5>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 gap-8">
-
-                <div class="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
-                    <div class="col-span-12 lg:col-span-10 ">
-                        <div class="sm:flex gap-6">
-                            <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image"
-                                class="w-32 h-32 rounded-full object-cover">
-                            <div class="text">
-                                <p class="font-medium text-lg leading-8 text-gray-900 mb-2">Muhammad Rifqy Saputra</p>
-                                <div class="flex lg:hidden items-center gap-2 lg:justify-between w-full mb-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <p class="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">Salah satu
-                                    keunggulan utama dari produk ini adalah tampilannya yang intuitif dan mudah
-                                    digunakan. Penggunaannya terasa alami, dan penataan produknya memudahkan untuk
-                                    menemukan serta memanfaatkan berbagai fitur yang tersedia. Hal ini sangat
-                                    bermanfaat, terutama bagi para petani atau pengguna yang ingin meningkatkan
-                                    efisiensi dalam penggunaan beras atau obat pertanian dalam kegiatan sehari-hari.</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="cursor-pointers flex items-center gap-2">
-                                        <a href="javascript:;"
-                                            class="font-semibold text-lg cursor-pointer leading-8 text-indigo-600 whitespace-nowrap">
-
-                                            Melihat & Membalas</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                            viewBox="0 0 22 22" fill="none">
-                                            <path d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998" stroke="#4F46E5"
-                                                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <p
-                                        class="lg:hidden font-medium text-sm leading-7 text-gray-400 lg:text-center whitespace-nowrap">
-                                        Mei 15, 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="col-span-12 lg:col-span-2 max-lg:hidden flex lg:items-center flex-row lg:flex-col justify-center max-lg:pt-6 ">
-                        <div class="flex items-center gap-2 lg:justify-between w-full mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <p class="font-medium text-lg leading-8 text-gray-400 lg:text-center whitespace-nowrap">Mei 15,
-                            2025</p>
-                    </div>
-                </div>
-                <div class="pb-8 border-b border-gray-100 w-full"></div>
-                <div class="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
-                    <div class="col-span-12 lg:col-span-10 ">
-                        <div class="sm:flex gap-6">
-                            <img src="https://pagedone.io/asset/uploads/1704364533.png" alt="Robert image"
-                                class="w-32 h-32 rounded-full object-cover">
-                            <div class="text">
-                                <p class="font-medium text-lg leading-8 text-gray-900 mb-2">Benson Wira Pambudi</p>
-                                <div class="flex lg:hidden items-center gap-2 lg:justify-between w-full mb-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <p class="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">Saya sangat
-                                    terbantu dengan adanya platform ini! Informasi mengenai berbagai jenis beras dan
-                                    obat pertanian disajikan secara lengkap dan mudah dipahami. Antarmuka tampilannya
-                                    responsif, baik saat dibuka di laptop maupun di HP. Sebagai petani, saya jadi lebih
-                                    mudah memilih produk yang sesuai kebutuhan lahan saya, lengkap dengan detail manfaat
-                                    dan cara penggunaan obat pertaniannya.
-
-                                    Keunggulan utamanya ada pada kemudahan akses dan tampilan yang ramah pengguna. Tidak
-                                    perlu lagi datang ke toko fisik, cukup buka platform ini, semua informasi penting
-                                    sudah tersedia.
-
-                                </p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <a href="javascript:;"
-                                            class="font-semibold text-lg cursor-pointer leading-8 text-indigo-600 whitespace-nowrap">
-                                            Melihat & Membalas</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                            viewBox="0 0 22 22" fill="none">
-                                            <path d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998" stroke="#4F46E5"
-                                                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <p
-                                        class="lg:hidden font-medium text-sm leading-7 text-gray-400 lg:text-center whitespace-nowrap">
-                                        Mei 15, 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="col-span-12 lg:col-span-2 max-lg:hidden flex lg:items-center flex-row lg:flex-col justify-center max-lg:pt-6 ">
-                        <div class="flex items-center gap-2 lg:justify-between w-full mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <p class="font-medium text-lg leading-8 text-gray-400 lg:text-center whitespace-nowrap">Mei 15,
-                            2025</p>
-                    </div>
-                </div>
-                <div class="pb-8 border-b border-gray-100 w-full"></div>
-                <div class="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
-                    <div class="col-span-12 lg:col-span-10 ">
-                        <div class="sm:flex gap-6">
-                            <img src="https://pagedone.io/asset/uploads/1704364549.png" alt="Robert image"
-                                class="w-32 h-32 rounded-full object-cover">
-                            <div class="text">
-                                <p class="font-medium text-lg leading-8 text-gray-900 mb-2">Roaetul Janah</p>
-                                <div class="flex lg:hidden items-center gap-2 lg:justify-between w-full mb-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                        fill="none">
-                                        <g clip-path="url(#clip0_13624_2090)">
-                                            <path
-                                                d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                                fill="#FBBF24" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_13624_2090">
-                                                <rect width="30" height="30" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <p class="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">"Akses cepat,
-                                    informasi lengkap!"
-                                    Sebagai petani muda, saya merasa sangat terbantu dengan platform ini. Informasi soal
-                                    jenis beras, pupuk, hingga pestisida tersedia lengkap dengan petunjuk penggunaannya.
-                                    Tampilan websitenya juga responsif, bisa dibuka lancar lewat HP saat di sawah. Ini
-                                    benar-benar solusi digital untuk pertanian modern.
-                                </p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <a href="javascript:;"
-                                            class="font-semibold text-lg cursor-pointer leading-8 text-indigo-600 whitespace-nowrap">
-                                            Melihat & Membalas</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                            viewBox="0 0 22 22" fill="none">
-                                            <path d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998" stroke="#4F46E5"
-                                                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <p
-                                        class="lg:hidden font-medium text-sm leading-7 text-gray-400 lg:text-center whitespace-nowrap">
-                                        Mei 15, 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="col-span-12 lg:col-span-2 max-lg:hidden flex lg:items-center flex-row lg:flex-col justify-center max-lg:pt-6 ">
-                        <div class="flex items-center gap-2 lg:justify-between w-full mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
-                                fill="none">
-                                <g clip-path="url(#clip0_13624_2090)">
-                                    <path
-                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
-                                        fill="#FBBF24" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_13624_2090">
-                                        <rect width="30" height="30" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </div>
-                        <p class="font-medium text-lg leading-8 text-gray-400 lg:text-center whitespace-nowrap">Mei 15,
-                            2025</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+    <!-- Categori Section End -->
 
-    <!-- Customer Reviw Section End -->
+    <!-- Customer Review Section Start -->
+    <section class="bg-white dark:bg-gray-900 py-12 sm:py-16 md:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="relative flex flex-col items-center">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                        Penilaian <span class="text-blue-500">Pelanggan</span>
+                    </h1>
+                    <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
+                        <div class="flex-1 h-2 bg-blue-200"></div>
+                        <div class="flex-1 h-2 bg-blue-400"></div>
+                        <div class="flex-1 h-2 bg-blue-600"></div>
+                    </div>
+                </div>
+                <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
+                    Lihat apa kata pelanggan kami tentang produk dan layanan yang kami berikan. Kepuasan Anda adalah
+                    prioritas kami.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:gap-6">
+
+                @forelse($storeReviews as $review)
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 p-4 sm:p-6">
+                        <!-- User Info & Rating -->
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                            <div class="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                                <div class="flex-shrink-0">
+                                    @if ($review->user->avatar)
+                                        <img src="{{ Storage::url($review->user->avatar) }}"
+                                            alt="{{ $review->user->name }}"
+                                            class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900 shadow-lg"
+                                            loading="lazy" width="64" height="64">
+                                    @else
+                                        <div
+                                            class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                                            {{ strtoupper(substr($review->user->name, 0, 2)) }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white truncate">
+                                        {{ $review->user->name }}
+                                    </h3>
+                                    <p
+                                        class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                        <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        {{ $review->created_at->format('F d, Y') }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Rating Stars -->
+                            <div
+                                class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-lg w-fit">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>
+                                @endfor
+                            </div>
+                        </div>
+
+                        <!-- Review Text -->
+                        <div class="mb-4">
+                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {{ Str::limit($review->review, 250) }}
+                            </p>
+                        </div>
+
+                        <!-- Read More Link -->
+                        @if (strlen($review->review) > 250)
+                            <a href="{{ route('store.reviews') }}"
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+                                Baca Selengkapnya
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        @endif
+                    </div>
+
+                @empty
+                    <div
+                        class="bg-white border-2 shadow-lg rounded-2xl p-8 sm:p-12 text-center dark:bg-slate-900 dark:border-gray-800">
+                        <svg class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                        <p class="text-gray-600 dark:text-gray-400 text-base sm:text-lg mb-6">Belum ada ulasan
+                            pelanggan.</p>
+                        <a href="{{ route('store.reviews') }}"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base">
+                            Jadilah yang Pertama Memberikan Ulasan
+                        </a>
+                    </div>
+                @endforelse
+
+                @if ($storeReviews->count() > 0)
+                    <div class="text-center mt-6 sm:mt-8">
+                        <a href="{{ route('store.reviews') }}"
+                            class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base">
+                            Lihat Semua Ulasan
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </section>
+    <!-- Customer Review Section End -->
+
 </div>

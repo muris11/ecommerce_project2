@@ -45,6 +45,22 @@ class SuccessPage extends Component
                 'order_id' => $latest_order->id,
                 'payment_method' => 'midtrans'
             ]);
+
+            // Send order confirmation email
+            try {
+                \Illuminate\Support\Facades\Mail::to($latest_order->user->email)
+                    ->send(new \App\Mail\OrderPlaced($latest_order));
+                
+                \Illuminate\Support\Facades\Log::info('Order confirmation email sent', [
+                    'order_id' => $latest_order->id,
+                    'email' => $latest_order->user->email
+                ]);
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to send order confirmation email', [
+                    'order_id' => $latest_order->id,
+                    'error' => $e->getMessage()
+                ]);
+            }
         }
 
         return view('livewire.success-page' ,[

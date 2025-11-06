@@ -1,2 +1,29 @@
+# Robots.txt for Munir Jaya Abadi
+# Domain: munirjayaabadi.sikcb.my.id
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Allow crawling of important pages
+Allow: /products
+Allow: /categories
+Allow: /brands
+Allow: /about
+Allow: /contact
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /livewire
+Disallow: /api
+
+# Disallow search and filter URLs
+Disallow: /*?*sort=
+Disallow: /*?*price_range=
+
+# Allow images and assets
+Allow: /storage/
+Allow: /build/
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://munirjayaabadi.sikcb.my.id/sitemap.xml

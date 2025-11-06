@@ -12,10 +12,25 @@ class OrderStats extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('New Orders', Order::query()->where('status', 'new')->count()),
-            Stat::make('Order Processing', Order::query()->where('status', 'processing')->count()),
-            Stat::make('Order Shipped', Order::query()->where('status', 'shipped')->count()),
-            Stat::make('Average Price', Number::currency(Order::query()->avg('grand_total') ?? 0, 'IDR'))
+            Stat::make('Pesanan Baru', Order::query()->where('status', 'new')->count())
+                ->description('Pesanan yang baru masuk')
+                ->descriptionIcon('heroicon-m-sparkles')
+                ->color('info'),
+            
+            Stat::make('Pesanan Diproses', Order::query()->where('status', 'processing')->count())
+                ->description('Sedang diproses')
+                ->descriptionIcon('heroicon-m-arrow-path')
+                ->color('warning'),
+            
+            Stat::make('Pesanan Dikirim', Order::query()->where('status', 'shipped')->count())
+                ->description('Dalam pengiriman')
+                ->descriptionIcon('heroicon-m-truck')
+                ->color('primary'),
+            
+            Stat::make('Rata-rata Nilai Pesanan', Number::currency(Order::query()->avg('grand_total') ?? 0, 'IDR'))
+                ->description('Average order value')
+                ->descriptionIcon('heroicon-m-currency-dollar')
+                ->color('success')
         ];
     }
 }

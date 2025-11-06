@@ -18,6 +18,13 @@ class Order extends Model
         'currency',
         'shipping_amount',
         'shipping_method',
+        'shipping_destination_id',
+        'shipping_destination_name',
+        'shipping_courier',
+        'shipping_service',
+        'shipping_cost',
+        'shipping_etd',
+        'waybill',
         'notes',
     ];
 

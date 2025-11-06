@@ -15,9 +15,14 @@ class MyOrdersPage extends Component
 
     public function render()
     {
-
+        // Eager load with specific columns to reduce data transfer
         $my_orders = Order::where('user_id', Auth::id())
-            ->with(['items.product', 'address'])
+            ->with([
+                'items:id,order_id,product_id,quantity,unit_amount,total_amount', 
+                'items.product:id,name,slug,image',
+                'address:id,order_id,first_name,last_name,phone,street_address,city,state,zip_code'
+            ])
+            ->select('id', 'user_id', 'grand_total', 'payment_method', 'payment_status', 'status', 'created_at', 'updated_at')
             ->latest()
             ->paginate(10);
             
