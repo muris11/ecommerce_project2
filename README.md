@@ -830,53 +830,53 @@ sudo certbot --nginx -d munirjayaabadi.sikcb.my.id
 
 #### Homepage
 
-![Homepage](docs/screenshots/homepage.png)
+![Homepage](public/images/homepage.png)
 
 #### Products Page
 
-![Products](docs/screenshots/products.png)
+![Products](public/images/product%20page.png)
 
 #### Product Detail
 
-![Product Detail](docs/screenshots/product-detail.png)
+![Product Detail](public/images/product%20detail.png)
 
 #### Shopping Cart
 
-![Cart](docs/screenshots/cart.png)
+![Cart](public/images/shopping%20cart.png)
 
 #### Checkout
 
-![Checkout](docs/screenshots/checkout.png)
+![Checkout](public/images/checkout.png)
 
 #### Payment
 
-![Payment](docs/screenshots/payment.png)
+![Payment](public/images/payment.png)
 
 #### My Orders
 
-![My Orders](docs/screenshots/my-orders.png)
+![My Orders](public/images/my%20orders.png)
 
 ### Admin Panel
 
 #### Dashboard
 
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
+![Admin Dashboard](public/images/dashboard.png)
 
 #### Product Management
 
-![Product Management](docs/screenshots/admin-products.png)
+![Product Management](public/images/product%20management.png)
 
 #### Order Management
 
-![Order Management](docs/screenshots/admin-orders.png)
+![Order Management](public/images/order%20management.png)
 
 #### Order Detail
 
-![Order Detail](docs/screenshots/admin-order-detail.png)
+![Order Detail](public/images/order%20detail.png)
 
 #### User Management
 
-![User Management](docs/screenshots/admin-users.png)
+![User Management](public/images/user%20management.png)
 
 ---
 
