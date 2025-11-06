@@ -15,18 +15,18 @@
 
 ## 📋 Daftar Isi
 
-- [Tentang Project](#-tentang-project)
-- [Fitur Utama](#-fitur-utama)
-- [Tech Stack](#-tech-stack)
-- [Persyaratan Sistem](#-persyaratan-sistem)
-- [Instalasi](#-instalasi)
-- [Konfigurasi](#-konfigurasi)
-- [Database Schema](#-database-schema)
-- [API Documentation](#-api-documentation)
-- [Deployment](#-deployment)
-- [Screenshot](#-screenshot)
-- [Kontributor](#-kontributor)
-- [Lisensi](#-lisensi)
+-   [Tentang Project](#-tentang-project)
+-   [Fitur Utama](#-fitur-utama)
+-   [Tech Stack](#-tech-stack)
+-   [Persyaratan Sistem](#-persyaratan-sistem)
+-   [Instalasi](#-instalasi)
+-   [Konfigurasi](#-konfigurasi)
+-   [Database Schema](#-database-schema)
+-   [API Documentation](#-api-documentation)
+-   [Deployment](#-deployment)
+-   [Screenshot](#-screenshot)
+-   [Kontributor](#-kontributor)
+-   [Lisensi](#-lisensi)
 
 ---
 
@@ -36,17 +36,17 @@
 
 ### 🌟 Highlight
 
-- ✨ **Modern UI/UX** dengan TailwindCSS dan dark mode support
-- 🚀 **Real-time** interaktivity dengan Livewire
-- 🎨 **Powerful Admin Panel** menggunakan Filament 3
-- 💳 **Multi Payment Gateway** (Midtrans, Stripe, COD)
-- 📦 **Real-time Shipping** calculation dengan RajaOngkir API
-- 🤖 **AI Chatbot** powered by Google Gemini
-- 📧 **Email Notifications** untuk order management
-- 🔐 **Secure Authentication** dan authorization
-- 📱 **Fully Responsive** design
-- 🌐 **SEO Optimized** dengan meta tags lengkap
-- 🇮🇩 **Localized** untuk Indonesia (Bahasa Indonesia)
+-   ✨ **Modern UI/UX** dengan TailwindCSS dan dark mode support
+-   🚀 **Real-time** interaktivity dengan Livewire
+-   🎨 **Powerful Admin Panel** menggunakan Filament 3
+-   💳 **Multi Payment Gateway** (Midtrans, Stripe, COD)
+-   📦 **Real-time Shipping** calculation dengan RajaOngkir API
+-   🤖 **AI Chatbot** powered by Google Gemini
+-   📧 **Email Notifications** untuk order management
+-   🔐 **Secure Authentication** dan authorization
+-   📱 **Fully Responsive** design
+-   🌐 **SEO Optimized** dengan meta tags lengkap
+-   🇮🇩 **Localized** untuk Indonesia (Bahasa Indonesia)
 
 ---
 
@@ -55,172 +55,187 @@
 ### 🛒 Customer Features
 
 #### 🏪 Shopping Experience
-- **Product Catalog** dengan filter dan sorting canggih
-  - Filter berdasarkan kategori, brand, harga, featured, on-sale
-  - Sorting by latest, price (low-high, high-low)
-  - Search functionality
-  - Product detail dengan multiple images
-- **Shopping Cart** dengan real-time updates
-  - Add/remove items
-  - Quantity adjustment
-  - Price calculation otomatis
-  - Persistent cart (cookie-based)
-- **Wishlist** untuk save produk favorit
+
+-   **Product Catalog** dengan filter dan sorting canggih
+    -   Filter berdasarkan kategori, brand, harga, featured, on-sale
+    -   Sorting by latest, price (low-high, high-low)
+    -   Search functionality
+    -   Product detail dengan multiple images
+-   **Shopping Cart** dengan real-time updates
+    -   Add/remove items
+    -   Quantity adjustment
+    -   Price calculation otomatis
+    -   Persistent cart (cookie-based)
+-   **Wishlist** untuk save produk favorit
 
 #### 💰 Checkout & Payment
-- **Smart Checkout Flow**
-  - Real-time shipping cost calculation
-  - Multiple courier options (JNE, TIKI, POS, J&T, SiCepat, dll)
-  - Automatic address autocomplete via RajaOngkir
-  - ETD (Estimated Time Delivery) information
-- **Payment Methods**
-  - **Midtrans** (Credit Card, e-Wallet, Bank Transfer, dll)
-  - **Stripe** (International payments)
-  - **COD** (Cash on Delivery)
-- **Order Management**
-  - Order history tracking
-  - Real-time status updates
-  - Email notifications
-  - Invoice download (PDF)
-  - Waybill tracking
+
+-   **Smart Checkout Flow**
+    -   Real-time shipping cost calculation
+    -   Multiple courier options (JNE, TIKI, POS, J&T, SiCepat, dll)
+    -   Automatic address autocomplete via RajaOngkir
+    -   ETD (Estimated Time Delivery) information
+-   **Payment Methods**
+    -   **Midtrans** (Credit Card, e-Wallet, Bank Transfer, dll)
+    -   **Stripe** (International payments)
+    -   **COD** (Cash on Delivery)
+-   **Order Management**
+    -   Order history tracking
+    -   Real-time status updates
+    -   Email notifications
+    -   Invoice download (PDF)
+    -   Waybill tracking
 
 #### 🤖 AI Features
-- **Chatbot** powered by Google Gemini AI
-  - Product recommendations
-  - Customer support
-  - Order inquiry
-  - FAQs assistance
+
+-   **Chatbot** powered by Google Gemini AI
+    -   Product recommendations
+    -   Customer support
+    -   Order inquiry
+    -   FAQs assistance
 
 #### 👤 User Account
-- **Profile Management**
-  - Personal information
-  - Avatar upload
-  - Password change
-  - Email verification
-- **Order History**
-  - Detailed order view
-  - Status tracking
-  - Reorder functionality
-- **Product Reviews**
-  - Rating system (1-5 stars)
-  - Review submission
-  - Review moderation
+
+-   **Profile Management**
+    -   Personal information
+    -   Avatar upload
+    -   Password change
+    -   Email verification
+-   **Order History**
+    -   Detailed order view
+    -   Status tracking
+    -   Reorder functionality
+-   **Product Reviews**
+    -   Rating system (1-5 stars)
+    -   Review submission
+    -   Review moderation
 
 ---
 
 ### 🔧 Admin Features
 
 #### 📊 Dashboard
-- **Analytics Overview**
-  - Total orders, revenue, customers
-  - Latest orders widget
-  - Revenue charts
-  - Best-selling products
-- **Statistics**
-  - Order status breakdown
-  - Payment status analytics
-  - Shipping method analysis
+
+-   **Analytics Overview**
+    -   Total orders, revenue, customers
+    -   Latest orders widget
+    -   Revenue charts
+    -   Best-selling products
+-   **Statistics**
+    -   Order status breakdown
+    -   Payment status analytics
+    -   Shipping method analysis
 
 #### 🏢 Product Management
-- **CRUD Operations** untuk products
-  - Multiple image upload
-  - Category & brand assignment
-  - Stock management
-  - Pricing (regular price, sale price)
-  - Featured & on-sale flags
-- **Category Management**
-  - Hierarchical categories
-  - Image & icon support
-  - Active/inactive status
-- **Brand Management**
-  - Brand logos
-  - Brand visibility control
+
+-   **CRUD Operations** untuk products
+    -   Multiple image upload
+    -   Category & brand assignment
+    -   Stock management
+    -   Pricing (regular price, sale price)
+    -   Featured & on-sale flags
+-   **Category Management**
+    -   Hierarchical categories
+    -   Image & icon support
+    -   Active/inactive status
+-   **Brand Management**
+    -   Brand logos
+    -   Brand visibility control
 
 #### 📦 Order Management
-- **Comprehensive Order Control**
-  - Order listing dengan filter canggih
-  - Order detail view (infolist)
-  - Order status management (New → Processing → Shipped → Delivered)
-  - Payment status tracking
-  - Shipping information
-  - Quick actions (Ship, Cancel, Mark Delivered)
-- **Order Items**
-  - Product details
-  - Quantity & pricing
-  - Subtotal calculation
-- **Address Information**
-  - Customer delivery address
-  - Contact information
+
+-   **Comprehensive Order Control**
+    -   Order listing dengan filter canggih
+    -   Order detail view (infolist)
+    -   Order status management (New → Processing → Shipped → Delivered)
+    -   Payment status tracking
+    -   Shipping information
+    -   Quick actions (Ship, Cancel, Mark Delivered)
+-   **Order Items**
+    -   Product details
+    -   Quantity & pricing
+    -   Subtotal calculation
+-   **Address Information**
+    -   Customer delivery address
+    -   Contact information
 
 #### 👥 User Management
-- **Customer Management**
-  - User listing & search
-  - User details with avatar
-  - Email verification status
-  - Order history per user
-  - Quick access to user orders
-- **Role & Permission** (via Filament)
+
+-   **Customer Management**
+    -   User listing & search
+    -   User details with avatar
+    -   Email verification status
+    -   Order history per user
+    -   Quick access to user orders
+-   **Role & Permission** (via Filament)
 
 #### ⭐ Review Management
-- **Product Reviews**
-  - Review moderation
-  - Approval system
-  - Rating analytics
-  - Customer feedback
+
+-   **Product Reviews**
+    -   Review moderation
+    -   Approval system
+    -   Rating analytics
+    -   Customer feedback
 
 #### 📧 Contact Messages
-- **Customer Inquiries**
-  - Contact form submissions
-  - Read/unread status
-  - Email responses
+
+-   **Customer Inquiries**
+    -   Contact form submissions
+    -   Read/unread status
+    -   Email responses
 
 #### ⚙️ Settings
-- **Filament Configuration**
-  - User profile management
-  - Avatar upload
-  - Password change
-  - Email preferences
+
+-   **Filament Configuration**
+    -   User profile management
+    -   Avatar upload
+    -   Password change
+    -   Email preferences
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Laravel** | 11.31 | PHP Framework |
-| **PHP** | 8.2+ | Programming Language |
-| **MySQL** | 8.0+ | Database |
-| **Livewire** | 3.5 | Full-stack Framework |
-| **Filament** | 3.2 | Admin Panel |
-| **Laravel Sanctum** | Latest | API Authentication |
-| **Laravel Tinker** | 2.9 | REPL |
+
+| Technology          | Version | Purpose              |
+| ------------------- | ------- | -------------------- |
+| **Laravel**         | 11.31   | PHP Framework        |
+| **PHP**             | 8.2+    | Programming Language |
+| **MySQL**           | 8.0+    | Database             |
+| **Livewire**        | 3.5     | Full-stack Framework |
+| **Filament**        | 3.2     | Admin Panel          |
+| **Laravel Sanctum** | Latest  | API Authentication   |
+| **Laravel Tinker**  | 2.9     | REPL                 |
 
 ### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **TailwindCSS** | 3.4.17 | CSS Framework |
-| **Vite** | 6.1.1 | Build Tool |
-| **Axios** | 1.7.4 | HTTP Client |
-| **Preline** | 2.7.0 | UI Components |
-| **Alpine.js** | - | JavaScript Framework (via Livewire) |
+
+| Technology      | Version | Purpose                             |
+| --------------- | ------- | ----------------------------------- |
+| **TailwindCSS** | 3.4.17  | CSS Framework                       |
+| **Vite**        | 6.1.1   | Build Tool                          |
+| **Axios**       | 1.7.4   | HTTP Client                         |
+| **Preline**     | 2.7.0   | UI Components                       |
+| **Alpine.js**   | -       | JavaScript Framework (via Livewire) |
 
 ### Integrations
-| Service | Purpose |
-|---------|---------|
-| **Midtrans** | Payment Gateway (Indonesia) |
-| **Stripe** | International Payment |
-| **RajaOngkir** | Shipping Cost Calculation |
-| **Google Gemini AI** | AI Chatbot |
-| **Gmail SMTP** | Email Notifications |
+
+| Service              | Purpose                     |
+| -------------------- | --------------------------- |
+| **Midtrans**         | Payment Gateway (Indonesia) |
+| **Stripe**           | International Payment       |
+| **RajaOngkir**       | Shipping Cost Calculation   |
+| **Google Gemini AI** | AI Chatbot                  |
+| **Gmail SMTP**       | Email Notifications         |
 
 ### Development Tools
-| Tool | Version | Purpose |
-|------|---------|---------|
-| **Laravel Debugbar** | 3.16 | Debugging |
-| **Laravel Pint** | 1.13 | Code Styling |
-| **PHPUnit** | 11.0.1 | Testing |
-| **Faker** | 1.23 | Fake Data |
+
+| Tool                 | Version | Purpose      |
+| -------------------- | ------- | ------------ |
+| **Laravel Debugbar** | 3.16    | Debugging    |
+| **Laravel Pint**     | 1.13    | Code Styling |
+| **PHPUnit**          | 11.0.1  | Testing      |
+| **Faker**            | 1.23    | Fake Data    |
 
 ---
 
@@ -381,6 +396,7 @@ exit
 Edit file `.env` untuk konfigurasi:
 
 #### Aplikasi Dasar
+
 ```env
 APP_NAME="Munir Jaya Abadi"
 APP_ENV=local
@@ -391,6 +407,7 @@ APP_LOCALE=id
 ```
 
 #### Database
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -401,6 +418,7 @@ DB_PASSWORD=
 ```
 
 #### Mail Configuration
+
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -413,12 +431,14 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 **Cara mendapatkan Gmail App Password:**
+
 1. Buka Google Account Settings
 2. Security → 2-Step Verification → App passwords
 3. Generate password untuk "Mail"
 4. Copy password ke `MAIL_PASSWORD`
 
 #### Midtrans Configuration
+
 ```env
 MIDTRANS_MERCHANT_ID=your_merchant_id
 MIDTRANS_CLIENT_KEY=your_client_key
@@ -429,12 +449,14 @@ MIDTRANS_IS_3DS=true
 ```
 
 **Cara mendapatkan Midtrans credentials:**
+
 1. Daftar di [Midtrans](https://midtrans.com)
 2. Login ke Dashboard
 3. Settings → Access Keys
 4. Copy Client Key dan Server Key
 
 #### Google Gemini AI
+
 ```env
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-2.5-flash
@@ -443,17 +465,20 @@ GEMINI_TEMPERATURE=0.7
 ```
 
 **Cara mendapatkan Gemini API Key:**
+
 1. Buka [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Create API Key
 3. Copy ke `GEMINI_API_KEY`
 
 #### RajaOngkir API
+
 ```env
 RAJAONGKIR_API_KEY=your_api_key
 RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 **Cara mendapatkan RajaOngkir API:**
+
 1. Daftar di [RajaOngkir Komerce](https://rajaongkir.komerce.id)
 2. Dapatkan API Key gratis
 3. Copy ke `RAJAONGKIR_API_KEY`
@@ -491,6 +516,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ### Tabel Utama
 
 #### users
+
 ```sql
 - id (PK)
 - name
@@ -503,6 +529,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### products
+
 ```sql
 - id (PK)
 - category_id (FK)
@@ -520,6 +547,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### categories
+
 ```sql
 - id (PK)
 - name
@@ -530,6 +558,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### brands
+
 ```sql
 - id (PK)
 - name
@@ -540,6 +569,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### orders
+
 ```sql
 - id (PK)
 - user_id (FK)
@@ -562,6 +592,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### order_items
+
 ```sql
 - id (PK)
 - order_id (FK)
@@ -573,6 +604,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### addresses
+
 ```sql
 - id (PK)
 - order_id (FK)
@@ -587,6 +619,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### reviews
+
 ```sql
 - id (PK)
 - user_id (FK)
@@ -598,6 +631,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
 #### contact_messages
+
 ```sql
 - id (PK)
 - name
@@ -615,6 +649,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ### Public Endpoints
 
 #### Products
+
 ```http
 GET /api/products
 GET /api/products/{id}
@@ -623,12 +658,14 @@ GET /api/products/brand/{brand_slug}
 ```
 
 #### Categories
+
 ```http
 GET /api/categories
 GET /api/categories/{slug}
 ```
 
 #### Brands
+
 ```http
 GET /api/brands
 GET /api/brands/{slug}
@@ -637,6 +674,7 @@ GET /api/brands/{slug}
 ### Authenticated Endpoints
 
 #### Cart
+
 ```http
 POST /api/cart/add
 DELETE /api/cart/remove/{product_id}
@@ -645,6 +683,7 @@ GET /api/cart
 ```
 
 #### Orders
+
 ```http
 POST /api/checkout
 GET /api/orders
@@ -653,6 +692,7 @@ PUT /api/orders/{id}/cancel
 ```
 
 #### User
+
 ```http
 GET /api/user/profile
 PUT /api/user/profile
@@ -662,6 +702,7 @@ PUT /api/user/password
 ### Response Format
 
 **Success Response:**
+
 ```json
 {
     "success": true,
@@ -673,6 +714,7 @@ PUT /api/user/password
 ```
 
 **Error Response:**
+
 ```json
 {
     "success": false,
@@ -689,22 +731,22 @@ PUT /api/user/password
 
 ### Production Checklist
 
-- [ ] Set `APP_ENV=production`
-- [ ] Set `APP_DEBUG=false`
-- [ ] Generate new `APP_KEY`
-- [ ] Configure production database
-- [ ] Setup SSL certificate (HTTPS)
-- [ ] Configure mail server
-- [ ] Setup backup strategy
-- [ ] Configure caching
-- [ ] Optimize autoloader
-- [ ] Run migrations
-- [ ] Build production assets
-- [ ] Set proper file permissions
-- [ ] Configure queue workers
-- [ ] Setup cron jobs
-- [ ] Configure monitoring
-- [ ] Update Midtrans to production keys
+-   [ ] Set `APP_ENV=production`
+-   [ ] Set `APP_DEBUG=false`
+-   [ ] Generate new `APP_KEY`
+-   [ ] Configure production database
+-   [ ] Setup SSL certificate (HTTPS)
+-   [ ] Configure mail server
+-   [ ] Setup backup strategy
+-   [ ] Configure caching
+-   [ ] Optimize autoloader
+-   [ ] Run migrations
+-   [ ] Build production assets
+-   [ ] Set proper file permissions
+-   [ ] Configure queue workers
+-   [ ] Setup cron jobs
+-   [ ] Configure monitoring
+-   [ ] Update Midtrans to production keys
 
 ### Deploy ke cPanel
 
@@ -787,41 +829,53 @@ sudo certbot --nginx -d munirjayaabadi.sikcb.my.id
 ### Customer Interface
 
 #### Homepage
+
 ![Homepage](docs/screenshots/homepage.png)
 
 #### Products Page
+
 ![Products](docs/screenshots/products.png)
 
 #### Product Detail
+
 ![Product Detail](docs/screenshots/product-detail.png)
 
 #### Shopping Cart
+
 ![Cart](docs/screenshots/cart.png)
 
 #### Checkout
+
 ![Checkout](docs/screenshots/checkout.png)
 
 #### Payment
+
 ![Payment](docs/screenshots/payment.png)
 
 #### My Orders
+
 ![My Orders](docs/screenshots/my-orders.png)
 
 ### Admin Panel
 
 #### Dashboard
+
 ![Admin Dashboard](docs/screenshots/admin-dashboard.png)
 
 #### Product Management
+
 ![Product Management](docs/screenshots/admin-products.png)
 
 #### Order Management
+
 ![Order Management](docs/screenshots/admin-orders.png)
 
 #### Order Detail
+
 ![Order Detail](docs/screenshots/admin-order-detail.png)
 
 #### User Management
+
 ![User Management](docs/screenshots/admin-users.png)
 
 ---
@@ -895,6 +949,7 @@ nohup php artisan queue:work &
 ### Scheduled Tasks
 
 Add to crontab:
+
 ```bash
 * * * * * cd /path/to/project && php artisan schedule:run >> /dev/null 2>&1
 ```
@@ -905,11 +960,11 @@ Add to crontab:
 
 ### Additional Docs
 
-- [Installation Guide](docs/INSTALLATION.md)
-- [Deployment Guide](DEPLOYMENT_GUIDE.md)
-- [API Reference](docs/API.md)
-- [Database Schema](docs/DATABASE.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
+-   [Installation Guide](docs/INSTALLATION.md)
+-   [Deployment Guide](DEPLOYMENT_GUIDE.md)
+-   [API Reference](docs/API.md)
+-   [Database Schema](docs/DATABASE.md)
+-   [Troubleshooting](docs/TROUBLESHOOTING.md)
 
 ### Code Documentation
 
@@ -925,7 +980,7 @@ php artisan apidoc:generate
 
 ### Development Team
 
-- **Muhammad Rifqy Saputra** - *Lead Developer* - [@muris11](https://github.com/muris11)
+-   **Muhammad Rifqy Saputra** - _Lead Developer_ - [@muris11](https://github.com/muris11)
 
 ### Contributing
 
@@ -951,30 +1006,33 @@ Kontribusi sangat diterima! Silakan:
 ### Version 1.0.0 (2025-11-06)
 
 #### ✨ Features
-- Complete e-commerce functionality
-- Admin panel with Filament
-- Multi payment gateway integration
-- Real-time shipping calculation
-- AI chatbot with Google Gemini
-- Email notifications
-- Product reviews system
-- SEO optimization
-- Dark mode support
-- Indonesian localization
+
+-   Complete e-commerce functionality
+-   Admin panel with Filament
+-   Multi payment gateway integration
+-   Real-time shipping calculation
+-   AI chatbot with Google Gemini
+-   Email notifications
+-   Product reviews system
+-   SEO optimization
+-   Dark mode support
+-   Indonesian localization
 
 #### 🐛 Bug Fixes
-- Fixed grand total calculation
-- Fixed order edit form paths
-- Fixed price range filter
-- Fixed shipping address fields
-- Fixed cart management arguments
+
+-   Fixed grand total calculation
+-   Fixed order edit form paths
+-   Fixed price range filter
+-   Fixed shipping address fields
+-   Fixed cart management arguments
 
 #### 🔧 Improvements
-- Optimized database migrations
-- Improved responsive design
-- Enhanced SEO meta tags
-- Better error handling
-- Performance optimization
+
+-   Optimized database migrations
+-   Improved responsive design
+-   Enhanced SEO meta tags
+-   Better error handling
+-   Performance optimization
 
 ---
 
@@ -989,15 +1047,15 @@ Jika Anda menemukan kerentanan keamanan, silakan email ke:
 
 ### Security Best Practices
 
-- ✅ Input validation dan sanitization
-- ✅ CSRF protection (Laravel default)
-- ✅ SQL injection prevention (Eloquent ORM)
-- ✅ XSS protection
-- ✅ Password hashing (bcrypt)
-- ✅ Secure session handling
-- ✅ HTTPS enforced in production
-- ✅ API rate limiting
-- ✅ File upload validation
+-   ✅ Input validation dan sanitization
+-   ✅ CSRF protection (Laravel default)
+-   ✅ SQL injection prevention (Eloquent ORM)
+-   ✅ XSS protection
+-   ✅ Password hashing (bcrypt)
+-   ✅ Secure session handling
+-   ✅ HTTPS enforced in production
+-   ✅ API rate limiting
+-   ✅ File upload validation
 
 ---
 
@@ -1035,20 +1093,20 @@ SOFTWARE.
 
 ### Libraries & Tools
 
-- [Laravel](https://laravel.com) - The PHP Framework
-- [Livewire](https://livewire.laravel.com) - Full-stack Framework
-- [Filament](https://filamentphp.com) - Admin Panel
-- [TailwindCSS](https://tailwindcss.com) - CSS Framework
-- [Alpine.js](https://alpinejs.dev) - JavaScript Framework
-- [Midtrans](https://midtrans.com) - Payment Gateway
-- [RajaOngkir](https://rajaongkir.com) - Shipping API
-- [Google Gemini](https://ai.google.dev) - AI Platform
+-   [Laravel](https://laravel.com) - The PHP Framework
+-   [Livewire](https://livewire.laravel.com) - Full-stack Framework
+-   [Filament](https://filamentphp.com) - Admin Panel
+-   [TailwindCSS](https://tailwindcss.com) - CSS Framework
+-   [Alpine.js](https://alpinejs.dev) - JavaScript Framework
+-   [Midtrans](https://midtrans.com) - Payment Gateway
+-   [RajaOngkir](https://rajaongkir.com) - Shipping API
+-   [Google Gemini](https://ai.google.dev) - AI Platform
 
 ### Inspiration
 
-- Laravel community
-- Filament community
-- Livewire community
+-   Laravel community
+-   Filament community
+-   Livewire community
 
 ---
 
@@ -1056,15 +1114,15 @@ SOFTWARE.
 
 ### Developer
 
-- **Email**: rifqysaputra1102@gmail.com
-- **GitHub**: [@muris11](https://github.com/muris11)
-- **Project URL**: [https://github.com/muris11/ecommerce_project2](https://github.com/muris11/ecommerce_project2)
+-   **Email**: rifqysaputra1102@gmail.com
+-   **GitHub**: [@muris11](https://github.com/muris11)
+-   **Project URL**: [https://github.com/muris11/ecommerce_project2](https://github.com/muris11/ecommerce_project2)
 
 ### Support
 
-- **Documentation**: [GitHub Wiki](https://github.com/muris11/ecommerce_project2/wiki)
-- **Issues**: [GitHub Issues](https://github.com/muris11/ecommerce_project2/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/muris11/ecommerce_project2/discussions)
+-   **Documentation**: [GitHub Wiki](https://github.com/muris11/ecommerce_project2/wiki)
+-   **Issues**: [GitHub Issues](https://github.com/muris11/ecommerce_project2/issues)
+-   **Discussions**: [GitHub Discussions](https://github.com/muris11/ecommerce_project2/discussions)
 
 ---
 
@@ -1078,11 +1136,11 @@ SOFTWARE.
 
 Jika project ini membantu Anda, pertimbangkan untuk:
 
-- ⭐ Star repository ini
-- 🐛 Report bugs
-- 💡 Suggest new features
-- 🔀 Submit pull requests
-- 📢 Share dengan teman-teman
+-   ⭐ Star repository ini
+-   🐛 Report bugs
+-   💡 Suggest new features
+-   🔀 Submit pull requests
+-   📢 Share dengan teman-teman
 
 ---
 
