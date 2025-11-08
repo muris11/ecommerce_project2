@@ -3,18 +3,21 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.2",
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.31",
-        "laravel/sanctum": "*",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "midtrans/midtrans-php": "^2.6",
-        "openai-php/client": "^0.18.0",
+        "stevebauman/purify": "^6.3",
         "stripe/stripe-php": "^17.2"
     },
     "require-dev": {

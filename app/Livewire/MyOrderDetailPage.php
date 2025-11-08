@@ -2,10 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Address;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\OrderItem;
 use Livewire\Attributes\Title;
 
 #[Title('Detail Pesanan')]
@@ -14,8 +13,13 @@ class MyOrderDetailPage extends Component
 
     public $order_id;
 
-    public function mount($order_id){
-        $this->order_id = $order_id;
+    public function mount(Order $order){
+        // Ensure user can only access their own orders
+        if ($order->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to order details.');
+        }
+
+        $this->order_id = $order->id;
     }
     public function render()
     {

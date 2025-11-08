@@ -1,16 +1,16 @@
 <header
-    class="flex z-[60] sticky top-0 flex-wrap md:justify-start md:flex-nowrap w-full bg-white/90 backdrop-blur-md text-sm py-3 md:py-0 dark:bg-gray-800/90 shadow-md transition-all duration-300 border-b border-gray-100 dark:border-gray-700">
+    class="flex z-[60] sticky top-0 flex-wrap md:justify-start md:flex-nowrap w-full bg-white/90 backdrop-blur-md text-sm py-3 md:py-0 shadow-md transition-all duration-300 border-b border-gray-100">
     <nav class="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Global">
         <div class="relative md:flex md:items-center md:justify-between">
             <div class="flex items-center justify-between">
-                <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 hover:scale-105 transition-transform duration-300"
+                <a class="flex-none text-xl font-semibold hover:scale-105 transition-transform duration-300"
                     href="{{ route('home') }}" aria-label="Brand">
                     <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">Munir Jaya
                         Abadi</span>
                 </a>
                 <div class="md:hidden">
                     <button type="button"
-                        class="hs-collapse-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        class="hs-collapse-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
                         data-hs-collapse="#navbar-collapse-with-animation"
                         aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
                         <svg class="hs-collapse-open:hidden flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg"
@@ -34,12 +34,12 @@
             <div id="navbar-collapse-with-animation"
                 class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block">
                 <div
-                    class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500">
+                    class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                     <div
-                        class="flex flex-col gap-x-0 mt-5 divide-y divide-dashed divide-gray-200 md:flex-row md:items-center md:justify-end md:gap-x-7 md:mt-0 md:ps-7 md:divide-y-0 md:divide-solid dark:divide-gray-700">
+                        class="flex flex-col gap-x-0 mt-5 divide-y divide-dashed divide-gray-200 md:flex-row md:items-center md:justify-end md:gap-x-7 md:mt-0 md:ps-7 md:divide-y-0 md:divide-solid">
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-500' }} py-3 md:py-6 dark:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 hover:text-blue-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-500' }} py-3 md:py-6 hover:text-blue-600 transition-all duration-300 relative group"
                             href="{{ route('home') }}" aria-current="page">
                             Beranda
                             <span
@@ -47,7 +47,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('brands') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('brands') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('brands') }}">
                             Merek
                             <span
@@ -55,7 +55,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('categories') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('categories') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('categories') }}">
                             Kategori
                             <span
@@ -63,7 +63,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('products') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('products') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('products') }}">
                             Produk
                             <span
@@ -71,7 +71,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('about') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('about') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('about') }}">
                             Tentang Kami
                             <span
@@ -79,7 +79,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium {{ request()->routeIs('contact') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium {{ request()->routeIs('contact') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('contact') }}">
                             Hubungi Kami
                             <span
@@ -87,7 +87,7 @@
                         </a>
 
                         <a wire:navigate
-                            class="font-medium flex items-center {{ request()->routeIs('cart') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-all duration-300 relative group"
+                            class="font-medium flex items-center {{ request()->routeIs('cart') ? 'text-blue-600' : 'text-gray-500' }} hover:text-blue-600 py-3 md:py-6 transition-all duration-300 relative group"
                             href="{{ route('cart') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor"
@@ -105,7 +105,7 @@
                         @guest
                             <div class="pt-3 md:pt-0">
                                 <a wire:navigate
-                                    class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                    class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                     href="{{ route('login') }}">
                                     <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -122,7 +122,7 @@
                             <div
                                 class="hs-dropdown [--strategy:static] md:[--strategy:fixed] [--adaptive:none] md:[--trigger:click] md:py-4">
                                 <button type="button"
-                                    class="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium dark:text-gray-400 dark:hover:text-gray-500">
+                                    class="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium">
                                     {{ Auth::user()->name }}
                                     <svg class="ms-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -132,8 +132,8 @@
                                 </button>
 
                                 <div
-                                    class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 md:w-48 hidden z-10 bg-white md:shadow-md rounded-lg p-2 dark:bg-gray-800 md:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full md:border before:-top-5 before:start-0 before:w-full before:h-5">
-                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                    class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 md:w-48 hidden z-10 bg-white md:shadow-md rounded-lg p-2 before:absolute top-full md:border before:-top-5 before:start-0 before:w-full before:h-5">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                         wire:navigate href="{{ route('profile') }}">
                                         <svg class="flex-shrink-0 w-4 h-4" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -143,7 +143,7 @@
                                         Profil Saya
                                     </a>
 
-                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                         wire:navigate href="{{ route('my-orders') }}">
                                         <svg class="flex-shrink-0 w-4 h-4" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -153,7 +153,7 @@
                                         Pesanan Saya
                                     </a>
                                     <button wire:click="logout" type="button"
-                                        class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-red-500 dark:text-red-400 dark:hover:bg-gray-700 dark:hover:text-red-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                        class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-red-500">
                                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

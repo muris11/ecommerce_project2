@@ -4,13 +4,12 @@
     <!-- Grid -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-5">
         <!-- Card -->
-        <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-800">
+        <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="p-4 md:p-5 flex gap-x-4">
-                <div
-                    class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-gray-800">
-                    <svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                    <svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                         <circle cx="9" cy="7" r="4" />
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -33,14 +32,12 @@
         <!-- End Card -->
 
         <!-- Card -->
-        <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-800">
+        <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="p-4 md:p-5 flex gap-x-4">
-                <div
-                    class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-gray-800">
-                    <svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <div class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                    <svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 22h14" />
                         <path d="M5 2h14" />
                         <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
@@ -55,7 +52,7 @@
                         </p>
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl font-medium text-gray-800 dark:text-gray-200">
+                        <h3 class="text-xl font-medium text-gray-800">
                             {{ $order->created_at->format('d-m-Y') }}
                         </h3>
                     </div>
@@ -65,14 +62,12 @@
         <!-- End Card -->
 
         <!-- Card -->
-        <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-800">
+        <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="p-4 md:p-5 flex gap-x-4">
-                <div
-                    class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-gray-800">
-                    <svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <div class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                    <svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6" />
                         <path d="m12 12 4 10 1.7-4.3L22 16Z" />
                     </svg>
@@ -115,14 +110,12 @@
         <!-- End Card -->
 
         <!-- Card -->
-        <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-800">
+        <div class="flex flex-col bg-white border shadow-sm rounded-xl">
             <div class="p-4 md:p-5 flex gap-x-4">
-                <div
-                    class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-gray-800">
-                    <svg class="flex-shrink-0 size-5 text-gray-600 dark:text-gray-400"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <div class="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+                    <svg class="flex-shrink-0 size-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
                         <path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                         <path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
@@ -203,38 +196,71 @@
 
     <div class="flex flex-col md:flex-row gap-4 mt-4">
         <div class="md:w-3/4">
-            <div class="bg-white overflow-x-auto rounded-lg shadow-md p-6 mb-4">
-                <table class="w-full">
-                    <thead>
-                        <tr>
-                            <th class="text-left font-semibold">Produk</th>
-                            <th class="text-left font-semibold">Harga</th>
-                            <th class="text-left font-semibold">Kuantitas</th>
-                            <th class="text-left font-semibold">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="bg-white rounded-lg shadow-md p-6 mb-4">
+                <h2 class="text-xl font-semibold mb-4">Detail Produk</h2>
 
-                        @foreach ($order_items as $item)
-                            <tr wire:key="{{ $item->id }}">
-                                <td class="py-4">
-                                    <div class="flex items-center">
-                                        <img class="h-16 w-16 mr-4 object-cover rounded"
-                                            src="{{ is_array($item->product->image) && !empty($item->product->image) ? url('storage', $item->product->image[0]) : url('images/no-image.png') }}"
-                                            alt="{{ $item->product->name }}" loading="lazy" width="64"
-                                            height="64">
-                                        <span class="font-semibold">{{ $item->product->name }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-4">{{ Number::currency($item->unit_amount, 'IDR') }}</td>
-                                <td class="py-4">
-                                    <span class="text-center w-8">{{ $item->quantity }}</span>
-                                </td>
-                                <td class="py-4">{{ Number::currency($item->total_amount, 'IDR') }}</td>
+                <!-- Mobile View -->
+                <div class="block md:hidden space-y-4">
+                    @foreach ($order_items as $item)
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center mb-3">
+                                <img class="h-16 w-16 mr-4 object-cover rounded"
+                                    src="{{ is_array($item->product->image) && !empty($item->product->image) ? url('storage', $item->product->image[0]) : url('images/no-image.png') }}"
+                                    alt="{{ $item->product->name }}" loading="lazy" width="64" height="64">
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-800">{{ $item->product->name }}</h3>
+                                    <p class="text-sm text-gray-600">Kuantitas: {{ $item->quantity }}</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm text-gray-600">Harga Satuan</p>
+                                    <p class="font-semibold">{{ Number::currency($item->unit_amount, 'IDR') }}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-gray-600">Total</p>
+                                    <p class="font-semibold text-lg">
+                                        {{ Number::currency($item->total_amount, 'IDR') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Desktop Table View -->
+                <div class="hidden md:block overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left font-semibold py-3 px-4">Produk</th>
+                                <th class="text-left font-semibold py-3 px-4">Harga</th>
+                                <th class="text-left font-semibold py-3 px-4">Kuantitas</th>
+                                <th class="text-left font-semibold py-3 px-4">Total</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($order_items as $item)
+                                <tr wire:key="{{ $item->id }}" class="border-b border-gray-100 hover:bg-gray-50">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <img class="h-16 w-16 mr-4 object-cover rounded"
+                                                src="{{ is_array($item->product->image) && !empty($item->product->image) ? url('storage', $item->product->image[0]) : url('images/no-image.png') }}"
+                                                alt="{{ $item->product->name }}" loading="lazy" width="64"
+                                                height="64">
+                                            <span class="font-semibold">{{ $item->product->name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">{{ Number::currency($item->unit_amount, 'IDR') }}</td>
+                                    <td class="py-4 px-4">
+                                        <span class="text-center w-8">{{ $item->quantity }}</span>
+                                    </td>
+                                    <td class="py-4 px-4 font-semibold">
+                                        {{ Number::currency($item->total_amount, 'IDR') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="bg-white overflow-x-auto rounded-lg shadow-md p-6 mb-4">

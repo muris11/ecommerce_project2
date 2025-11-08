@@ -25,10 +25,10 @@ class User extends Authenticatable implements FilamentUser
     protected $fillable = [
         'name',
         'email',
-        'email_verified_at',
         'password',
         'phone',
         'avatar',
+        'is_admin',
     ];
 
     /**
@@ -47,9 +47,10 @@ class User extends Authenticatable implements FilamentUser
      * @return array<string, string>
      */
     protected $casts = [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_admin' => 'boolean',
+    ];
 
     public function orders() {
         return $this->hasMany(Order::class);
@@ -74,11 +75,19 @@ class User extends Authenticatable implements FilamentUser
         $this->notify(new ResetPasswordNotification($token));
     }
 
-     public function canAccessPanel(Panel $panel): bool
+    /**
+     * Get the avatar URL attribute.
+     */
+    public function getAvatarUrlAttribute()
     {
-        // Allow specific admin emails or check if user is verified
-        return str_ends_with($this->email, '@example.com') || 
-               str_ends_with($this->email, '@gmail.com') ||
-               $this->email_verified_at !== null;
+        return $this->avatar 
+            ? asset('storage/' . $this->avatar) 
+            : asset('images/default-avatar.svg');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // SECURITY: Only allow users with is_admin = true
+        return $this->is_admin === true;
     }
 }

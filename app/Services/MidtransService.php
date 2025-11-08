@@ -13,8 +13,8 @@ class MidtransService
     {
         // Set your Merchant Server Key
         Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        Config::$isProduction = false;
+        // FIXED: Read from config instead of hardcoded false
+        Config::$isProduction = (bool) config('midtrans.is_production', false);
         // Set sanitization on (default)
         Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true

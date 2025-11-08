@@ -17,7 +17,7 @@
             <!-- Header -->
             <div class="mb-10 text-center">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-4xl md:text-5xl font-bold dark:text-gray-200 mb-2">
+                    <h1 class="text-4xl md:text-5xl font-bold  mb-2">
                         Review <span class="text-blue-500">Produk</span>
                     </h1>
                     <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
@@ -26,10 +26,10 @@
                         <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <h2 class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-semibold mb-2">
+                <h2 class="text-xl md:text-2xl text-gray-700  font-semibold mb-2">
                     {{ $product->name }}
                 </h2>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-gray-600 ">
                     Total <span class="font-semibold text-blue-600">{{ $reviews->total() }}</span> review dari pelanggan
                 </p>
             </div>
@@ -38,7 +38,7 @@
             <div class="space-y-6">
                 @forelse($reviews as $review)
                     <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 p-6">
+                        class="bg-white  rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100  p-6">
                         <!-- User Info -->
                         <div class="flex items-start justify-between mb-4 flex-wrap gap-4">
                             <div class="flex items-center gap-4">
@@ -46,7 +46,7 @@
                                     @if ($review->user->avatar)
                                         <img src="{{ Storage::url($review->user->avatar) }}"
                                             alt="{{ $review->user->name }}"
-                                            class="w-14 h-14 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900 shadow-lg"
+                                            class="w-14 h-14 rounded-full object-cover border-4 border-blue-100  shadow-lg"
                                             loading="lazy" width="56" height="56">
                                     @else
                                         <div
@@ -56,10 +56,10 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                    <h3 class="text-lg font-bold text-gray-900 ">
                                         {{ $review->user->name }}
                                     </h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                    <p class="text-sm text-gray-500  flex items-center gap-1">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
@@ -72,7 +72,7 @@
 
                             <!-- Rating -->
                             <div
-                                class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-lg">
+                                class="flex items-center gap-1 bg-yellow-50  px-3 py-2 rounded-lg">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <svg class="w-5 h-5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}"
                                         fill="currentColor" viewBox="0 0 20 20">
@@ -81,7 +81,7 @@
                                         </path>
                                     </svg>
                                 @endfor
-                                <span class="ml-1 text-sm font-bold text-gray-700 dark:text-gray-300">
+                                <span class="ml-1 text-sm font-bold text-gray-700 ">
                                     {{ $review->rating }}/5
                                 </span>
                             </div>
@@ -89,7 +89,7 @@
 
                         <!-- Review Comment -->
                         <div class="mb-4">
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+                            <p class="text-gray-700  leading-relaxed text-base">
                                 {{ $review->comment }}
                             </p>
                         </div>
@@ -97,7 +97,7 @@
                         <!-- Admin Reply -->
                         @if ($review->admin_reply)
                             <div
-                                class="mt-4 pl-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 via-blue-50/50 to-transparent dark:from-blue-900/30 dark:via-blue-900/10 p-5 rounded-r-lg">
+                                class="mt-4 pl-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 via-blue-50/50 to-transparent   p-5 rounded-r-lg">
                                 <div class="flex items-center gap-2 mb-3">
                                     <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -109,11 +109,11 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400">
+                                    <span class="text-sm font-bold text-blue-600 ">
                                         Balasan dari Admin
                                     </span>
                                     @if ($review->replied_at)
-                                        <span class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                        <span class="text-xs text-gray-500  flex items-center gap-1">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -123,7 +123,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed pl-10">
+                                <p class="text-gray-700  leading-relaxed pl-10">
                                     {{ $review->admin_reply }}
                                 </p>
                             </div>
@@ -131,18 +131,18 @@
                     </div>
                 @empty
                     <div
-                        class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+                        class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100   rounded-xl border-2 border-dashed border-gray-300 ">
                         <div
-                            class="w-20 h-20 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="h-10 w-10 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                            class="w-20 h-20 bg-gray-200  rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-10 w-10 text-gray-400 " fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Belum ada review</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
+                        <h3 class="text-xl font-bold text-gray-900  mb-2">Belum ada review</h3>
+                        <p class="text-gray-600 ">
                             Jadilah yang pertama memberikan review untuk produk ini.
                         </p>
                     </div>

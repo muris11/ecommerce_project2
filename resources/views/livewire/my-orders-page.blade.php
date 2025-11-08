@@ -5,60 +5,45 @@
             Pesanan Saya</h1>
 
         <div
-            class="flex flex-col bg-white dark:bg-gray-800 p-5 rounded-xl mt-4 shadow-lg hover:shadow-2xl transition-shadow duration-500 animate-fade-in-up animation-delay-200">
+            class="flex flex-col bg-white p-5 rounded-xl mt-4 shadow-lg hover:shadow-2xl transition-shadow duration-500 animate-fade-in-up animation-delay-200">
             @if ($orders->count() > 0)
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div class="overflow-hidden">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-900">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
                                     <tr>
-                                        <th
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             ID Pesanan</th>
-                                        <th
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Tanggal</th>
-                                        <th
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Status Pesanan</th>
-                                        <th
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Status Pembayaran</th>
-                                        <th
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                             Total</th>
-                                        <th
-                                            class="px-6 py-3 text-end text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                        <th class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
                                             Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody class="divide-y divide-gray-200">
                                     @foreach ($orders as $order)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300 animate-fade-in-up"
+                                        <tr class="hover:bg-gray-100 transition-colors duration-300 animate-fade-in-up"
                                             style="animation-delay: {{ $loop->index * 50 }}ms">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                 #{{ $order->id }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-300">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                 {{ $order->created_at->format('d-m-Y') }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-300">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                 @php
                                                     $statusClasses = match ($order->status) {
-                                                        'new'
-                                                            => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-                                                        'processing'
-                                                            => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-                                                        'shipped'
-                                                            => 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
-                                                        'delivered'
-                                                            => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-                                                        'canceled'
-                                                            => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-                                                        default
-                                                            => 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300',
+                                                        'new' => 'bg-blue-100 text-blue-800',
+                                                        'processing' => 'bg-yellow-100 text-yellow-800',
+                                                        'shipped' => 'bg-indigo-100 text-indigo-800',
+                                                        'delivered' => 'bg-green-100 text-green-800',
+                                                        'canceled' => 'bg-red-100 text-red-800',
+                                                        default => 'bg-gray-100 text-gray-800',
                                                     };
 
                                                     $statusLabel = match ($order->status) {
@@ -75,18 +60,13 @@
                                                     {{ $statusLabel }}
                                                 </span>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-300">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                 @php
                                                     $paymentStatusClasses = match ($order->payment_status) {
-                                                        'paid'
-                                                            => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-                                                        'pending'
-                                                            => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-                                                        'failed'
-                                                            => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-                                                        default
-                                                            => 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300',
+                                                        'paid' => 'bg-green-100 text-green-800',
+                                                        'pending' => 'bg-yellow-100 text-yellow-800',
+                                                        'failed' => 'bg-red-100 text-red-800',
+                                                        default => 'bg-gray-100 text-gray-800',
                                                     };
 
                                                     $paymentLabel = match ($order->payment_status) {
@@ -101,8 +81,7 @@
                                                     {{ $paymentLabel }}
                                                 </span>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800">
                                                 Rp
                                                 {{ number_format($order->grand_total, 0, ',', '.') }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">

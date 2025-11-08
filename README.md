@@ -9,7 +9,7 @@
 
 > Platform e-commerce modern dan lengkap dengan fitur admin panel, integrasi payment gateway, sistem pengiriman real-time, dan AI chatbot menggunakan teknologi terkini.
 
-**🌐 Live Demo**: [munirjayaabadi.sikcb.my.id](https://munirjayaabadi.sikcb.my.id)
+**🌐 Live Demo**: [munirjayaabadi.sikcb.my.id](https://munirjayaabadi.sikcb.my.id/)
 
 ---
 
@@ -32,7 +32,22 @@
 
 ## 🎯 Tentang Project
 
-**Munir Jaya Abadi** adalah platform e-commerce full-stack yang dibangun menggunakan Laravel 11 dengan Livewire 3 untuk interaktivitas real-time, Filament 3 untuk admin panel yang powerful, dan integrasi dengan berbagai layanan pihak ketiga.
+> Platform e-commerce full-stack yang dibangun menggunakan Laravel 11 dengan Livewire 3 untuk interaktivitas real-time, Filament 3 untuk admin panel yang powerful, dan **RESTful API lengkap** untuk integrasi mobile app.
+
+### 🌟 Highlight
+
+-   ✨ **Modern UI/UX** dengan TailwindCSS dan dark mode support
+-   🚀 **Real-time** interaktivity dengan Livewire
+-   🎨 **Powerful Admin Panel** menggunakan Filament 3
+-   📱 **Complete REST API** dengan 43 endpoints untuk mobile app
+-   💳 **Multi Payment Gateway** (Midtrans, Stripe, COD)
+-   📦 **Real-time Shipping** calculation dengan RajaOngkir API
+-   🤖 **AI Chatbot** powered by Google Gemini
+-   📧 **Email Notifications** untuk order management
+-   🔐 **Secure Authentication** dan authorization
+-   📱 **Fully Responsive** design
+-   🌐 **SEO Optimized** dengan meta tags lengkap
+-   🇮🇩 **Localized** untuk Indonesia (Bahasa Indonesia)
 
 ### 🌟 Highlight
 
@@ -176,6 +191,11 @@
     -   Approval system
     -   Rating analytics
     -   Customer feedback
+-   **Store Reviews**
+    -   Overall store rating
+    -   Customer satisfaction metrics
+    -   Review aggregation
+    -   Performance insights
 
 #### 📧 Contact Messages
 
@@ -184,13 +204,68 @@
     -   Read/unread status
     -   Email responses
 
-#### ⚙️ Settings
+#### 📊 Analytics & Reporting
 
--   **Filament Configuration**
-    -   User profile management
-    -   Avatar upload
-    -   Password change
-    -   Email preferences
+-   **Dashboard Analytics**
+    -   Sales overview & trends
+    -   Customer metrics
+    -   Product performance
+    -   Revenue reports
+-   **Real-time Monitoring**
+    -   Live order tracking
+    -   Inventory alerts
+    -   Customer activity
+    -   System performance
+
+#### 📝 Content Management
+
+-   **Static Pages**
+    -   About page management
+    -   Contact information
+    -   Terms & conditions
+    -   Privacy policy
+-   **SEO Management**
+    -   Meta tags configuration
+    -   Page titles & descriptions
+    -   Open graph settings
+
+#### ⚙️ System Configuration
+
+-   **General Settings**
+    -   Site information (name, logo, favicon)
+    -   Contact details
+    -   Social media links
+    -   Business hours
+-   **Payment Configuration**
+    -   Midtrans settings
+    -   Stripe integration
+    -   COD options
+-   **Shipping Settings**
+    -   RajaOngkir API configuration
+    -   Shipping zones & rates
+    -   Courier preferences
+-   **AI & Chatbot**
+    -   Google Gemini API settings
+    -   Chatbot behavior configuration
+-   **Email Configuration**
+    -   SMTP settings
+    -   Email templates
+    -   Notification preferences
+
+#### 📱 API & Mobile Integration
+
+-   **RESTful API v1**
+    -   43 comprehensive endpoints
+    -   Laravel Sanctum authentication
+    -   JSON responses with pagination
+    -   File upload support
+    -   Rate limiting & CORS
+-   **Mobile App Ready**
+    -   Complete e-commerce functionality
+    -   Real-time cart management
+    -   Order tracking & payment
+    -   User profile & reviews
+    -   Push notification ready
 
 ---
 
@@ -200,7 +275,7 @@
 
 | Technology          | Version | Purpose              |
 | ------------------- | ------- | -------------------- |
-| **Laravel**         | 11.31   | PHP Framework        |
+| **Laravel**         | 11.46.0 | PHP Framework        |
 | **PHP**             | 8.2+    | Programming Language |
 | **MySQL**           | 8.0+    | Database             |
 | **Livewire**        | 3.5     | Full-stack Framework |
@@ -470,18 +545,40 @@ GEMINI_TEMPERATURE=0.7
 2. Create API Key
 3. Copy ke `GEMINI_API_KEY`
 
-#### RajaOngkir API
+#### Laravel Sanctum (API Authentication)
 
 ```env
-RAJAONGKIR_API_KEY=your_api_key
-RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
+SANCTUM_STATEFUL_DOMAINS=localhost:8000
+SANCTUM_GUARD=web
 ```
 
-**Cara mendapatkan RajaOngkir API:**
+#### Cache Configuration
 
-1. Daftar di [RajaOngkir Komerce](https://rajaongkir.komerce.id)
-2. Dapatkan API Key gratis
-3. Copy ke `RAJAONGKIR_API_KEY`
+```env
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=database
+```
+
+#### File Storage
+
+```env
+FILESYSTEM_DISK=local
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+```
+
+#### Application Cache Keys
+
+```env
+CACHE_KEYS_PRODUCTS=products_cache
+CACHE_KEYS_CATEGORIES=categories_cache
+CACHE_KEYS_PRODUCT_REVIEWS=product_reviews_cache
+CACHE_KEYS_STORE_REVIEWS=store_reviews_cache
+```
 
 ---
 
@@ -493,12 +590,12 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ┌─────────────┐       ┌──────────────┐       ┌─────────────┐
 │   Users     │──────<│    Orders    │>──────│  Addresses  │
 └─────────────┘       └──────────────┘       └─────────────┘
-                             │
-                             │
-                             ▼
-                      ┌──────────────┐
-                      │ Order Items  │
-                      └──────────────┘
+       │                       │
+       │                       │
+       ▼                       ▼
+┌─────────────┐       ┌──────────────┐
+│   Reviews   │       │ Order Items  │
+└─────────────┘       └──────────────┘
                              │
                              │
                              ▼
@@ -521,10 +618,22 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 - id (PK)
 - name
 - email (unique)
-- email_verified_at
+- email_verified_at (nullable)
 - password
 - avatar (nullable)
-- remember_token
+- remember_token (nullable)
+- created_at, updated_at
+```
+
+#### personal_access_tokens (Laravel Sanctum)
+
+```sql
+- id (PK)
+- tokenable_type
+- tokenable_id
+- name
+- token (unique, hashed)
+- abilities (nullable, JSON)
 - created_at, updated_at
 ```
 
@@ -532,17 +641,17 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 
 ```sql
 - id (PK)
-- category_id (FK)
-- brand_id (FK)
+- category_id (FK → categories.id)
+- brand_id (FK → brands.id)
 - name
 - slug (unique)
 - image (JSON array)
 - description (text)
-- price (decimal)
-- is_active (boolean)
-- is_featured (boolean)
-- in_stock (boolean)
-- on_sale (boolean)
+- price (decimal 10,2)
+- is_active (boolean, default true)
+- is_featured (boolean, default false)
+- in_stock (boolean, default true)
+- on_sale (boolean, default false)
 - created_at, updated_at
 ```
 
@@ -553,7 +662,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 - name
 - slug (unique)
 - image (nullable)
-- is_active (boolean)
+- is_active (boolean, default true)
 - created_at, updated_at
 ```
 
@@ -564,7 +673,33 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 - name
 - slug (unique)
 - image (nullable)
-- is_active (boolean)
+- is_active (boolean, default true)
+- created_at, updated_at
+```
+
+#### reviews (Product Reviews)
+
+```sql
+- id (PK)
+- user_id (FK → users.id)
+- product_id (FK → products.id)
+- rating (tinyint, 1-5)
+- comment (text)
+- admin_reply (text, nullable)
+- replied_at (timestamp, nullable)
+- created_at, updated_at
+```
+
+#### store_reviews (Store Reviews)
+
+```sql
+- id (PK)
+- user_id (FK → users.id)
+- rating (tinyint, 1-5)
+- comment (text)
+- is_published (boolean, default false)
+- admin_reply (text, nullable)
+- replied_at (timestamp, nullable)
 - created_at, updated_at
 ```
 
@@ -572,22 +707,22 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 
 ```sql
 - id (PK)
-- user_id (FK)
-- grand_total (decimal)
-- payment_method (enum)
-- payment_status (enum)
-- status (enum)
-- currency
-- shipping_amount (decimal)
-- shipping_method
-- shipping_destination_id
-- shipping_destination_name
-- shipping_courier
-- shipping_service
-- shipping_cost (decimal)
-- shipping_etd
-- waybill (nullable)
-- notes (text)
+- user_id (FK → users.id)
+- grand_total (decimal 15,2)
+- payment_method (enum: midtrans, stripe, cod)
+- payment_status (enum: pending, paid, failed, refunded)
+- status (enum: new, processing, shipped, delivered, cancelled)
+- currency (varchar, default 'IDR')
+- shipping_amount (decimal 10,2)
+- shipping_method (varchar)
+- shipping_destination_id (varchar)
+- shipping_destination_name (varchar)
+- shipping_courier (varchar)
+- shipping_service (varchar)
+- shipping_cost (decimal 10,2)
+- shipping_etd (varchar)
+- waybill (varchar, nullable)
+- notes (text, nullable)
 - created_at, updated_at
 ```
 
@@ -595,13 +730,35 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 
 ```sql
 - id (PK)
-- order_id (FK)
-- product_id (FK)
+- order_id (FK → orders.id)
+- product_id (FK → products.id)
 - quantity (integer)
-- unit_amount (decimal)
-- total_amount (decimal)
+- unit_price (decimal 10,2)
+- total_price (decimal 10,2)
 - created_at, updated_at
 ```
+
+#### addresses
+
+```sql
+- id (PK)
+- user_id (FK → users.id)
+- label (varchar)
+- recipient_name (varchar)
+- phone (varchar)
+- address (text)
+- city (varchar)
+- province (varchar)
+- postal_code (varchar)
+- is_default (boolean, default false)
+- created_at, updated_at
+```
+
+-   unit_amount (decimal)
+-   total_amount (decimal)
+-   created_at, updated_at
+
+````
 
 #### addresses
 
@@ -616,7 +773,7 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 - state
 - zip_code
 - created_at, updated_at
-```
+````
 
 #### reviews
 
@@ -646,60 +803,381 @@ RAJAONGKIR_BASE_URL=https://rajaongkir.komerce.id/api/v1
 
 ## 📡 API Documentation
 
-### Public Endpoints
+Platform ini menyediakan **RESTful API lengkap** untuk integrasi mobile app dengan **43 endpoints** yang terorganisir dalam versi API v1.
 
-#### Products
+### 🔑 Authentication
 
-```http
-GET /api/products
-GET /api/products/{id}
-GET /api/products/category/{category_slug}
-GET /api/products/brand/{brand_slug}
-```
-
-#### Categories
+API menggunakan **Laravel Sanctum** untuk authentication. Semua protected endpoints memerlukan Bearer token.
 
 ```http
-GET /api/categories
-GET /api/categories/{slug}
+# Login untuk mendapatkan token
+POST /api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
+    "password": "password123",
+    "device_name": "mobile_app"
+}
+
+# Response
+{
+    "data": {
+        "id": 1,
+        "name": "User Name",
+        "email": "user@example.com",
+        "email_verified_at": null,
+        "created_at": "2025-11-08T00:00:00+07:00",
+        "updated_at": "2025-11-08T00:00:00+07:00"
+    },
+    "token": "1|abc123def456..."
+}
 ```
 
-#### Brands
+### 📋 Public Endpoints
+
+#### 🛍️ Products API
 
 ```http
-GET /api/brands
-GET /api/brands/{slug}
+# Get all products (with pagination, filtering, sorting)
+GET /api/v1/products?page=1&per_page=12&category=beras&brand=rojolele&min_price=10000&max_price=100000&sort=price_asc&featured=1&on_sale=1
+
+# Get product by slug
+GET /api/v1/products/{slug}
+
+# Get product reviews
+GET /api/v1/products/{slug}/reviews
 ```
 
-### Authenticated Endpoints
+**Response Example:**
 
-#### Cart
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "slug": "beras-premium-sania",
+            "name": "Beras Premium Sania",
+            "description": "Beras berkualitas tinggi...",
+            "price": 69000,
+            "in_stock": true,
+            "is_active": true,
+            "is_featured": true,
+            "on_sale": true,
+            "category": {
+                "id": 1,
+                "name": "Beras",
+                "slug": "beras"
+            },
+            "brand": {
+                "id": 1,
+                "name": "Rojolele",
+                "slug": "rojolele"
+            },
+            "image_urls": ["http://127.0.0.1:8000/storage/products/image1.jpg"],
+            "primary_image_url": "http://127.0.0.1:8000/storage/products/image1.jpg",
+            "created_at": "2025-11-07T13:56:59+07:00",
+            "updated_at": "2025-11-07T13:56:59+07:00"
+        }
+    ],
+    "meta": {
+        "current_page": 1,
+        "per_page": 12,
+        "total": 6,
+        "last_page": 1,
+        "has_more_pages": false
+    }
+}
+```
+
+#### 📂 Categories API
 
 ```http
-POST /api/cart/add
-DELETE /api/cart/remove/{product_id}
-PUT /api/cart/update/{product_id}
-GET /api/cart
+# Get all categories
+GET /api/v1/categories
+
+# Get category by slug
+GET /api/v1/categories/{slug}
 ```
 
-#### Orders
+#### 🏢 Brands API
 
 ```http
-POST /api/checkout
-GET /api/orders
-GET /api/orders/{id}
-PUT /api/orders/{id}/cancel
+# Get all brands
+GET /api/v1/brands
+
+# Get brand by slug
+GET /api/v1/brands/{slug}
 ```
 
-#### User
+#### ⭐ Reviews API
 
 ```http
-GET /api/user/profile
-PUT /api/user/profile
-PUT /api/user/password
+# Get published store reviews
+GET /api/v1/reviews
+
+# Get specific review
+GET /api/v1/reviews/{id}
 ```
 
-### Response Format
+### 🔐 Protected Endpoints (Requires Authentication)
+
+#### 🛒 Cart Management
+
+```http
+# Get cart items
+GET /api/v1/cart
+
+# Add item to cart
+POST /api/v1/cart
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "product_id": 1,
+    "quantity": 2
+}
+
+# Update cart item
+PATCH /api/v1/cart/{product_id}
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "quantity": 3
+}
+
+# Remove item from cart
+DELETE /api/v1/cart/{product_id}
+Authorization: Bearer {token}
+
+# Clear entire cart
+DELETE /api/v1/cart
+Authorization: Bearer {token}
+```
+
+#### 🛍️ Order Management
+
+```http
+# Get user orders
+GET /api/v1/orders
+
+# Get specific order
+GET /api/v1/orders/{order}
+
+# Get order payment info
+GET /api/v1/orders/{order}/payment
+
+# Create checkout
+POST /api/v1/checkout
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "shipping_address": "Jl. Example No. 123",
+    "shipping_city": "Jakarta",
+    "shipping_postal_code": "12345",
+    "payment_method": "midtrans",
+    "notes": "Handle with care"
+}
+```
+
+#### 👤 User Profile
+
+```http
+# Get user profile
+GET /api/v1/profile
+Authorization: Bearer {token}
+
+# Update profile
+PATCH /api/v1/profile
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "name": "Updated Name",
+    "email": "newemail@example.com"
+}
+
+# Change password
+PATCH /api/v1/profile/password
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "current_password": "oldpassword",
+    "password": "newpassword123",
+    "password_confirmation": "newpassword123"
+}
+
+# Upload avatar
+POST /api/v1/profile/avatar
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
+# Delete avatar
+DELETE /api/v1/profile/avatar
+Authorization: Bearer {token}
+
+# Get user statistics
+GET /api/v1/profile/statistics
+Authorization: Bearer {token}
+```
+
+#### ⭐ Product Reviews
+
+```http
+# Get user's reviews
+GET /api/v1/user/reviews
+Authorization: Bearer {token}
+
+# Create product review
+POST /api/v1/products/{product_id}/reviews
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "rating": 5,
+    "comment": "Produk sangat berkualitas!"
+}
+
+# Update review
+PATCH /api/v1/reviews/{review_id}
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "rating": 4,
+    "comment": "Updated review comment"
+}
+
+# Delete review
+DELETE /api/v1/reviews/{review_id}
+Authorization: Bearer {token}
+```
+
+#### 🏪 Store Reviews
+
+```http
+# Get user's store reviews
+GET /api/v1/user/store-reviews
+Authorization: Bearer {token}
+
+# Create store review
+POST /api/v1/store-reviews
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "rating": 5,
+    "comment": "Pelayanan sangat baik!"
+}
+
+# Update store review
+PATCH /api/v1/store-reviews/{review_id}
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "rating": 4,
+    "comment": "Updated store review"
+}
+
+# Delete store review
+DELETE /api/v1/store-reviews/{review_id}
+Authorization: Bearer {token}
+```
+
+#### 📍 Address Management
+
+```http
+# Get user addresses
+GET /api/v1/addresses
+Authorization: Bearer {token}
+
+# Create address
+POST /api/v1/addresses
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "label": "Rumah",
+    "recipient_name": "John Doe",
+    "phone": "08123456789",
+    "address": "Jl. Example No. 123",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "postal_code": "12345"
+}
+
+# Update address
+PATCH /api/v1/addresses/{address}
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "label": "Kantor"
+}
+
+# Delete address
+DELETE /api/v1/addresses/{address}
+Authorization: Bearer {token}
+```
+
+#### 🔐 Authentication
+
+```http
+# Register new user
+POST /api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "password_confirmation": "password123",
+    "device_name": "mobile_app"
+}
+
+# Login
+POST /api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "john@example.com",
+    "password": "password123",
+    "device_name": "mobile_app"
+}
+
+# Logout current device
+POST /api/v1/auth/logout
+Authorization: Bearer {token}
+
+# Get current user
+GET /api/v1/auth/user
+Authorization: Bearer {token}
+
+# Send password reset link
+POST /api/v1/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "john@example.com"
+}
+
+# Reset password
+POST /api/v1/auth/reset-password
+Content-Type: application/json
+
+{
+    "email": "john@example.com",
+    "token": "reset_token_here",
+    "password": "newpassword123",
+    "password_confirmation": "newpassword123"
+}
+```
+
+### 📊 Response Format
 
 **Success Response:**
 
@@ -709,7 +1187,10 @@ PUT /api/user/password
     "data": {
         // response data
     },
-    "message": "Success message"
+    "message": "Operation successful",
+    "meta": {
+        // pagination meta (if applicable)
+    }
 }
 ```
 
@@ -718,12 +1199,54 @@ PUT /api/user/password
 ```json
 {
     "success": false,
-    "message": "Error message",
+    "message": "Validation failed",
     "errors": {
-        // validation errors (if any)
+        "email": ["The email field is required."],
+        "password": ["The password must be at least 8 characters."]
     }
 }
 ```
+
+**Paginated Response:**
+
+```json
+{
+    "success": true,
+    "data": [...],
+    "meta": {
+        "current_page": 1,
+        "per_page": 12,
+        "total": 50,
+        "last_page": 5,
+        "has_more_pages": true
+    }
+}
+```
+
+### 🔧 API Features
+
+-   ✅ **Versioning** - API v1 dengan backward compatibility
+-   ✅ **Authentication** - Laravel Sanctum token-based
+-   ✅ **Validation** - Comprehensive input validation
+-   ✅ **Error Handling** - Consistent error responses
+-   ✅ **Pagination** - Cursor-based pagination
+-   ✅ **Rate Limiting** - Built-in throttling
+-   ✅ **CORS Support** - Cross-origin requests enabled
+-   ✅ **File Upload** - Avatar upload support
+-   ✅ **Caching** - Response caching untuk performance
+-   ✅ **Documentation** - OpenAPI/Swagger ready
+
+### 📱 Mobile App Integration
+
+API ini dirancang khusus untuk integrasi mobile app dengan:
+
+-   **43 endpoints lengkap** untuk semua functionality
+-   **Consistent JSON responses** untuk mudah parsing
+-   **Authentication flow** yang secure
+-   **File upload support** untuk avatar
+-   **Real-time cart management**
+-   **Order tracking** dan payment integration
+-   **Review system** untuk products dan store
 
 ---
 
@@ -1036,7 +1559,83 @@ Kontribusi sangat diterima! Silakan:
 
 ---
 
-## 🔐 Security
+## � Deployment & Production
+
+### Prerequisites
+
+-   **Server Requirements**
+    -   PHP 8.2 or higher
+    -   MySQL 8.0 or higher
+    -   Node.js 18+ (for asset building)
+    -   Composer 2.x
+    -   Web server (Apache/Nginx)
+-   **Recommended Server Specs**
+    -   2GB RAM minimum
+    -   20GB storage
+    -   SSL certificate (HTTPS)
+
+### Environment Setup
+
+1. **Clone Repository**
+
+    ```bash
+    git clone <repository-url>
+    cd ecommerce_project2
+    ```
+
+2. **Install Dependencies**
+
+    ```bash
+    composer install --optimize-autoloader --no-dev
+    npm install && npm run build
+    ```
+
+3. **Environment Configuration**
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4. **Database Setup**
+
+    ```bash
+    php artisan migrate --seed
+    php artisan storage:link
+    ```
+
+5. **Cache Optimization**
+    ```bash
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+    ```
+
+### Production Checklist
+
+-   [ ] Environment variables configured
+-   [ ] Database migrated and seeded
+-   [ ] Storage linked
+-   [ ] SSL certificate installed
+-   [ ] Queue worker configured (if using queues)
+-   [ ] Cron jobs set up for scheduled tasks
+-   [ ] File permissions set correctly
+-   [ ] Backup strategy implemented
+
+### Performance Optimization
+
+-   **Caching Strategy**
+    -   Redis for session/cache storage
+    -   CDN for static assets
+    -   Database query optimization
+-   **Monitoring**
+    -   Laravel Telescope (development)
+    -   Laravel Horizon (queue monitoring)
+    -   Server monitoring tools
+
+---
+
+## �🔐 Security
 
 ### Reporting Vulnerabilities
 
@@ -1056,6 +1655,66 @@ Jika Anda menemukan kerentanan keamanan, silakan email ke:
 -   ✅ HTTPS enforced in production
 -   ✅ API rate limiting
 -   ✅ File upload validation
+
+---
+
+## 🤝 Contributing
+
+Kami menyambut kontribusi dari komunitas! Berikut adalah panduan untuk berkontribusi:
+
+### Development Setup
+
+1. Fork repository ini
+2. Clone fork Anda:
+    ```bash
+    git clone https://github.com/your-username/ecommerce_project2.git
+    cd ecommerce_project2
+    ```
+3. Install dependencies:
+    ```bash
+    composer install
+    npm install
+    ```
+4. Setup environment:
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    php artisan migrate:fresh --seed
+    ```
+5. Jalankan development server:
+    ```bash
+    php artisan serve
+    npm run dev
+    ```
+
+### Code Standards
+
+-   **PHP**: Follow PSR-12 coding standards
+-   **JavaScript**: Use ESLint configuration
+-   **CSS**: Follow TailwindCSS best practices
+-   **Git**: Use conventional commit messages
+
+### Pull Request Process
+
+1. Buat branch baru untuk fitur Anda:
+    ```bash
+    git checkout -b feature/amazing-feature
+    ```
+2. Commit perubahan Anda:
+    ```bash
+    git commit -m 'feat: add amazing feature'
+    ```
+3. Push ke branch Anda:
+    ```bash
+    git push origin feature/amazing-feature
+    ```
+4. Buat Pull Request
+
+### Testing
+
+-   Jalankan PHP tests: `php artisan test`
+-   Jalankan JavaScript tests: `npm test`
+-   Pastikan semua tests pass sebelum submit PR
 
 ---
 

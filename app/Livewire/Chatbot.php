@@ -6,6 +6,13 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
+use Stevebauman\Purify\Facades\Purify;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Models\Order;
 
 class Chatbot extends Component
 {
@@ -15,6 +22,12 @@ class Chatbot extends Component
     public $isTyping = false;
     public $useAI = true;
     public $conversationContext = [];
+
+    // Persist chat state across page navigation
+    protected function getListeners()
+    {
+        return ['echo:chatbot,MessageReceived' => 'handleMessage'];
+    }
 
     public function mount()
     {
@@ -26,11 +39,23 @@ class Chatbot extends Component
             Log::warning('Gemini API key not configured.');
         }
 
-        // Start with empty messages for better UX (welcome screen in view)
-        $this->messages = [];
+        // Load messages from session to persist across pages
+        $this->messages = session('chatbot_messages', []);
+        $this->conversationContext = session('chatbot_context', []);
+    }
 
-        // Initialize conversation context
-        $this->conversationContext = [];
+    public function hydrate()
+    {
+        // Restore state after each request
+        $this->messages = session('chatbot_messages', $this->messages);
+        $this->conversationContext = session('chatbot_context', $this->conversationContext);
+    }
+
+    public function dehydrate()
+    {
+        // Save state before response
+        session(['chatbot_messages' => $this->messages]);
+        session(['chatbot_context' => $this->conversationContext]);
     }
 
     public function toggleChat()
@@ -63,8 +88,16 @@ class Chatbot extends Component
             'message' => $userMessage
         ];
 
+        // Clear input IMMEDIATELY before processing
         $this->message = '';
         $this->isTyping = true;
+        
+        // Save to session
+        session(['chatbot_messages' => $this->messages]);
+        session(['chatbot_context' => $this->conversationContext]);
+        
+        // Force refresh UI
+        $this->dispatch('$refresh');
         
         // Get response
         try {
@@ -96,40 +129,128 @@ class Chatbot extends Component
             array_splice($this->conversationContext, 0, 2);
         }
         
+        // Save to session
+        session(['chatbot_messages' => $this->messages]);
+        session(['chatbot_context' => $this->conversationContext]);
+        
         $this->isTyping = false;
+        
+        // Dispatch events
         $this->dispatch('scroll-to-bottom');
+        $this->dispatch('$refresh');
+        
+        // Ensure input is cleared and ready
+        $this->reset('message');
     }
 
     private function getSystemPrompt()
     {
+        // Get real-time data from database
+        $productsCount = Cache::remember('chatbot_products_count', 3600, function() {
+            return Product::where('is_active', 1)->count();
+        });
+        
+        $categoriesCount = Cache::remember('chatbot_categories_count', 3600, function() {
+            return Category::where('is_active', 1)->count();
+        });
+        
+        $brandsCount = Cache::remember('chatbot_brands_count', 3600, function() {
+            return Brand::where('is_active', 1)->count();
+        });
+        
+        $categories = Cache::remember('chatbot_categories_list', 3600, function() {
+            return Category::where('is_active', 1)
+                ->withCount('products')
+                ->get()
+                ->map(fn($cat) => "- {$cat->name} ({$cat->products_count} produk)")
+                ->join("\n");
+        });
+        
+        $brands = Cache::remember('chatbot_brands_list', 3600, function() {
+            return Brand::where('is_active', 1)
+                ->withCount('products')
+                ->get()
+                ->map(fn($brand) => "- {$brand->name} ({$brand->products_count} produk)")
+                ->join("\n");
+        });
+        
+        $featuredProducts = Cache::remember('chatbot_featured_products', 3600, function() {
+            return Product::where('is_active', 1)
+                ->where('is_featured', 1)
+                ->with(['category', 'brand'])
+                ->take(5)
+                ->get()
+                ->map(fn($prod) => "- {$prod->name} - Rp " . number_format($prod->price, 0, ',', '.') . " ({$prod->category->name})")
+                ->join("\n");
+        });
+        
         $productLink = route('products');
-        return "Anda adalah chatbot customer service untuk Munir Jaya Abadi, toko online produk pertanian berkualitas di Indonesia.
+        $contactLink = route('contact');
+        $myOrdersLink = route('my-orders');
+        
+        return "Anda adalah asisten AI yang cerdas dan ramah untuk Munir Jaya Abadi, toko online produk pertanian berkualitas di Indonesia.
 
 INFORMASI TOKO:
 - Nama: Munir Jaya Abadi
-- Produk: Beras, pupuk, pestisida, herbisida, obat pertanian
-- Lokasi: Jl. Raya Pertanian No. 123, Jakarta Selatan
-- WhatsApp: 081234567890
-- Email: info@munirjayaabadi.com
-- Jam: Senin-Jumat 08:00-17:00, Sabtu 08:00-15:00, Minggu tutup
-- Website: munirjayaabadi.com
+- Total Produk: {$productsCount} produk aktif
+- Kategori: {$categoriesCount} kategori
+- Merek: {$brandsCount} merek
+- Lokasi: Indonesia
+- Website: " . config('app.url') . "
 
-LAYANAN:
-- Pengiriman seluruh Indonesia (2-5 hari)
-- Pembayaran: Bank (BCA, Mandiri, BRI, BNI), E-Wallet (GoPay, OVO, DANA), QRIS
-- Garansi & return 7 hari
+KATEGORI TERSEDIA:
+{$categories}
 
-INSTRUKSI:
-1. Jawab dalam Bahasa Indonesia ramah & profesional
-2. Berikan info spesifik tentang produk
-3. Sertakan link HTML: <a href='{$productLink}' class='text-blue-500 underline'>Produk</a>
-4. Gunakan emoji yang sesuai
-5. Jika tidak tahu, arahkan ke customer service
-6. Fokus membantu petani menemukan produk tepat
-7. Promosikan keunggulan produk berkualitas
-8. Berikan rekomendasi berdasarkan kebutuhan
+MEREK TERSEDIA:
+{$brands}
 
-TONE: Ramah, membantu, profesional, peduli kebutuhan petani.";
+PRODUK UNGGULAN:
+{$featuredProducts}
+
+LAYANAN PENGIRIMAN:
+- Kurir: JNE, J&T, SiCepat, Ninja Express, AnterAja
+- Coverage: Seluruh Indonesia (kota & kabupaten)
+- Estimasi: 2-5 hari kerja (dalam kota), 5-7 hari (luar kota)
+- Gratis Ongkir: Promo khusus untuk pembelian minimum tertentu
+- COD: Tersedia untuk wilayah tertentu
+- Tracking: Real-time tracking pesanan
+
+METODE PEMBAYARAN (via Midtrans):
+- Transfer Bank: BCA, Mandiri, BRI, BNI, Permata
+- E-Wallet: GoPay, OVO, DANA, LinkAja, ShopeePay
+- Credit/Debit Card: Visa, Mastercard, JCB, Amex
+- QRIS: Scan QR semua e-wallet
+- Cicilan: Kartu kredit 0% (min. pembelian tertentu)
+
+KEMAMPUAN ANDA:
+1. Menjawab pertanyaan APAPUN dengan cerdas (umum, teknis, atau tentang toko)
+2. Memberikan informasi produk spesifik dengan nama dan harga real
+3. Membantu customer menemukan produk yang tepat
+4. Menjelaskan proses pembelian, pembayaran, dan pengiriman
+5. Memberikan rekomendasi produk berdasarkan kebutuhan
+6. Menjawab pertanyaan umum tentang apapun (tidak hanya toko)
+
+INSTRUKSI PENTING:
+1. Jawab dalam Bahasa Indonesia yang ramah, natural, dan mudah dipahami
+2. Jika ditanya tentang produk, sebutkan nama produk ASLI dari database
+3. Jika ditanya tentang pengiriman, jelaskan opsi kurir yang tersedia
+4. Jika ditanya pertanyaan umum (bukan tentang toko), jawab dengan pengetahuan umum
+5. Gunakan emoji yang sesuai untuk membuat percakapan menarik
+6. Sertakan link HTML yang relevan:
+   - Produk: <a href='{$productLink}' class='text-blue-500 underline font-semibold'>🛒 Lihat Katalog</a>
+   - Kontak: <a href='{$contactLink}' class='text-blue-500 underline font-semibold'>📞 Hubungi Kami</a>
+   - Pesanan: <a href='{$myOrdersLink}' class='text-blue-500 underline font-semibold'>📦 Lacak Pesanan</a>
+7. Jika tidak yakin, akui dan berikan alternatif jawaban atau sumber informasi
+8. Jadilah helpful dan proaktif dalam memberikan informasi
+
+TONE: Ramah, cerdas, helpful, natural seperti berbicara dengan teman yang knowledgeable.
+
+CONTOH INTERAKSI:
+User: 'Apa itu fotosintesis?'
+Assistant: '🌱 Fotosintesis adalah proses tumbuhan mengubah cahaya matahari, air, dan CO2 menjadi makanan (glukosa) dan oksigen. Ini penting untuk kehidupan di Bumi! Btw, kami juga jual produk pertanian untuk membantu tanaman tumbuh optimal.'
+
+User: 'Ada pupuk NPK?'
+Assistant: '✅ Ada! Kami punya [sebutkan produk spesifik dari database dengan harga]. Cocok untuk meningkatkan hasil panen.'";
     }
 
     private function getAIResponse($userMessage)
@@ -193,120 +314,299 @@ TONE: Ramah, membantu, profesional, peduli kebutuhan petani.";
     {
         $userMessage = strtolower($userMessage);
 
-        if ((str_contains($userMessage, 'produk') || str_contains($userMessage, 'barang')) 
+        // Add product link if relevant
+        if ((str_contains($userMessage, 'produk') || str_contains($userMessage, 'barang') || str_contains($userMessage, 'katalog')) 
             && !str_contains($response, '/products')) {
-            $response .= "\n\n<a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Katalog Produk</a>";
+            $response .= "\n\n<a href='" . route('products') . "'>🔍 Lihat Katalog Lengkap</a>";
         }
 
-        if ((str_contains($userMessage, 'kontak') || str_contains($userMessage, 'hubungi')) 
+        // Add contact link if relevant
+        if ((str_contains($userMessage, 'kontak') || str_contains($userMessage, 'hubungi') || str_contains($userMessage, 'admin')) 
             && !str_contains($response, '/contact')) {
-            $response .= "\n\n<a href='" . route('contact') . "' class='text-blue-500 underline font-semibold'>📞 Hubungi Kami</a>";
+            $response .= "\n\n<a href='" . route('contact') . "'>📞 Hubungi Kami</a>";
         }
 
-        if (str_contains($userMessage, 'lacak') || str_contains($userMessage, 'track')) {
-            if (auth()->check()) {
-                $response .= "\n\n<a href='" . route('my-orders') . "' class='text-blue-500 underline font-semibold'>📦 Lihat Pesanan</a>";
+        // Add order tracking link if relevant
+        if (str_contains($userMessage, 'lacak') || str_contains($userMessage, 'track') || str_contains($userMessage, 'pesanan')) {
+            if (Auth::check()) {
+                if (!str_contains($response, '/my-orders')) {
+                    $response .= "\n\n<a href='" . route('my-orders') . "'>📦 Lihat Pesanan Saya</a>";
+                }
             } else {
-                $response .= "\n\n<a href='" . route('login') . "' class='text-blue-500 underline font-semibold'>🔐 Login</a>";
+                if (!str_contains($response, '/login')) {
+                    $response .= "\n\n<a href='" . route('login') . "'>🔐 Login untuk Lihat Pesanan</a>";
+                }
             }
         }
 
-        return $response;
+        return $this->formatResponse($response);
+    }
+
+    private function formatResponse($text)
+    {
+        // Convert markdown-style bold to HTML
+        $text = preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', $text);
+        
+        // Convert markdown-style links to HTML (but preserve existing HTML links)
+        if (!str_contains($text, '<a href=')) {
+            $text = preg_replace('/\[([^\]]+)\]\(([^)]+)\)/', '<a href="$2">$1</a>', $text);
+        }
+        
+        // Convert line breaks to HTML br tags
+        $text = nl2br($text);
+        
+        // Add proper spacing between sections
+        $text = str_replace("<br />\n<br />", "<br /><br />", $text);
+        
+        // SECURITY: Sanitize HTML to prevent XSS
+        // Allow only safe tags and attributes
+        return Purify::clean($text, [
+            'HTML.Allowed' => 'br,strong,b,em,i,a[href],p,ul,li,ol',
+            'AutoFormat.RemoveEmpty' => true,
+            'URI.AllowedSchemes' => ['http' => true, 'https' => true],
+            'Attr.AllowedFrameTargets' => [],
+        ]);
     }
 
     private function getFallbackResponse($message)
     {
-        // Pertanyaan tentang produk
+        // Get real data for better responses
+        $productsCount = Product::where('is_active', 1)->count();
+        $categories = Category::where('is_active', 1)->take(5)->pluck('name')->toArray();
+        $brands = Brand::where('is_active', 1)->take(5)->pluck('name')->toArray();
+        
+        // Pertanyaan tentang produk spesifik
+        if (str_contains($message, 'pupuk') || str_contains($message, 'pestisida') || str_contains($message, 'herbisida') || str_contains($message, 'beras')) {
+            $keyword = '';
+            if (str_contains($message, 'pupuk')) $keyword = 'pupuk';
+            elseif (str_contains($message, 'pestisida')) $keyword = 'pestisida';
+            elseif (str_contains($message, 'herbisida')) $keyword = 'herbisida';
+            elseif (str_contains($message, 'beras')) $keyword = 'beras';
+            
+            $products = Product::where('is_active', 1)
+                ->where(function($q) use ($keyword) {
+                    $q->where('name', 'like', "%{$keyword}%")
+                      ->orWhere('description', 'like', "%{$keyword}%");
+                })
+                ->with(['category', 'brand'])
+                ->take(3)
+                ->get();
+            
+            if ($products->count() > 0) {
+                $productList = $products->map(function($p) {
+                    return "📦 <strong>{$p->name}</strong> - Rp " . number_format($p->price, 0, ',', '.') . " ({$p->category->name})";
+                })->join("<br>");
+                
+                return "🌾 Kami memiliki beberapa produk {$keyword} yang mungkin cocok untuk Anda:<br><br>{$productList}<br><br><a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Semua Produk {$keyword}</a>";
+            }
+        }
+        
+        // Pertanyaan tentang kategori
+        if (str_contains($message, 'kategori') || str_contains($message, 'jenis')) {
+            $categoriesList = implode(', ', $categories);
+            return "📂 Kami memiliki berbagai kategori produk pertanian berkualitas, antara lain: <strong>{$categoriesList}</strong>, dan masih banyak lagi!<br><br><a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Semua Kategori</a>";
+        }
+        
+        // Pertanyaan tentang merek
+        if (str_contains($message, 'merek') || str_contains($message, 'brand')) {
+            $brandsList = implode(', ', $brands);
+            return "🏷️ Kami bekerja sama dengan merek-merek terpercaya seperti: <strong>{$brandsList}</strong>, dan masih banyak lagi!<br><br><a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Produk Berdasarkan Merek</a>";
+        }
+        
+        // Pertanyaan tentang produk umum
         if (str_contains($message, 'produk') || str_contains($message, 'barang') || str_contains($message, 'jual')) {
-            return '📦 Kami menjual berbagai produk pertanian berkualitas seperti beras, pupuk, pestisida, dan obat-obatan pertanian. Silakan kunjungi halaman <a href="' . route('products') . '" class="text-blue-500 underline">Produk</a> untuk melihat katalog lengkap kami!';
+            $featured = Product::where('is_active', 1)
+                ->where('is_featured', 1)
+                ->with(['category', 'brand'])
+                ->take(3)
+                ->get();
+            
+            if ($featured->count() > 0) {
+                $featuredList = $featured->map(function($p) {
+                    return "⭐ <strong>{$p->name}</strong> - Rp " . number_format($p->price, 0, ',', '.') . " ({$p->brand->name})";
+                })->join("<br>");
+                
+                return "🌟 Kami memiliki <strong>{$productsCount} produk</strong> pertanian berkualitas! Berikut beberapa produk unggulan kami:<br><br>{$featuredList}<br><br><a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Katalog Lengkap</a>";
+            }
+            
+            return "📦 Kami menjual berbagai produk pertanian berkualitas dengan total <strong>{$productsCount} produk</strong>. Silakan kunjungi halaman <a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>Produk</a> untuk melihat katalog lengkap kami!";
         }
         
         // Pertanyaan tentang harga
         if (str_contains($message, 'harga') || str_contains($message, 'berapa')) {
-            return '💰 Untuk informasi harga produk, silakan lihat di halaman <a href="' . route('products') . '" class="text-blue-500 underline">Produk</a>. Kami menyediakan harga terbaik dengan kualitas terjamin!';
+            $priceRange = Product::where('is_active', 1)
+                ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
+                ->first();
+            
+            if ($priceRange) {
+                $minPrice = number_format($priceRange->min_price, 0, ',', '.');
+                $maxPrice = number_format($priceRange->max_price, 0, ',', '.');
+                
+                return "💰 Harga produk kami bervariasi mulai dari <strong>Rp {$minPrice}</strong> hingga <strong>Rp {$maxPrice}</strong>, tergantung jenis dan kualitas produk.<br><br>Untuk informasi harga detail, silakan lihat di halaman <a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>Produk</a>. Kami menyediakan harga terbaik dengan kualitas terjamin!";
+            }
         }
         
         // Pertanyaan tentang pengiriman
-        if (str_contains($message, 'kirim') || str_contains($message, 'ongkir') || str_contains($message, 'pengiriman')) {
-            return '🚚 Kami melayani pengiriman ke seluruh Indonesia. Biaya pengiriman akan dihitung otomatis saat checkout berdasarkan lokasi Anda. Estimasi pengiriman 2-5 hari kerja.';
+        if (str_contains($message, 'kirim') || str_contains($message, 'ongkir') || str_contains($message, 'pengiriman') || str_contains($message, 'kurir') || str_contains($message, 'ekspedisi')) {
+            return $this->formatResponse("🚚 **Layanan Pengiriman Kami**
+
+**Kurir Tersedia:**
+✅ JNE (Reguler, YES, OKE)
+✅ J&T Express
+✅ SiCepat (REG, HALU)
+✅ Ninja Express
+✅ AnterAja
+
+**Coverage:**
+📍 Seluruh Indonesia (kota & kabupaten)
+
+**Estimasi Pengiriman:**
+🏙️ Dalam kota: 1-2 hari
+🌆 Luar kota (Jawa): 2-4 hari
+🏝️ Luar Pulau: 5-7 hari
+
+**Fitur:**
+🎁 Gratis ongkir untuk pembelian minimum tertentu
+💵 COD tersedia untuk wilayah tertentu
+📱 Real-time tracking pesanan
+📦 Packing aman & rapi
+
+Biaya dihitung otomatis saat checkout berdasarkan berat & tujuan!
+
+<a href='" . route('products') . "'>🛒 Belanja Sekarang</a>");
         }
         
         // Pertanyaan tentang pembayaran
         if (str_contains($message, 'bayar') || str_contains($message, 'payment') || str_contains($message, 'transfer')) {
-            return '💳 Kami menerima berbagai metode pembayaran: Transfer Bank (BCA, Mandiri, BRI, BNI), E-Wallet (GoPay, OVO, DANA), dan QRIS. Pembayaran diproses melalui Midtrans yang aman dan terpercaya.';
+            return $this->formatResponse("💳 **Metode Pembayaran Kami (via Midtrans):**
+
+**Transfer Bank:**
+🏦 BCA, Mandiri, BRI, BNI, Permata, CIMB Niaga
+
+**E-Wallet:**
+📱 GoPay, OVO, DANA, LinkAja, ShopeePay
+
+**Kartu Kredit/Debit:**
+💳 Visa, Mastercard, JCB, American Express
+
+**QRIS:**
+📲 Scan QR dengan semua e-wallet
+
+**Cicilan 0%:**
+🎯 Kartu kredit (min. pembelian tertentu)
+
+Semua pembayaran **aman & terenkripsi SSL**!
+
+<a href='" . route('products') . "'>🛒 Mulai Belanja</a>");
         }
         
         // Pertanyaan tentang cara pesan
-        if (str_contains($message, 'pesan') || str_contains($message, 'order') || str_contains($message, 'beli')) {
-            return '🛒 Cara order sangat mudah:<br>1. Pilih produk di <a href="' . route('products') . '" class="text-blue-500 underline">halaman Produk</a><br>2. Klik "Add to Cart"<br>3. Lihat keranjang dan klik "Checkout"<br>4. Isi alamat pengiriman<br>5. Pilih metode pembayaran<br>6. Selesai! Pesanan akan kami proses.';
+        if (str_contains($message, 'pesan') || str_contains($message, 'order') || str_contains($message, 'beli') || str_contains($message, 'checkout')) {
+            return $this->formatResponse("🛒 **Cara Order Mudah:**
+
+1️⃣ Pilih produk di <a href='" . route('products') . "'>Katalog</a>
+2️⃣ Klik \"Tambah ke Keranjang\"
+3️⃣ Lihat keranjang dan klik \"Checkout\"
+4️⃣ Isi alamat pengiriman
+5️⃣ Pilih metode pembayaran
+6️⃣ Selesai! Pesanan akan diproses
+
+<a href='" . route('products') . "'>🛍️ Mulai Belanja Sekarang</a>");
         }
         
         // Pertanyaan tentang kontak
-        if (str_contains($message, 'kontak') || str_contains($message, 'hubungi') || str_contains($message, 'telepon') || str_contains($message, 'whatsapp')) {
-            return '📞 Anda bisa menghubungi kami melalui:<br>📱 WhatsApp: 081234567890<br>📧 Email: info@munirjayaabadi.com<br>📍 Alamat: Jl. Raya Pertanian No. 123, Jakarta<br><br>Atau kunjungi halaman <a href="' . route('contact') . '" class="text-blue-500 underline">Kontak</a> untuk info lengkap!';
-        }
-        
-        // Pertanyaan tentang jam operasional
-        if (str_contains($message, 'jam') || str_contains($message, 'buka') || str_contains($message, 'operasional')) {
-            return '🕒 Jam Operasional Toko:<br>Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu: 08:00 - 15:00 WIB<br>Minggu & Tanggal Merah: Tutup<br><br>Namun, Anda tetap bisa order online 24/7!';
-        }
-        
-        // Pertanyaan tentang lokasi
-        if (str_contains($message, 'lokasi') || str_contains($message, 'alamat') || str_contains($message, 'dimana')) {
-            return '📍 Lokasi toko kami:<br>Jl. Raya Pertanian No. 123, Jakarta Selatan<br><br>Lihat peta di halaman <a href="' . route('contact') . '" class="text-blue-500 underline">Kontak</a> untuk arah lebih detail!';
-        }
-        
-        // Pertanyaan tentang akun/register
-        if (str_contains($message, 'daftar') || str_contains($message, 'register') || str_contains($message, 'akun')) {
-            return '👤 Untuk membuat akun, silakan klik <a href="' . route('register') . '" class="text-blue-500 underline">Daftar</a> di pojok kanan atas. Dengan akun, Anda bisa melacak pesanan, melihat riwayat belanja, dan mendapat promo eksklusif!';
+        if (str_contains($message, 'kontak') || str_contains($message, 'hubungi') || str_contains($message, 'telepon') || str_contains($message, 'whatsapp') || str_contains($message, 'email')) {
+            return "📞 <strong>Hubungi Kami:</strong><br><br>📧 Email: " . config('mail.from.address') . "<br>🌐 Website: " . config('app.url') . "<br>📍 Lokasi: Indonesia<br><br>Atau kunjungi halaman <a href='" . route('contact') . "' class='text-blue-500 underline font-semibold'>Kontak</a> untuk form kontak langsung!";
         }
         
         // Pertanyaan tentang tracking order
-        if (str_contains($message, 'lacak') || str_contains($message, 'tracking') || str_contains($message, 'pesanan saya')) {
-            return '📦 Untuk melacak pesanan Anda, silakan login dan kunjungi halaman <a href="' . route('my-orders') . '" class="text-blue-500 underline">Pesanan Saya</a>. Anda bisa melihat status pesanan real-time di sana.';
+        if (str_contains($message, 'lacak') || str_contains($message, 'tracking') || str_contains($message, 'pesanan saya') || str_contains($message, 'status pesanan')) {
+            if (Auth::check()) {
+                $orderCount = Order::where('user_id', Auth::id())->count();
+                return "📦 <strong>Lacak Pesanan Anda</strong><br><br>Anda memiliki <strong>{$orderCount} pesanan</strong>. Silakan kunjungi halaman <a href='" . route('my-orders') . "' class='text-blue-500 underline font-semibold'>Pesanan Saya</a> untuk melihat status pesanan real-time!";
+            } else {
+                return "🔐 Untuk melacak pesanan, silakan <a href='" . route('login') . "' class='text-blue-500 underline font-semibold'>Login</a> terlebih dahulu. Kemudian Anda bisa melihat semua status pesanan di halaman Pesanan Saya.";
+            }
         }
         
         // Pertanyaan tentang return/komplain
-        if (str_contains($message, 'return') || str_contains($message, 'kembalikan') || str_contains($message, 'komplain') || str_contains($message, 'rusak')) {
-            return '🔄 Jika ada masalah dengan produk, kami menerima return/pengembalian dalam 7 hari. Silakan hubungi customer service kami di WhatsApp 081234567890 atau email info@munirjayaabadi.com dengan menyertakan foto produk dan nomor order.';
+        if (str_contains($message, 'return') || str_contains($message, 'kembalikan') || str_contains($message, 'komplain') || str_contains($message, 'rusak') || str_contains($message, 'garansi')) {
+            return "🔄 <strong>Kebijakan Return & Garansi:</strong><br><br>✅ Garansi 7 hari untuk produk cacat<br>✅ Return mudah dengan bukti foto<br>✅ Refund cepat setelah verifikasi<br><br>Jika ada masalah, hubungi kami di halaman <a href='" . route('contact') . "' class='text-blue-500 underline font-semibold'>Kontak</a> dengan menyertakan nomor order!";
         }
         
         // Pertanyaan tentang promo
-        if (str_contains($message, 'promo') || str_contains($message, 'diskon') || str_contains($message, 'sale')) {
-            return '🎉 Kami sering memberikan promo menarik! Follow Instagram kami @munirjayaabadi atau subscribe newsletter untuk info promo terbaru. Cek juga halaman <a href="' . route('products') . '" class="text-blue-500 underline">Produk</a> untuk produk dengan harga spesial!';
+        if (str_contains($message, 'promo') || str_contains($message, 'diskon') || str_contains($message, 'sale') || str_contains($message, 'murah')) {
+            $onSaleProducts = Product::where('is_active', 1)
+                ->where('on_sale', 1)
+                ->count();
+            
+            if ($onSaleProducts > 0) {
+                return "🎉 <strong>Ada {$onSaleProducts} Produk Sedang Promo!</strong><br><br>Jangan lewatkan penawaran spesial kami. Cek halaman <a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>Produk</a> untuk lihat semua promo menarik!";
+            }
+            
+            return "🎉 <strong>Promo Spesial Menanti!</strong><br><br>Follow sosial media kami untuk info promo terbaru. Cek juga halaman <a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>Produk</a> untuk penawaran spesial!";
+        }
+        
+        // Pertanyaan tentang rekomendasi
+        if (str_contains($message, 'rekomendasi') || str_contains($message, 'recommend') || str_contains($message, 'saran') || str_contains($message, 'terbaik')) {
+            $bestSellers = Product::where('is_active', 1)
+                ->where('is_featured', 1)
+                ->with(['category', 'brand'])
+                ->take(3)
+                ->get();
+            
+            if ($bestSellers->count() > 0) {
+                $recommendations = $bestSellers->map(function($p) {
+                    return "⭐ <strong>{$p->name}</strong> - Rp " . number_format($p->price, 0, ',', '.') . " ({$p->category->name})";
+                })->join("<br>");
+                
+                return "🌟 <strong>Rekomendasi Produk Terbaik:</strong><br><br>{$recommendations}<br><br><a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>🔍 Lihat Lebih Banyak</a>";
+            }
         }
         
         // Greeting
-        if (str_contains($message, 'hai') || str_contains($message, 'halo') || str_contains($message, 'hello') || str_contains($message, 'hi')) {
-            return '👋 Halo! Senang bisa membantu Anda. Ada yang ingin ditanyakan tentang produk atau layanan kami?';
+        if (str_contains($message, 'hai') || str_contains($message, 'halo') || str_contains($message, 'hello') || str_contains($message, 'hi') || str_contains($message, 'pagi') || str_contains($message, 'siang') || str_contains($message, 'sore') || str_contains($message, 'malam')) {
+            $greeting = '👋';
+            if (str_contains($message, 'pagi')) $greeting .= ' Selamat pagi';
+            elseif (str_contains($message, 'siang')) $greeting .= ' Selamat siang';
+            elseif (str_contains($message, 'sore')) $greeting .= ' Selamat sore';
+            elseif (str_contains($message, 'malam')) $greeting .= ' Selamat malam';
+            else $greeting .= ' Halo';
+            
+            return "{$greeting}! Senang bisa membantu Anda di <strong>Munir Jaya Abadi</strong>. Ada yang bisa saya bantu terkait produk pertanian kami?";
         }
         
         // Thank you
-        if (str_contains($message, 'terima kasih') || str_contains($message, 'thanks') || str_contains($message, 'thank you')) {
-            return '😊 Sama-sama! Senang bisa membantu. Jangan ragu untuk bertanya lagi jika ada yang ingin ditanyakan. Selamat berbelanja!';
+        if (str_contains($message, 'terima kasih') || str_contains($message, 'thanks') || str_contains($message, 'thank you') || str_contains($message, 'makasih')) {
+            return "😊 Sama-sama! Senang bisa membantu. Jangan ragu untuk bertanya lagi jika ada yang ingin ditanyakan. <strong>Selamat berbelanja!</strong> 🛒";
+        }
+        
+        // Help/bantuan
+        if (str_contains($message, 'bantuan') || str_contains($message, 'help') || str_contains($message, 'tolong')) {
+            return "💡 <strong>Saya bisa membantu Anda dengan:</strong><br><br>📦 Informasi produk & harga<br>🏷️ Kategori & merek<br>🛒 Cara pemesanan<br>💳 Metode pembayaran<br>🚚 Info pengiriman<br>📦 Lacak pesanan<br>📞 Kontak customer service<br><br>Silakan tanyakan apa yang Anda butuhkan!";
         }
         
         // Default response
-        return '� Maaf, saya kurang paham. Topik yang bisa saya bantu:
-
-📦 Produk • 💰 Harga • 🛒 Order
-💳 Pembayaran • 🚚 Pengiriman
-📞 Kontak • 🕐 Jam Buka
-
-WhatsApp: 081234567890';
+        return "🤖 Maaf, saya kurang paham pertanyaan Anda. Namun saya bisa membantu dengan:<br><br>📦 <strong>Produk</strong> • 💰 <strong>Harga</strong> • 🛒 <strong>Cara Order</strong><br>💳 <strong>Pembayaran</strong> • 🚚 <strong>Pengiriman</strong><br>📞 <strong>Kontak</strong> • 📦 <strong>Lacak Pesanan</strong><br><br>Atau kunjungi <a href='" . route('products') . "' class='text-blue-500 underline font-semibold'>Katalog Produk</a> kami!";
     }
 
     public function clearChat()
     {
-        $this->messages = [
-            [
-                'type' => 'bot',
-                'message' => '🔄 Chat direset. Ada yang bisa saya bantu?',
-                'time' => now()->format('H:i')
-            ]
+        $this->messages = [];
+        $this->conversationContext = [];
+        
+        // Clear from session
+        session()->forget('chatbot_messages');
+        session()->forget('chatbot_context');
+        
+        $this->messages[] = [
+            'type' => 'bot',
+            'message' => '🔄 Chat direset. Ada yang bisa saya bantu hari ini?',
+            'time' => now()->format('H:i')
         ];
         
-        $this->conversationContext = [];
+        // Save to session
+        session(['chatbot_messages' => $this->messages]);
     }
 
     public function render()

@@ -5,7 +5,7 @@
             <h1
                 class="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
                 Pembayaran Midtrans</h1>
-            <p class="text-gray-600 dark:text-gray-400">Selesaikan pembayaran Anda dengan aman</p>
+            <p class="text-gray-600">Selesaikan pembayaran Anda dengan aman</p>
         </div>
 
         <!-- Breadcrumb -->
@@ -47,8 +47,7 @@
                 </div>
             </div>
         @elseif(!$order)
-            <div
-                class="bg-white dark:bg-slate-900 shadow-xl rounded-2xl p-8 max-w-md mx-auto text-center animate-fade-in-up">
+            <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md mx-auto text-center animate-fade-in-up">
                 <div
                     class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-x">
                     <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,8 +55,8 @@
                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Transaksi Tidak Ditemukan</h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-6">Order yang Anda cari tidak ditemukan atau telah
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Transaksi Tidak Ditemukan</h2>
+                <p class="text-gray-600 mb-6">Order yang Anda cari tidak ditemukan atau telah
                     dihapus.</p>
                 <div class="flex gap-2 justify-center">
                     <a href="/checkout"
@@ -71,8 +70,7 @@
                 </div>
             </div>
         @elseif($snapToken)
-            <div
-                class="bg-white dark:bg-slate-900 shadow-xl rounded-2xl p-8 max-w-2xl mx-auto animate-fade-in-up overflow-hidden">
+            <div class="bg-white shadow-xl rounded-2xl p-8 max-w-2xl mx-auto animate-fade-in-up overflow-hidden">
                 <!-- Decorative Header -->
                 <div
                     class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500">
@@ -81,27 +79,26 @@
                 <!-- Order Info Section -->
                 <div class="text-center mb-8 pt-4">
                     <div
-                        class="inline-flex items-center gap-2 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full mb-4 animate-pulse-slow">
+                        class="inline-flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full mb-4 animate-pulse-slow">
                         <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="text-green-700 dark:text-green-400 font-semibold text-sm">Pesanan Berhasil
+                        <span class="text-green-700 font-semibold text-sm">Pesanan Berhasil
                             Dibuat</span>
                     </div>
 
                     <h2
-                        class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300 mb-3">
+                        class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3">
                         Detail Pesanan</h2>
 
                     <!-- Order ID Badge -->
-                    <div class="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg mb-4">
-                        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                    <div class="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg mb-4">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                         </svg>
-                        <span class="text-gray-700 dark:text-gray-300 font-mono">Order #{{ $order->id }}</span>
+                        <span class="text-gray-700 font-mono">Order #{{ $order->id }}</span>
                     </div>
 
                     <!-- Grand Total -->
@@ -114,25 +111,25 @@
 
                     <!-- Order Items Summary -->
                     @if ($order->items && $order->items->count() > 0)
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-6 text-left">
+                        <div class="bg-gray-50 rounded-xl p-4 mb-6 text-left">
                             <div class="flex items-center gap-2 mb-3">
-                                <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                 </svg>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Ringkasan Produk</h3>
+                                <h3 class="font-semibold text-gray-800">Ringkasan Produk</h3>
                             </div>
                             <div class="space-y-2 max-h-40 overflow-y-auto">
                                 @foreach ($order->items as $item)
                                     <div class="flex justify-between items-start text-sm">
                                         <div class="flex-1">
-                                            <p class="font-medium text-gray-700 dark:text-gray-300">
+                                            <p class="font-medium text-gray-700">
                                                 {{ $item->product->name ?? 'Product' }}</p>
-                                            <p class="text-gray-500 dark:text-gray-500">{{ $item->quantity }}x Rp
+                                            <p class="text-gray-500">{{ $item->quantity }}x Rp
                                                 {{ number_format($item->unit_amount, 0, ',', '.') }}</p>
                                         </div>
-                                        <p class="font-semibold text-gray-800 dark:text-white">
+                                        <p class="font-semibold text-gray-800">
                                             Rp {{ number_format($item->total_amount, 0, ',', '.') }}
                                         </p>
                                     </div>
@@ -143,28 +140,28 @@
 
                     <!-- Shipping Information -->
                     @if ($order->address)
-                        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 mb-6 text-left">
+                        <div class="bg-blue-50 rounded-xl p-4 mb-6 text-left">
                             <div class="flex items-center gap-2 mb-3">
-                                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Alamat Pengiriman</h3>
+                                <h3 class="font-semibold text-gray-800">Alamat Pengiriman</h3>
                             </div>
                             <div class="text-sm space-y-1">
-                                <p class="font-semibold text-gray-800 dark:text-gray-200">
+                                <p class="font-semibold text-gray-800">
                                     {{ $order->address->first_name }} {{ $order->address->last_name }}
                                 </p>
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-600">
                                     {{ $order->address->phone }}
                                 </p>
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-600">
                                     {{ $order->address->street_address }}
                                 </p>
-                                <p class="text-gray-600 dark:text-gray-400">
+                                <p class="text-gray-600">
                                     {{ $order->address->city }}, {{ $order->address->state }}
                                     {{ $order->address->zip_code }}
                                 </p>
@@ -172,15 +169,15 @@
 
                             <!-- Shipping Method & Cost -->
                             @if ($order->shipping_method || $order->shipping_amount > 0)
-                                <div class="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800">
+                                <div class="mt-3 pt-3 border-t border-blue-200">
                                     <div class="flex items-center justify-between text-sm">
                                         <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                                             </svg>
-                                            <span class="text-gray-700 dark:text-gray-300">
+                                            <span class="text-gray-700">
                                                 @if ($order->shipping_method)
                                                     {{ $order->shipping_method }}
                                                     @if ($order->shipping_etd)
@@ -192,7 +189,7 @@
                                                 @endif
                                             </span>
                                         </div>
-                                        <span class="font-semibold text-blue-700 dark:text-blue-300">
+                                        <span class="font-semibold text-blue-700">
                                             Rp {{ number_format($order->shipping_amount, 0, ',', '.') }}
                                         </span>
                                     </div>
@@ -214,18 +211,17 @@
                     </button>
 
                     <!-- Info Box -->
-                    <div
-                        class="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
                         <div class="flex items-start gap-3">
-                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none"
+                            <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <div class="text-left flex-1">
-                                <p class="text-blue-800 dark:text-blue-300 text-sm font-semibold mb-1">Informasi
+                                <p class="text-blue-800 text-sm font-semibold mb-1">Informasi
                                     Pembayaran</p>
-                                <ul class="text-blue-700 dark:text-blue-400 text-xs space-y-1">
+                                <ul class="text-blue-700 text-xs space-y-1">
                                     <li>• Klik tombol "Bayar Sekarang" untuk melanjutkan</li>
                                     <li>• Pilih metode pembayaran yang Anda inginkan</li>
                                     <li>• Mode: <span
@@ -239,16 +235,16 @@
                     <!-- Alternative Actions -->
                     <div class="mt-6 flex gap-3 justify-center text-sm">
                         <a href="/my-orders"
-                            class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium hover:underline transition-colors flex items-center gap-1">
+                            class="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                             Lihat Pesanan Saya
                         </a>
-                        <span class="text-gray-300 dark:text-gray-700">|</span>
+                        <span class="text-gray-300">|</span>
                         <button wire:click="refreshToken"
-                            class="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 font-medium hover:underline transition-colors flex items-center gap-1">
+                            class="text-gray-600 hover:text-gray-700 font-medium hover:underline transition-colors flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -259,8 +255,8 @@
                     </div>
 
                     <!-- Powered by Midtrans -->
-                    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="flex items-center justify-center gap-2 text-gray-500 text-sm">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -275,15 +271,14 @@
             <!-- Loading State -->
             <div class="text-center py-16 animate-fade-in-up">
                 <div class="relative w-20 h-20 mx-auto mb-6">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full border-4 border-green-200 dark:border-green-900 rounded-full">
+                    <div class="absolute top-0 left-0 w-full h-full border-4 border-green-200 rounded-full">
                     </div>
                     <div
-                        class="absolute top-0 left-0 w-full h-full border-4 border-green-500 dark:border-green-400 rounded-full border-t-transparent animate-spin">
+                        class="absolute top-0 left-0 w-full h-full border-4 border-green-500 rounded-full border-t-transparent animate-spin">
                     </div>
                 </div>
-                <p class="text-gray-600 dark:text-gray-400 font-medium text-lg mb-2">Memproses pembayaran...</p>
-                <p class="text-gray-500 dark:text-gray-500 text-sm">Mohon tunggu sebentar</p>
+                <p class="text-gray-600 font-medium text-lg mb-2">Memproses pembayaran...</p>
+                <p class="text-gray-500 text-sm">Mohon tunggu sebentar</p>
             </div>
         @endif
     </div>
@@ -368,7 +363,7 @@
                             // Show pending message
                             alert(
                                 '⏳ Pembayaran sedang diproses. Silakan cek status di halaman pesanan Anda.'
-                                );
+                            );
 
                             // Redirect to my orders
                             window.location.href = '/my-orders';

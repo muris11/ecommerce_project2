@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class RefreshAdminSession
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // SECURITY: Check is_admin column instead of hardcoded email
-        if (!$request->user() || $request->user()->is_admin !== true) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Access denied. Admin privileges required.'
-            ], 403);
+        // If user is authenticated and accessing admin panel, refresh their session
+        if (Auth::guard('web')->check() && $request->is('admin/*')) {
+            // Refresh the session to prevent timeout
+            $request->session()->regenerate();
         }
 
         return $next($request);

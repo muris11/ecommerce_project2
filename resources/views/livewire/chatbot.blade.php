@@ -4,7 +4,7 @@
         x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-2" @click="showWelcome = false"
-        class="absolute bottom-20 right-0 bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-4 w-72 cursor-pointer border-2 border-blue-200 dark:border-blue-900 transform hover:scale-105 transition-all duration-300"
+        class="absolute bottom-20 right-0 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-2xl p-4 w-72 cursor-pointer border-2 border-blue-200 transform hover:scale-105 transition-all duration-300"
         style="display: none;">
         <div class="flex items-start space-x-3">
             <div
@@ -16,7 +16,7 @@
                     class="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1">
                     Hai! Ada yang bisa saya bantu?
                 </p>
-                <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p class="text-xs text-gray-600 leading-relaxed">
                     Tanyakan tentang produk pertanian kami!
                 </p>
             </div>
@@ -80,7 +80,7 @@
         x-transition:leave="transition ease-in duration-200 transform"
         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
         x-transition:leave-end="opacity-0 scale-90 translate-y-4"
-        class="absolute bottom-20 right-0 w-96 max-w-[calc(100vw-3rem)] bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-200 dark:border-gray-700"
+        class="absolute bottom-20 right-0 w-96 max-w-[calc(100vw-3rem)] bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-200"
         style="display: none;">
 
         {{-- Chat Header - More Modern Design --}}
@@ -143,35 +143,39 @@
 
         {{-- Chat Messages with Enhanced Design --}}
         <div id="chatMessages"
-            class="h-96 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 scroll-smooth">
+            class="h-96 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white scroll-smooth">
 
             {{-- Welcome Message (only shown when empty) --}}
             @if (count($messages) === 0)
                 <div class="flex flex-col items-center justify-center h-full space-y-3 px-4 text-center py-6">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-2xl flex items-center justify-center">
+                        class="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
                         <span class="text-3xl">👋</span>
                     </div>
                     <div>
-                        <h4 class="text-base font-bold text-gray-800 dark:text-white mb-1">
+                        <h4 class="text-base font-bold text-gray-800 mb-1">
                             Selamat datang di MJA! ✨
                         </h4>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                        <p class="text-xs text-gray-600 mb-3">
                             Saya siap membantu Anda dengan informasi produk pertanian
                         </p>
                     </div>
                     <div class="grid grid-cols-1 gap-2 w-full">
-                        <button wire:click="$set('message', 'Apa produk terbaik untuk padi?')"
-                            class="px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500 text-left">
-                            💡 Apa produk terbaik untuk padi?
+                        <button wire:click="$set('message', 'Apa saja produk unggulan hari ini?')"
+                            class="px-3 py-2 bg-white text-gray-700 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 hover:border-blue-300 text-left">
+                            ⭐ Apa saja produk unggulan hari ini?
                         </button>
-                        <button wire:click="$set('message', 'Bagaimana cara menggunakan pupuk NPK?')"
-                            class="px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500 text-left">
-                            🌾 Bagaimana cara menggunakan pupuk NPK?
+                        <button wire:click="$set('message', 'Kategori produk apa saja yang tersedia?')"
+                            class="px-3 py-2 bg-white text-gray-700 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 hover:border-blue-300 text-left">
+                            📦 Kategori produk apa saja yang tersedia?
                         </button>
-                        <button wire:click="$set('message', 'Dimana saya bisa melihat katalog produk?')"
-                            class="px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500 text-left">
-                            📦 Dimana saya bisa melihat katalog produk?
+                        <button wire:click="$set('message', 'Bagaimana cara order?')"
+                            class="px-3 py-2 bg-white text-gray-700 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 hover:border-blue-300 text-left">
+                            🛒 Bagaimana cara order?
+                        </button>
+                        <button wire:click="$set('message', 'Metode pembayaran apa saja yang diterima?')"
+                            class="px-3 py-2 bg-white text-gray-700 rounded-xl text-xs hover:shadow-md transition-all duration-200 border border-gray-200 hover:border-blue-300 text-left">
+                            💳 Metode pembayaran apa saja yang diterima?
                         </button>
                     </div>
                 </div>
@@ -186,14 +190,13 @@
                             <span class="text-white text-sm">🤖</span>
                         </div>
                         <div class="flex-1 max-w-[80%]">
-                            <div
-                                class="bg-white dark:bg-gray-700 rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm border border-gray-100 dark:border-gray-600">
-                                <p class="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                                    {!! nl2br($msg['message']) !!}
-                                </p>
+                            <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-gray-100">
+                                <div class="text-sm text-gray-800 leading-relaxed space-y-2 chatbot-response">
+                                    {!! $msg['message'] !!}
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 mt-1 ml-2">
-                                <span class="text-[10px] text-gray-500 dark:text-gray-400">{{ $msg['time'] }}</span>
+                                <span class="text-[10px] text-gray-500">{{ $msg['time'] }}</span>
                                 @if ($useAI && $index === count($messages) - 1 && $msg['type'] === 'bot')
                                     <span class="text-xs text-green-500 flex items-center">
                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -216,7 +219,7 @@
                                 <p class="text-sm leading-relaxed">{{ $msg['message'] }}</p>
                             </div>
                             <div class="flex items-center justify-end space-x-1.5 mt-1 mr-2">
-                                <span class="text-[10px] text-gray-500 dark:text-gray-400">{{ $msg['time'] }}</span>
+                                <span class="text-[10px] text-gray-500">{{ $msg['time'] }}</span>
                                 <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -239,8 +242,7 @@
                         class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow">
                         <span class="text-white text-sm">🤖</span>
                     </div>
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm border border-gray-100 dark:border-gray-600">
+                    <div class="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm border border-gray-100">
                         <div class="flex space-x-1">
                             <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0s">
                             </div>
@@ -255,10 +257,10 @@
         </div>
 
         {{-- Chat Input - Cleaner Design --}}
-        <div class="p-3 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-            <form wire:submit.prevent="sendMessage" class="space-y-2">
+        <div class="p-3 bg-white border-t border-gray-200">
+            <form wire:submit.prevent="sendMessage" class="space-y-2" id="chatForm">
                 <div
-                    class="flex items-center space-x-2 bg-gray-50 dark:bg-gray-700 rounded-xl px-3 py-2 border border-gray-200 dark:border-gray-600 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent transition-all">
+                    class="flex items-center space-x-2 bg-gray-50 rounded-xl px-3 py-2 border border-gray-200 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent transition-all">
                     {{-- Emoji Button --}}
                     <button type="button" class="flex-shrink-0 text-gray-400 hover:text-blue-500 transition-colors">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -269,17 +271,26 @@
                     </button>
 
                     {{-- Input Field --}}
-                    <input type="text" wire:model="message" placeholder="Ketik pesan..."
-                        class="flex-1 px-2 py-1.5 bg-transparent border-0 focus:outline-none focus:ring-0 text-sm text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-                        autofocus>
+                    <input type="text" wire:model.defer="message" placeholder="Ketik pesan..." id="chatInput"
+                        class="flex-1 px-2 py-1.5 bg-transparent border-0 focus:outline-none focus:ring-0 text-sm text-gray-800 placeholder-gray-400"
+                        wire:loading.attr="disabled" wire:loading.class="opacity-50"
+                        @keydown.enter.prevent="if($event.target.value.trim() !== '') { $wire.sendMessage() }">
 
                     {{-- Send Button --}}
                     <button type="submit"
                         class="flex-shrink-0 p-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:shadow-md transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                        @disabled(!$message)>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        wire:loading.attr="disabled" wire:loading.class="opacity-50 cursor-not-allowed">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            wire:loading.remove>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                        <svg wire:loading class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
                         </svg>
                     </button>
                 </div>
@@ -287,23 +298,31 @@
                 {{-- Quick Suggestions (only when no messages) --}}
                 @if (count($messages) === 0)
                     <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
-                        <button type="button" wire:click="$set('message', 'Info produk pupuk')"
-                            class="flex-shrink-0 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-[10px] font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">
-                            🌱 Info produk
+                        <button type="button" wire:click="$set('message', 'Produk apa saja yang tersedia?')"
+                            class="flex-shrink-0 px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-medium hover:bg-blue-100 transition-colors">
+                            📦 Produk
                         </button>
                         <button type="button" wire:click="$set('message', 'Cara pemesanan')"
-                            class="flex-shrink-0 px-2.5 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-[10px] font-medium hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">
-                            📦 Pemesanan
+                            class="flex-shrink-0 px-2.5 py-1 bg-purple-50 text-purple-600 rounded-full text-[10px] font-medium hover:bg-purple-100 transition-colors">
+                            🛒 Order
+                        </button>
+                        <button type="button" wire:click="$set('message', 'Metode pembayaran')"
+                            class="flex-shrink-0 px-2.5 py-1 bg-green-50 text-green-600 rounded-full text-[10px] font-medium hover:bg-green-100 transition-colors">
+                            � Bayar
+                        </button>
+                        <button type="button" wire:click="$set('message', 'Info pengiriman')"
+                            class="flex-shrink-0 px-2.5 py-1 bg-orange-50 text-orange-600 rounded-full text-[10px] font-medium hover:bg-orange-100 transition-colors">
+                            🚚 Kirim
                         </button>
                         <button type="button" wire:click="$set('message', 'Kontak admin')"
-                            class="flex-shrink-0 px-2.5 py-1 bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-full text-[10px] font-medium hover:bg-pink-100 dark:hover:bg-pink-900/50 transition-colors">
+                            class="flex-shrink-0 px-2.5 py-1 bg-pink-50 text-pink-600 rounded-full text-[10px] font-medium hover:bg-pink-100 transition-colors">
                             💬 Kontak
                         </button>
                     </div>
                 @endif
 
                 {{-- Footer Info --}}
-                <div class="flex items-center justify-center text-[10px] text-gray-500 dark:text-gray-400">
+                <div class="flex items-center justify-center text-[10px] text-gray-500">
                     @if ($useAI)
                         <div class="flex items-center gap-1">
                             <span class="relative flex h-1.5 w-1.5">
@@ -423,36 +442,92 @@
             backdrop-filter: blur(4px);
         }
 
-        /* Link styles in messages (converted from Tailwind @apply) */
+        /* Chatbot Response Formatting - Enhanced */
+        .chatbot-response {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Link styles in messages */
+        .chatbot-response a,
         #chatMessages a {
-            color: #2563eb;
-            /* text-blue-600 */
+            color: #2563eb !important;
             text-decoration: underline;
             text-decoration-thickness: 2px;
-            /* decoration-2 */
             text-underline-offset: 2px;
-            /* underline-offset-2 */
             font-weight: 600;
-            /* font-semibold */
-            transition: color 150ms;
-            /* transition-colors */
+            transition: all 150ms;
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 4px;
         }
 
+        .dark .chatbot-response a,
         .dark #chatMessages a {
-            color: #60a5fa;
-            /* dark:text-blue-400 */
+            color: #60a5fa !important;
         }
 
+        .chatbot-response a:hover,
         #chatMessages a:hover {
-            color: #1d4ed8;
-            /* hover:text-blue-700 */
-            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            /* shadow-sm */
+            color: #1d4ed8 !important;
+            background-color: rgba(37, 99, 235, 0.1);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            transform: translateY(-1px);
         }
 
+        .dark .chatbot-response a:hover,
         .dark #chatMessages a:hover {
-            color: #93c5fd;
-            /* dark:hover:text-blue-300 */
+            color: #93c5fd !important;
+            background-color: rgba(96, 165, 250, 0.1);
+        }
+
+        /* Strong/Bold text */
+        .chatbot-response strong {
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .dark .chatbot-response strong {
+            color: #f3f4f6;
+        }
+
+        /* Emoji spacing */
+        .chatbot-response {
+            line-height: 1.6;
+        }
+
+        /* List styling (for br-separated items) */
+        .chatbot-response br+br {
+            content: '';
+            display: block;
+            margin: 0.25rem 0;
+        }
+
+        /* Paragraph spacing */
+        .chatbot-response p {
+            margin-bottom: 0.5rem;
+        }
+
+        .chatbot-response p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Code/monospace text */
+        .chatbot-response code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+
+        .dark .chatbot-response code {
+            background-color: #374151;
+        }
+
+        /* Price/number highlighting */
+        .chatbot-response {
+            font-variant-numeric: tabular-nums;
         }
     </style>
 @endpush
@@ -470,16 +545,43 @@
             }
         }
 
-        // Auto scroll when new message arrives
+        // Focus input after sending message - IMPROVED
+        function focusChatInput() {
+            const input = document.getElementById('chatInput');
+            if (input && !input.disabled) {
+                // Small delay to ensure DOM is ready
+                requestAnimationFrame(() => {
+                    input.focus();
+                    // Move cursor to end
+                    input.setSelectionRange(input.value.length, input.value.length);
+                });
+            }
+        }
+
+        // Auto scroll and focus when messages update
         document.addEventListener('livewire:initialized', () => {
             Livewire.on('scroll-to-bottom', () => {
-                setTimeout(smoothScrollToBottom, 100);
+                setTimeout(() => {
+                    smoothScrollToBottom();
+                    focusChatInput();
+                }, 150);
+            });
+
+            Livewire.on('chat-opened', () => {
+                setTimeout(focusChatInput, 300);
             });
         });
 
-        // Auto scroll on component update
-        document.addEventListener('livewire:update', () => {
-            setTimeout(smoothScrollToBottom, 150);
+        // Re-focus after every Livewire update
+        Livewire.hook('commit', ({
+            succeed
+        }) => {
+            succeed(() => {
+                setTimeout(() => {
+                    smoothScrollToBottom();
+                    focusChatInput();
+                }, 100);
+            });
         });
 
         // Initial scroll on page load
@@ -487,15 +589,25 @@
             setTimeout(smoothScrollToBottom, 200);
         });
 
-        // Focus input when chat opens
-        window.addEventListener('livewire:initialized', () => {
-            Livewire.on('chat-opened', () => {
-                setTimeout(() => {
-                    const input = document.querySelector(
-                        '#chatMessages ~ div form input[type="text"]');
-                    if (input) input.focus();
-                }, 300);
-            });
+        // Restore scroll after navigation
+        document.addEventListener('livewire:navigated', () => {
+            setTimeout(() => {
+                smoothScrollToBottom();
+                focusChatInput();
+            }, 100);
         });
+
+        // Keep input enabled and focused
+        setInterval(() => {
+            const input = document.getElementById('chatInput');
+            const chatOpen = document.querySelector('[x-data]')?.__x?.$data?.show;
+            if (input && chatOpen && !input.disabled && document.activeElement !== input) {
+                // Re-focus if chat is open and input lost focus (but not clicking buttons)
+                const isClickingButton = document.activeElement?.tagName === 'BUTTON';
+                if (!isClickingButton) {
+                    focusChatInput();
+                }
+            }
+        }, 500);
     </script>
 @endpush

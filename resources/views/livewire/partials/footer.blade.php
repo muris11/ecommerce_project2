@@ -3,8 +3,8 @@
         <!-- Grid -->
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             <div class="col-span-full lg:col-span-1">
-                <a class="flex-none text-xl font-semibold text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="{{ route('home') }}" aria-label="Beranda Munir Jaya">Munir Jaya</a>
+                <a class="flex-none text-xl font-semibold text-white" href="{{ route('home') }}"
+                    aria-label="Beranda Munir Jaya">Munir Jaya</a>
             </div>
             <!-- End Col -->
 
@@ -12,12 +12,12 @@
                 <h4 class="font-semibold text-gray-100">Produk</h4>
 
                 <div class="mt-3 grid space-y-3">
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ route('categories') }}" wire:navigate>Kategori</a></p>
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ route('products') }}" wire:navigate>Semua Produk</a></p>
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ route('products') }}" wire:navigate>Produk Unggulan</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="{{ route('categories') }}"
+                            wire:navigate>Kategori</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="{{ route('products') }}"
+                            wire:navigate>Semua Produk</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="{{ route('products') }}"
+                            wire:navigate>Produk Unggulan</a></p>
                 </div>
             </div>
             <!-- End Col -->
@@ -26,12 +26,12 @@
                 <h4 class="font-semibold text-gray-100">Perusahaan</h4>
 
                 <div class="mt-3 grid space-y-3">
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ route('about') }}" wire:navigate>Tentang Kami</a></p>
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="{{ route('about') }}"
+                            wire:navigate>Tentang Kami</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
                             href="{{ route('store.reviews') }}" wire:navigate>Penilaian Pelanggan</a></p>
-                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ route('contact') }}" wire:navigate>Hubungi Kami</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200" href="{{ route('contact') }}"
+                            wire:navigate>Hubungi Kami</a></p>
                 </div>
             </div>
             <!-- End Col -->
@@ -52,19 +52,18 @@
                 <h4 class="font-semibold text-gray-100">Tetap Terhubung</h4>
 
                 <form wire:submit.prevent="subscribe">
-                    <div
-                        class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-gray-800">
+                    <div class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2">
                         <div class="w-full">
                             <input type="email" id="newsletter-email" name="newsletter-email"
                                 wire:model.defer="newsletterEmail"
-                                class="py-3 px-4 block w-full border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600"
+                                class="py-3 px-4 block w-full border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                 placeholder="Masukkan email Anda" autocomplete="email">
                             @error('newsletterEmail')
                                 <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
                         <button type="submit"
-                            class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                            class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                             Berlangganan
                         </button>
                     </div>

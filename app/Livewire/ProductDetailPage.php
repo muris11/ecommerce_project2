@@ -20,8 +20,8 @@ class ProductDetailPage extends Component
     public $slug;
     public $quantity = 1;
 
-    public function mount($slug){
-        $this->slug = $slug;
+    public function mount($product){
+        $this->slug = $product;
     }
 
     public function increaseQty(){
@@ -72,7 +72,7 @@ class ProductDetailPage extends Component
         ]);
 
         // Clear review cache for this product
-        cache()->forget('product_reviews_' . $product->id);
+        cache()->forget(config('cache_keys.keys.product_reviews') . $product->id);
 
         $this->alertSuccess('Review berhasil ditambahkan! Terima kasih atas feedback Anda.');
 
@@ -87,31 +87,22 @@ class ProductDetailPage extends Component
             ->where('slug', $this->slug)
             ->firstOrFail();
 
-        // Cache recent reviews for 5 minutes
-        $cacheKey = 'product_reviews_' . $product->id;
-        $reviewData = cache()->remember($cacheKey, 300, function () use ($product) {
-            $reviews = \App\Models\Review::where('product_id', $product->id)
-                ->with(['user:id,name,avatar'])
-                ->select('id', 'user_id', 'product_id', 'rating', 'comment', 'admin_reply', 'replied_at', 'created_at')
-                ->orderBy('created_at', 'desc')
-                ->take(4)
-                ->get();
-            
-            $count = \App\Models\Review::where('product_id', $product->id)->count();
-            $average = \App\Models\Review::where('product_id', $product->id)->avg('rating');
-
-            return [
-                'reviews' => $reviews,
-                'count' => $count,
-                'average' => $average ? round($average, 1) : 0,
-            ];
-        });
+        // Get reviews directly (no cache for admin replies to show immediately)
+        $reviews = \App\Models\Review::where('product_id', $product->id)
+            ->with(['user:id,name,avatar'])
+            ->select('id', 'user_id', 'product_id', 'rating', 'comment', 'admin_reply', 'replied_at', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+        
+        $count = \App\Models\Review::where('product_id', $product->id)->count();
+        $average = \App\Models\Review::where('product_id', $product->id)->avg('rating');
 
         return view('livewire.product-detail-page', [
             'product' => $product,
-            'recentReviews' => $reviewData['reviews'],
-            'reviewCount' => $reviewData['count'],
-            'averageRating' => $reviewData['average'],
+            'recentReviews' => $reviews,
+            'reviewCount' => $count,
+            'averageRating' => $average ? round($average, 1) : 0,
         ]);
     }
 }

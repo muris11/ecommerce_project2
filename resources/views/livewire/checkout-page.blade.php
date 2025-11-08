@@ -34,12 +34,10 @@
         <div class="grid grid-cols-12 gap-4">
             <div class="md:col-span-12 lg:col-span-8 col-span-12 animate-fade-in-up">
                 <!-- Card -->
-                <div
-                    class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-500 p-4 sm:p-7 dark:bg-slate-900">
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-500 p-4 sm:p-7">
                     <!-- Shipping Address -->
                     <div class="mb-6">
-                        <h2
-                            class="text-xl font-bold underline text-gray-700 dark:text-white mb-4 flex items-center gap-2">
+                        <h2 class="text-xl font-bold underline text-gray-700 mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
@@ -51,22 +49,22 @@
                         </h2>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="first_name">
+                                <label class="block text-gray-700 mb-1" for="first_name">
                                     Nama Depan
                                 </label>
                                 <input wire:model="first_name"
-                                    class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 @error('first_name') border-red-500 @enderror"
+                                    class="w-full rounded-lg border py-2 px-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 @error('first_name') border-red-500 @enderror"
                                     id="first_name" type="text">
                                 @error('first_name')
                                     <div class="text-red-500 text-sm animate-fade-in">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="last_name">
+                                <label class="block text-gray-700 mb-1" for="last_name">
                                     Nama Belakang
                                 </label>
                                 <input wire:model="last_name"
-                                    class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 @error('last_name') border-red-500 @enderror"
+                                    class="w-full rounded-lg border py-2 px-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 @error('last_name') border-red-500 @enderror"
                                     id="last_name" type="text">
                                 @error('last_name')
                                     <div class="text-red-500 text-sm animate-fade-in">{{ $message }}</div>
@@ -74,33 +72,33 @@
                             </div>
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="phone">
+                            <label class="block text-gray-700 mb-1" for="phone">
                                 Telepon
                             </label>
                             <input wire:model="phone"
-                                class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('phone') border-red-500 @enderror"
+                                class="w-full rounded-lg border py-2 px-3 @error('phone') border-red-500 @enderror"
                                 id="phone" type="text">
                             @error('phone')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="address">
+                            <label class="block text-gray-700 mb-1" for="address">
                                 Alamat
                             </label>
                             <input wire:model="street_address"
-                                class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('street_address') border-red-500 @enderror"
+                                class="w-full rounded-lg border py-2 px-3 @error('street_address') border-red-500 @enderror"
                                 id="address" type="text">
                             @error('street_address')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mt-4">
-                            <label class="block text-gray-700 dark:text-white mb-1" for="city">
+                            <label class="block text-gray-700 mb-1" for="city">
                                 Kota
                             </label>
                             <input wire:model="city"
-                                class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('city') border-red-500 @enderror"
+                                class="w-full rounded-lg border py-2 px-3 @error('city') border-red-500 @enderror"
                                 id="city" type="text">
                             @error('city')
                                 <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -108,22 +106,22 @@
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-4">
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="state">
+                                <label class="block text-gray-700 mb-1" for="state">
                                     Negara
                                 </label>
                                 <input wire:model="state"
-                                    class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('state') border-red-500 @enderror"
+                                    class="w-full rounded-lg border py-2 px-3 @error('state') border-red-500 @enderror"
                                     id="state" type="text">
                                 @error('state')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-gray-700 dark:text-white mb-1" for="zip">
+                                <label class="block text-gray-700 mb-1" for="zip">
                                     Kode Pos
                                 </label>
                                 <input wire:model="zip_code"
-                                    class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('zip_code') border-red-500 @enderror"
+                                    class="w-full rounded-lg border py-2 px-3 @error('zip_code') border-red-500 @enderror"
                                     id="zip" type="text">
                                 @error('zip_code')
                                     <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -145,12 +143,12 @@
                         </h2>
 
                         <div class="animate-fade-in" style="animation-delay: 150ms">
-                            <label class="block text-gray-700 dark:text-white mb-2 font-semibold">
+                            <label class="block text-gray-700 mb-2 font-semibold">
                                 Cari Kota/Kecamatan Tujuan
                             </label>
                             <input wire:model.live.debounce.300ms="search_city" type="text"
                                 placeholder="Ketik nama kota atau kecamatan..."
-                                class="w-full rounded-lg border py-3 px-4 dark:bg-gray-700 dark:text-white dark:border-none focus:ring-2 focus:ring-green-500 focus:border-transparent focus:scale-[1.02] transition-all duration-300 shadow-sm hover:shadow-md @error('selected_destination') border-red-500 @enderror">
+                                class="w-full rounded-lg border py-3 px-4 focus:ring-2 focus:ring-green-500 focus:border-transparent focus:scale-[1.02] transition-all duration-300 shadow-sm hover:shadow-md @error('selected_destination') border-red-500 @enderror">
 
                             @error('selected_destination')
                                 <div class="text-red-500 text-sm mt-1 animate-fade-in flex items-center gap-1">
@@ -166,13 +164,12 @@
                             <!-- Search Results Dropdown -->
                             @if (count($search_results) > 0)
                                 <div
-                                    class="mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto animate-fade-in-up backdrop-blur-sm">
+                                    class="mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 max-h-60 overflow-y-auto animate-fade-in-up backdrop-blur-sm">
                                     @foreach ($search_results as $index => $result)
                                         <div wire:click="selectDestination({{ json_encode($result) }})"
-                                            class="p-4 hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 dark:hover:from-green-900/20 dark:hover:to-emerald-900/20 cursor-pointer border-b border-gray-100 dark:border-gray-600 last:border-b-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-md animate-fade-in-right"
+                                            class="p-4 hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 cursor-pointer border-b border-gray-100 last:border-b-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-md animate-fade-in-right"
                                             style="animation-delay: {{ $index * 50 }}ms">
-                                            <div
-                                                class="font-semibold text-gray-800 dark:text-white flex items-center gap-2">
+                                            <div class="font-semibold text-gray-800 flex items-center gap-2">
                                                 <svg class="w-4 h-4 text-green-600" fill="currentColor"
                                                     viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd"
@@ -181,7 +178,7 @@
                                                 </svg>
                                                 {{ $result['subdistrict_name'] ?? '' }}
                                             </div>
-                                            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 ml-6">
+                                            <div class="text-sm text-gray-600 mt-1 ml-6">
                                                 {{ $result['district_name'] ?? '' }},
                                                 {{ $result['city_name'] ?? '' }}, {{ $result['province_name'] ?? '' }}
                                             </div>
@@ -193,8 +190,8 @@
                             <!-- Selected Destination -->
                             @if ($selected_destination)
                                 <div
-                                    class="mt-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-300 dark:border-green-800 animate-fade-in-up shadow-md hover:shadow-lg transition-all duration-300">
-                                    <div class="flex items-center gap-2 text-green-700 dark:text-green-400 mb-2">
+                                    class="mt-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 animate-fade-in-up shadow-md hover:shadow-lg transition-all duration-300">
+                                    <div class="flex items-center gap-2 text-green-700 mb-2">
                                         <svg class="w-5 h-5 animate-pulse-slow" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -202,7 +199,7 @@
                                         </svg>
                                         <span class="font-bold">Tujuan Terpilih:</span>
                                     </div>
-                                    <div class="text-gray-800 dark:text-white font-medium">
+                                    <div class="text-gray-800 font-medium">
                                         {{ $selected_destination['subdistrict_name'] ?? '' }},
                                         {{ $selected_destination['district_name'] ?? '' }},
                                         {{ $selected_destination['city_name'] ?? '' }},
@@ -215,8 +212,7 @@
                         <!-- Courier Selection -->
                         @if ($selected_destination)
                             <div class="mt-6 animate-fade-in-up" style="animation-delay: 200ms">
-                                <label
-                                    class="flex items-center gap-2 text-gray-700 dark:text-white mb-2 font-semibold">
+                                <label class="flex items-center gap-2 text-gray-700 mb-2 font-semibold">
                                     <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -225,7 +221,7 @@
                                     Pilih Kurir
                                 </label>
                                 <select wire:model.live="courier"
-                                    class="w-full rounded-lg border-2 py-3 px-4 dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:scale-[1.02] transition-all duration-300 shadow-sm hover:shadow-md font-medium">
+                                    class="w-full rounded-lg border-2 py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:scale-[1.02] transition-all duration-300 shadow-sm hover:shadow-md font-medium">
                                     <option value="">-- Pilih Kurir Pengiriman --</option>
                                     @foreach ($available_couriers as $code => $name)
                                         <option value="{{ $code }}">{{ $name }}</option>
@@ -237,7 +233,7 @@
                         <!-- Shipping Options -->
                         @if (count($shipping_options) > 0)
                             <div class="mt-6 animate-fade-in-up" style="animation-delay: 250ms">
-                                <label class="flex items-center gap-2 text-gray-700 dark:text-white mb-3 font-bold">
+                                <label class="flex items-center gap-2 text-gray-700 mb-3 font-bold">
                                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -251,21 +247,20 @@
                                             <div wire:click="selectShippingService({{ json_encode($option) }})"
                                                 class="group p-5 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] animate-fade-in-up
                                                 {{ $selected_shipping && $selected_shipping['service'] == $option['service']
-                                                    ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 shadow-lg'
-                                                    : 'border-gray-200 dark:border-gray-700 hover:border-green-400 bg-white dark:bg-gray-800' }}"
+                                                    ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-lg'
+                                                    : 'border-gray-200 hover:border-green-400 bg-white' }}"
                                                 style="animation-delay: {{ $optionIndex * 100 }}ms">
                                                 <div class="flex justify-between items-center">
                                                     <div class="flex-1">
                                                         <div
-                                                            class="font-bold text-gray-800 dark:text-white text-lg flex items-center gap-2 group-hover:text-green-600 transition-colors">
+                                                            class="font-bold text-gray-800 text-lg flex items-center gap-2 group-hover:text-green-600 transition-colors">
                                                             <span
-                                                                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold">
+                                                                class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold">
                                                                 {{ strtoupper($courier) }}
                                                             </span>
                                                             {{ $option['service'] }}
                                                         </div>
-                                                        <div
-                                                            class="text-sm text-gray-600 dark:text-gray-400 mt-2 ml-1">
+                                                        <div class="text-sm text-gray-600 mt-2 ml-1">
                                                             {{ $option['description'] }}
                                                         </div>
                                                         <div class="flex items-center gap-2 mt-2 ml-1">
@@ -275,8 +270,7 @@
                                                                     stroke-width="2"
                                                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                             </svg>
-                                                            <span
-                                                                class="text-sm text-amber-600 dark:text-amber-400 font-semibold">
+                                                            <span class="text-sm text-amber-600 font-semibold">
                                                                 Estimasi: {{ $cost['etd'] }} hari
                                                             </span>
                                                         </div>
@@ -288,7 +282,7 @@
                                                         </div>
                                                         @if ($selected_shipping && $selected_shipping['service'] == $option['service'])
                                                             <div
-                                                                class="mt-2 flex items-center gap-1 text-green-600 dark:text-green-400 text-sm font-semibold animate-pulse-slow">
+                                                                class="mt-2 flex items-center gap-1 text-green-600 text-sm font-semibold animate-pulse-slow">
                                                                 <svg class="w-4 h-4" fill="currentColor"
                                                                     viewBox="0 0 20 20">
                                                                     <path fill-rule="evenodd"
@@ -327,7 +321,7 @@
                             <input wire:model='payment_method' class="hidden peer" id="hosting-small" required=""
                                 type="radio" value="cod" />
                             <label
-                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
                                 for="hosting-small">
                                 <div class="block">
                                     <div class="w-full text-lg font-semibold">
@@ -346,7 +340,7 @@
                             <input wire:model='payment_method' class="hidden peer" id="hosting-big" type="radio"
                                 value="midtrans">
                             <label
-                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
                                 for="hosting-big">
                                 <div class="block">
                                     <div class="w-full text-lg font-semibold">
@@ -370,7 +364,7 @@
             </div>
             <div class="md:col-span-12 lg:col-span-4 col-span-12 space-y-6">
                 <!-- Ringkasan Pesanan -->
-                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 dark:bg-slate-900 animate-fade-in-up"
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 animate-fade-in-up"
                     style="animation-delay: 350ms">
                     <div class="flex items-center gap-2 mb-6">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,8 +379,8 @@
 
                     <!-- Subtotal -->
                     <div
-                        class="flex justify-between items-center mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-md transition-all duration-300">
-                        <span class="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-2">
+                        class="flex justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg hover:shadow-md transition-all duration-300">
+                        <span class="text-gray-700 font-medium flex items-center gap-2">
                             <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -394,15 +388,15 @@
                             </svg>
                             Subtotal
                         </span>
-                        <span class="font-bold text-gray-900 dark:text-white">
+                        <span class="font-bold text-gray-900">
                             {{ Number::currency($grand_total, 'IDR') }}
                         </span>
                     </div>
 
                     <!-- Pajak -->
                     <div
-                        class="flex justify-between items-center mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-md transition-all duration-300">
-                        <span class="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-2">
+                        class="flex justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg hover:shadow-md transition-all duration-300">
+                        <span class="text-gray-700 font-medium flex items-center gap-2">
                             <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -410,7 +404,7 @@
                             </svg>
                             Pajak
                         </span>
-                        <span class="font-bold text-gray-900 dark:text-white">
+                        <span class="font-bold text-gray-900">
                             {{ Number::currency(0, 'IDR') }}
                         </span>
                     </div>
@@ -418,8 +412,8 @@
                     <!-- Biaya Pengiriman -->
                     <div
                         class="flex justify-between items-center mb-4 p-3 rounded-lg transition-all duration-300
-                        {{ $shipping_cost > 0 ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-300 dark:border-green-700 shadow-md' : 'bg-gray-50 dark:bg-gray-800' }}">
-                        <span class="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-2">
+                        {{ $shipping_cost > 0 ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 shadow-md' : 'bg-gray-50' }}">
+                        <span class="text-gray-700 font-medium flex items-center gap-2">
                             <svg class="w-5 h-5 {{ $shipping_cost > 0 ? 'text-green-600 animate-bounce-x' : 'text-gray-500' }}"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -427,8 +421,7 @@
                             </svg>
                             Biaya Pengiriman
                         </span>
-                        <span
-                            class="font-bold {{ $shipping_cost > 0 ? 'text-green-600 dark:text-green-400 text-lg' : 'text-gray-900 dark:text-white' }}">
+                        <span class="font-bold {{ $shipping_cost > 0 ? 'text-green-600 text-lg' : 'text-gray-900' }}">
                             {{ Number::currency($shipping_cost, 'IDR') }}
                         </span>
                     </div>
@@ -436,8 +429,7 @@
                     <!-- Divider -->
                     <div class="my-6 relative">
                         <div class="absolute inset-0 flex items-center">
-                            <div
-                                class="w-full border-t-2 border-gradient-to-r from-blue-300 to-purple-300 dark:from-blue-700 dark:to-purple-700">
+                            <div class="w-full border-t-2 border-gradient-to-r from-blue-300 to-purple-300">
                             </div>
                         </div>
                     </div>
@@ -484,7 +476,7 @@
                 </div>
 
                 <!-- Ringkasan Keranjang -->
-                <div class="bg-white mt-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 dark:bg-slate-900 animate-fade-in-up"
+                <div class="bg-white mt-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 animate-fade-in-up"
                     style="animation-delay: 400ms">
                     <div class="flex items-center gap-2 mb-4">
                         <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
@@ -498,9 +490,9 @@
                         </h3>
                     </div>
 
-                    <ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
+                    <ul class="divide-y divide-gray-200" role="list">
                         @foreach ($cart_items as $index => $ci)
-                            <li class="py-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg px-2 transition-all duration-300 animate-fade-in-right"
+                            <li class="py-4 hover:bg-gray-50 rounded-lg px-2 transition-all duration-300 animate-fade-in-right"
                                 wire:key="{{ $ci['product_id'] }}"
                                 style="animation-delay: {{ 450 + $index * 50 }}ms">
                                 <div class="flex items-center gap-4">
@@ -515,10 +507,10 @@
                                         </div>
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-bold text-gray-900 dark:text-white line-clamp-2 mb-1">
+                                        <p class="text-sm font-bold text-gray-900 line-clamp-2 mb-1">
                                             {{ $ci['name'] }}
                                         </p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                        <p class="text-xs text-gray-500 flex items-center gap-1">
                                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                 <path
                                                     d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" />
@@ -538,16 +530,16 @@
                     </ul>
 
                     <!-- Total Items -->
-                    <div class="mt-4 pt-4 border-t-2 border-gray-200 dark:border-gray-700">
+                    <div class="mt-4 pt-4 border-t-2 border-gray-200">
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600 dark:text-gray-400 font-medium flex items-center gap-2">
+                            <span class="text-gray-600 font-medium flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                                 </svg>
                                 Total Items
                             </span>
-                            <span class="text-lg font-bold text-gray-900 dark:text-white">
+                            <span class="text-lg font-bold text-gray-900">
                                 {{ array_sum(array_column($cart_items, 'quantity')) }} Item
                             </span>
                         </div>

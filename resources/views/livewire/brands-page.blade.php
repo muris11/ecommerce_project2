@@ -1,6 +1,6 @@
     <section class="py-20">
         <div class="relative flex flex-col items-center animate-fade-in-up">
-            <h1 class="text-5xl font-bold dark:text-gray-200 mb-5">
+            <h1 class="text-5xl font-bold mb-5">
                 <span
                     class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient-x">
                     Merek Populer
@@ -18,7 +18,7 @@
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 md:grid-cols-2">
 
                 @foreach ($brands as $brand)
-                    <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl dark:bg-gray-800 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 hover:rotate-1 animate-fade-in-up"
+                    <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 hover:rotate-1 animate-fade-in-up"
                         style="animation-delay: {{ $loop->index * 100 }}ms" wire:key="{{ $brand->id }}">
                         <a href="/products?selected_brands[0]={{ $brand->id }}"
                             class="block relative overflow-hidden rounded-t-xl">
@@ -34,10 +34,9 @@
                                 class="object-cover w-full h-64 rounded-t-xl transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-500"
                                 loading="lazy" width="300" height="256">
                         </a>
-                        <div
-                            class="p-5 text-center bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-b-xl">
+                        <div class="p-5 text-center bg-gradient-to-br from-white to-gray-50 rounded-b-xl">
                             <a href="/products?selected_brands[0]={{ $brand->id }}"
-                                class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 inline-block transform group-hover:scale-110">
+                                class="text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-colors duration-300 inline-block transform group-hover:scale-110">
                                 {{ $brand->name }}
                             </a>
                         </div>

@@ -4,7 +4,7 @@
             <!-- Header -->
             <div class="mb-12 text-center">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-5xl font-bold dark:text-gray-200 mb-2">
+                    <h1 class="text-5xl font-bold  mb-2">
                         Penilaian <span class="text-blue-500">Pelanggan</span>
                     </h1>
                     <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
@@ -13,7 +13,7 @@
                         <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="text-gray-600 dark:text-gray-400 text-lg">
+                <p class="text-gray-600  text-lg">
                     Apa kata pelanggan kami tentang toko ini
                 </p>
             </div>
@@ -42,8 +42,8 @@
             <!-- Submit Review Form -->
             @auth
                 <div
-                    class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 dark:border-gray-700 p-6 md:p-8 mb-10">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    class="bg-white  rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100  p-6 md:p-8 mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900  mb-6 flex items-center gap-2">
                         <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
@@ -54,7 +54,7 @@
                     <form wire:submit.prevent="submitReview">
                         <!-- Rating Stars -->
                         <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                            <label class="block text-sm font-medium text-gray-700  mb-3">
                                 Berikan Rating
                             </label>
                             <div class="flex items-center space-x-2">
@@ -69,7 +69,7 @@
                                         </svg>
                                     </button>
                                 @endfor
-                                <span class="ml-3 text-lg font-medium text-gray-700 dark:text-gray-300">{{ $rating }}
+                                <span class="ml-3 text-lg font-medium text-gray-700 ">{{ $rating }}
                                     /
                                     5</span>
                             </div>
@@ -80,11 +80,11 @@
 
                         <!-- Review Text -->
                         <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label class="block text-sm font-medium text-gray-700  mb-2">
                                 Ulasan Anda
                             </label>
                             <textarea wire:model="review" rows="5"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500   "
                                 placeholder="Ceritakan pengalaman Anda berbelanja di toko kami... (minimal 20 karakter)"></textarea>
                             @error('review')
                                 <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
@@ -116,19 +116,19 @@
                 </div>
             @else
                 <div
-                    class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-10 mb-10 text-center">
+                    class="bg-gradient-to-br from-gray-50 to-gray-100   rounded-xl shadow-md border border-gray-200  p-10 mb-10 text-center">
                     <div
-                        class="w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                        class="w-20 h-20 bg-blue-100  rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-blue-600 " fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 class="text-2xl font-bold text-gray-900  mb-2">
                         Login untuk Memberikan Ulasan
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                    <p class="text-gray-600  mb-6">
                         Bagikan pengalaman Anda dengan pelanggan lainnya
                     </p>
                     <a href="/login"
@@ -151,14 +151,14 @@
                             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
                         </path>
                     </svg>
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    <h2 class="text-3xl font-bold text-gray-900 ">
                         Semua Ulasan <span class="text-blue-500">({{ $totalReviews }})</span>
                     </h2>
                 </div>
 
                 @forelse($reviews as $review)
                     <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 p-6">
+                        class="bg-white  rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100  p-6">
                         <!-- User Info & Rating -->
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center gap-4">
@@ -166,7 +166,7 @@
                                     @if ($review->user->avatar)
                                         <img src="{{ Storage::url($review->user->avatar) }}"
                                             alt="{{ $review->user->name }}"
-                                            class="w-16 h-16 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900 shadow-lg"
+                                            class="w-16 h-16 rounded-full object-cover border-4 border-blue-100  shadow-lg"
                                             loading="lazy" width="64" height="64">
                                     @else
                                         <div
@@ -176,10 +176,10 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                                    <h3 class="text-xl font-bold text-gray-900 ">
                                         {{ $review->user->name }}
                                     </h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                    <p class="text-sm text-gray-500  flex items-center gap-1">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -193,7 +193,7 @@
 
                             <!-- Rating Stars -->
                             <div
-                                class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-lg">
+                                class="flex items-center gap-1 bg-yellow-50  px-3 py-2 rounded-lg">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <svg class="w-6 h-6 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}"
                                         fill="currentColor" viewBox="0 0 20 20">
@@ -207,7 +207,7 @@
 
                         <!-- Review Text -->
                         <div class="mb-4">
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+                            <p class="text-gray-700  leading-relaxed text-base">
                                 {{ $review->review }}
                             </p>
                         </div>
@@ -215,7 +215,7 @@
                         <!-- Admin Reply -->
                         @if ($review->admin_reply)
                             <div
-                                class="mt-4 pl-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 via-blue-50/50 to-transparent dark:from-blue-900/30 dark:via-blue-900/10 p-5 rounded-r-lg">
+                                class="mt-4 pl-6 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 via-blue-50/50 to-transparent   p-5 rounded-r-lg">
                                 <div class="flex items-center gap-2 mb-3">
                                     <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -227,11 +227,11 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400">
+                                    <span class="text-sm font-bold text-blue-600 ">
                                         Balasan dari Admin Toko
                                     </span>
                                     @if ($review->replied_at)
-                                        <span class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                        <span class="text-xs text-gray-500  flex items-center gap-1">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -241,7 +241,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed pl-10">
+                                <p class="text-gray-700  leading-relaxed pl-10">
                                     {{ $review->admin_reply }}
                                 </p>
                             </div>
@@ -249,18 +249,18 @@
                     </div>
                 @empty
                     <div
-                        class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700">
+                        class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100   rounded-xl border-2 border-dashed border-gray-300 ">
                         <div
-                            class="w-20 h-20 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="h-10 w-10 text-gray-400 dark:text-gray-500" fill="none"
+                            class="w-20 h-20 bg-gray-200  rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-10 w-10 text-gray-400 " fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Belum Ada Ulasan</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
+                        <h3 class="text-xl font-bold text-gray-900  mb-2">Belum Ada Ulasan</h3>
+                        <p class="text-gray-600 ">
                             Jadilah yang pertama memberikan ulasan untuk toko kami!
                         </p>
                     </div>

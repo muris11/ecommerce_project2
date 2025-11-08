@@ -11,11 +11,11 @@
             </div>
         </div>
         <div class="max-w-[85rem] mx-auto text-center relative z-10 animate-fade-in-up">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white mb-6">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800  mb-6">
                 Profile<span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     Saya</span>
             </h1>
-            <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            <p class="text-lg sm:text-xl text-gray-700  max-w-3xl mx-auto">
                 Kelola informasi profil Anda dan keamanan akun
             </p>
         </div>
@@ -28,10 +28,10 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             {{-- Total Orders --}}
             <div
-                class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up">
+                class="bg-white  rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Pesanan</p>
+                        <p class="text-sm text-gray-600  mb-1">Total Pesanan</p>
                         <p
                             class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                             {{ $totalOrders }}</p>
@@ -48,10 +48,10 @@
 
             {{-- Total Spent --}}
             <div
-                class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-100">
+                class="bg-white  rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-100">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Belanja</p>
+                        <p class="text-sm text-gray-600  mb-1">Total Belanja</p>
                         <p
                             class="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                             Rp {{ number_format($totalSpent, 0, ',', '.') }}
@@ -69,10 +69,10 @@
 
             {{-- Completed Orders --}}
             <div
-                class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-200">
+                class="bg-white  rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-200">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Selesai</p>
+                        <p class="text-sm text-gray-600  mb-1">Selesai</p>
                         <p
                             class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                             {{ $completedOrders }}</p>
@@ -89,11 +89,11 @@
 
             {{-- Pending Orders --}}
             <div
-                class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-300">
+                class="bg-white  rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up animation-delay-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Dalam Proses</p>
-                        <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ $pendingOrders }}</p>
+                        <p class="text-sm text-gray-600  mb-1">Dalam Proses</p>
+                        <p class="text-2xl font-bold text-gray-900 ">{{ $pendingOrders }}</p>
                     </div>
                     <div
                         class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
@@ -110,7 +110,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             {{-- Profile Update Form --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 lg:p-8">
+            <div class="bg-white  rounded-2xl shadow-xl p-6 lg:p-8">
                 <div class="flex items-center gap-3 mb-6">
                     <div
                         class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
@@ -120,41 +120,41 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Informasi Profil</h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">Update informasi akun Anda</p>
+                        <h2 class="text-2xl font-bold text-gray-900 ">Informasi Profil</h2>
+                        <p class="text-sm text-gray-600 ">Update informasi akun Anda</p>
                     </div>
                 </div>
 
                 {{-- Success Message --}}
                 @if ($successMessage)
                     <div
-                        class="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-start gap-3">
-                        <svg class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" fill="none"
+                        class="mb-6 p-4 bg-green-50  border border-green-200  rounded-lg flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-600  flex-shrink-0 mt-0.5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="text-sm text-green-800 dark:text-green-300">{{ $successMessage }}</p>
+                        <p class="text-sm text-green-800 ">{{ $successMessage }}</p>
                     </div>
                 @endif
 
                 {{-- Error Message --}}
                 @if ($errorMessage)
                     <div
-                        class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
-                        <svg class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" fill="none"
+                        class="mb-6 p-4 bg-red-50  border border-red-200  rounded-lg flex items-start gap-3">
+                        <svg class="w-5 h-5 text-red-600  flex-shrink-0 mt-0.5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="text-sm text-red-800 dark:text-red-300">{{ $errorMessage }}</p>
+                        <p class="text-sm text-red-800 ">{{ $errorMessage }}</p>
                     </div>
                 @endif
 
                 <form wire:submit.prevent="updateProfile" class="space-y-6">
                     {{-- Avatar Upload --}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                        <label class="block text-sm font-medium text-gray-700  mb-3">
                             Foto Profil
                         </label>
                         <div class="flex items-center gap-6">
@@ -166,7 +166,7 @@
                                     height="80">
                             @elseif (auth()->user()->avatar)
                                 <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Avatar"
-                                    class="w-20 h-20 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900"
+                                    class="w-20 h-20 rounded-full object-cover border-4 border-blue-100 "
                                     loading="lazy" width="80" height="80">
                             @else
                                 <div
@@ -177,12 +177,12 @@
 
                             <div class="flex-1">
                                 <input type="file" wire:model="avatar" accept="image/*" id="avatar"
-                                    class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400">
-                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">PNG, JPG maksimal 2MB</p>
+                                    class="block w-full text-sm text-gray-500  file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100  ">
+                                <p class="mt-1 text-xs text-gray-500 ">PNG, JPG maksimal 2MB</p>
 
                                 {{-- Loading indicator --}}
                                 <div wire:loading wire:target="avatar" class="mt-2">
-                                    <span class="text-sm text-blue-600 dark:text-blue-400">
+                                    <span class="text-sm text-blue-600 ">
                                         <svg class="animate-spin inline h-4 w-4 mr-2"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <circle class="opacity-25" cx="12" cy="12" r="10"
@@ -196,7 +196,7 @@
                                 </div>
 
                                 @error('avatar')
-                                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -204,46 +204,46 @@
 
                     {{-- Name --}}
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label for="name" class="block text-sm font-medium text-gray-700  mb-2">
                             Nama Lengkap <span class="text-red-500">*</span>
                         </label>
                         <input type="text" id="name" wire:model="name"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="Masukkan nama lengkap">
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Email --}}
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label for="email" class="block text-sm font-medium text-gray-700  mb-2">
                             Email <span class="text-red-500">*</span>
                         </label>
                         <input type="email" id="email" wire:model="email"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="nama@email.com">
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Phone --}}
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label for="phone" class="block text-sm font-medium text-gray-700  mb-2">
                             Nomor Telepon
                         </label>
                         <input type="tel" id="phone" wire:model="phone"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="+62 812-3456-7890">
                         @error('phone')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Submit Button --}}
                     <button type="submit"
-                        class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+                        class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 "
                         wire:loading.attr="disabled">
                         <span wire:loading.remove>
                             Simpan Perubahan
@@ -263,7 +263,7 @@
             </div>
 
             {{-- Password Change Form --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 lg:p-8">
+            <div class="bg-white  rounded-2xl shadow-xl p-6 lg:p-8">
                 <div class="flex items-center gap-3 mb-6">
                     <div
                         class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
@@ -273,34 +273,34 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Ubah Password</h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">Perbarui password akun Anda</p>
+                        <h2 class="text-2xl font-bold text-gray-900 ">Ubah Password</h2>
+                        <p class="text-sm text-gray-600 ">Perbarui password akun Anda</p>
                     </div>
                 </div>
 
                 {{-- Password Success Message --}}
                 @if ($passwordSuccessMessage)
                     <div
-                        class="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-start gap-3">
-                        <svg class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" fill="none"
+                        class="mb-6 p-4 bg-green-50  border border-green-200  rounded-lg flex items-start gap-3">
+                        <svg class="w-5 h-5 text-green-600  flex-shrink-0 mt-0.5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="text-sm text-green-800 dark:text-green-300">{{ $passwordSuccessMessage }}</p>
+                        <p class="text-sm text-green-800 ">{{ $passwordSuccessMessage }}</p>
                     </div>
                 @endif
 
                 {{-- Password Error Message --}}
                 @if ($passwordErrorMessage)
                     <div
-                        class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
-                        <svg class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" fill="none"
+                        class="mb-6 p-4 bg-red-50  border border-red-200  rounded-lg flex items-start gap-3">
+                        <svg class="w-5 h-5 text-red-600  flex-shrink-0 mt-0.5" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="text-sm text-red-800 dark:text-red-300">{{ $passwordErrorMessage }}</p>
+                        <p class="text-sm text-red-800 ">{{ $passwordErrorMessage }}</p>
                     </div>
                 @endif
 
@@ -308,54 +308,54 @@
                     {{-- Current Password --}}
                     <div>
                         <label for="current_password"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            class="block text-sm font-medium text-gray-700  mb-2">
                             Password Saat Ini <span class="text-red-500">*</span>
                         </label>
                         <input type="password" id="current_password" wire:model="current_password"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="Masukkan password saat ini">
                         @error('current_password')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- New Password --}}
                     <div>
                         <label for="new_password"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            class="block text-sm font-medium text-gray-700  mb-2">
                             Password Baru <span class="text-red-500">*</span>
                         </label>
                         <input type="password" id="new_password" wire:model="new_password"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="Minimal 8 karakter">
                         @error('new_password')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Confirm New Password --}}
                     <div>
                         <label for="new_password_confirmation"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            class="block text-sm font-medium text-gray-700  mb-2">
                             Konfirmasi Password Baru <span class="text-red-500">*</span>
                         </label>
                         <input type="password" id="new_password_confirmation" wire:model="new_password_confirmation"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                            class="w-full px-4 py-3 border border-gray-300  rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent   transition-all duration-200"
                             placeholder="Ketik ulang password baru">
                         @error('new_password_confirmation')
-                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 ">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Security Info --}}
-                    <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <div class="p-4 bg-blue-50  rounded-lg">
                         <div class="flex gap-3">
-                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none"
+                            <svg class="w-5 h-5 text-blue-600  flex-shrink-0 mt-0.5" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <div class="text-sm text-blue-800 dark:text-blue-300">
+                            <div class="text-sm text-blue-800 ">
                                 <p class="font-medium mb-1">Tips Password Aman:</p>
                                 <ul class="list-disc list-inside space-y-1 text-xs">
                                     <li>Minimal 8 karakter</li>
@@ -369,7 +369,7 @@
 
                     {{-- Submit Button --}}
                     <button type="submit"
-                        class="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-800"
+                        class="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-300 "
                         wire:loading.attr="disabled">
                         <span wire:loading.remove>
                             Ubah Password
@@ -392,7 +392,7 @@
         {{-- Quick Actions --}}
         <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             <a href="/my-orders" wire:navigate
-                class="group p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+                class="group p-6 bg-white  rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
                 <div class="flex items-center gap-4">
                     <div
                         class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
@@ -402,14 +402,14 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-gray-900 dark:text-white">Pesanan Saya</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Lihat riwayat pesanan</p>
+                        <h3 class="font-semibold text-gray-900 ">Pesanan Saya</h3>
+                        <p class="text-sm text-gray-600 ">Lihat riwayat pesanan</p>
                     </div>
                 </div>
             </a>
 
             <a href="/cart" wire:navigate
-                class="group p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+                class="group p-6 bg-white  rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
                 <div class="flex items-center gap-4">
                     <div
                         class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
@@ -419,14 +419,14 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-gray-900 dark:text-white">Keranjang</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Lihat keranjang belanja</p>
+                        <h3 class="font-semibold text-gray-900 ">Keranjang</h3>
+                        <p class="text-sm text-gray-600 ">Lihat keranjang belanja</p>
                     </div>
                 </div>
             </a>
 
             <button wire:click="$dispatch('logout')"
-                class="group p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 text-left">
+                class="group p-6 bg-white  rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 text-left">
                 <div class="flex items-center gap-4">
                     <div
                         class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
@@ -436,8 +436,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-gray-900 dark:text-white">Keluar</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Logout dari akun</p>
+                        <h3 class="font-semibold text-gray-900 ">Keluar</h3>
+                        <p class="text-sm text-gray-600 ">Logout dari akun</p>
                     </div>
                 </div>
             </button>

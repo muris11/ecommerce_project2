@@ -14,10 +14,10 @@ class ProductReviewsPage extends Component
     public $slug;
     public $product;
 
-    public function mount($slug)
+    public function mount($product)
     {
-        $this->slug = $slug;
-        $this->product = Product::where('slug', $slug)->firstOrFail();
+        $this->slug = $product;
+        $this->product = Product::where('slug', $product)->firstOrFail();
     }
 
     public function render()

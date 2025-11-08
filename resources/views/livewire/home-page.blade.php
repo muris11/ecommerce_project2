@@ -25,12 +25,12 @@
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 xl:gap-20 md:items-center h-full">
                 <div class="order-2 md:order-1 animate-fade-in-up">
                     <h1
-                        class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-5xl xl:text-6xl lg:leading-tight dark:text-white animate-fade-in">
+                        class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-5xl xl:text-6xl lg:leading-tight animate-fade-in">
                         Mulai belanja di <span
                             class="text-blue-600 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 animate-gradient-x">Munir
                             Jaya Abadi</span></h1>
                     <p
-                        class="mt-4 text-base sm:text-lg text-gray-700 dark:text-gray-400 leading-relaxed animate-fade-in animation-delay-200">
+                        class="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in animation-delay-200">
                         Dapatkan beras
                         berkualitas dan obat
                         pertanian terbaik hanya di Munir Jaya Abadi. Kami menyediakan solusi untuk kebutuhan pertanian
@@ -49,7 +49,7 @@
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </a>
-                        <a class="group py-3 px-6 inline-flex justify-center items-center gap-x-2 text-sm sm:text-base font-semibold rounded-xl border-2 border-gray-800 bg-white text-gray-800 shadow-lg hover:bg-gray-50 hover:shadow-2xl hover:scale-105 transition-all duration-300 dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 transform"
+                        <a class="group py-3 px-6 inline-flex justify-center items-center gap-x-2 text-sm sm:text-base font-semibold rounded-xl border-2 border-gray-800 bg-white text-gray-800 shadow-lg hover:bg-gray-50 hover:shadow-2xl hover:scale-105 transition-all duration-300 transform"
                             href="{{ route('contact') }}">
                             Hubungi tim penjualan
                         </a>
@@ -58,7 +58,7 @@
 
                     <!-- Review Statistics -->
                     <div
-                        class="mt-8 lg:mt-12 p-4 sm:p-6 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm hover:bg-white/70 transition-all duration-300 animate-fade-in animation-delay-600 border border-white/20 hover:shadow-xl hover:scale-105 transform">
+                        class="mt-8 lg:mt-12 p-4 sm:p-6 bg-white/50 rounded-xl backdrop-blur-sm hover:bg-white/70 transition-all duration-300 animate-fade-in animation-delay-600 border border-white/20 hover:shadow-xl hover:scale-105 transform">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="flex space-x-1">
                                 @for ($i = 1; $i <= 5; $i++)
@@ -71,9 +71,9 @@
                                     </svg>
                                 @endfor
                             </div>
-                            <span class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200">5.0</span>
+                            <span class="text-xl sm:text-2xl font-bold text-gray-800">5.0</span>
                         </div>
-                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                        <p class="text-sm sm:text-base text-gray-600">
                             Dipercaya oleh <span
                                 class="font-semibold text-blue-600">{{ $storeReviews->count() }}+</span> pelanggan
                             yang puas
@@ -85,15 +85,16 @@
 
                 <div class="relative order-1 md:order-2 animate-fade-in-right">
                     <img class="w-full rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 transform"
-                        src="/images/bg3.png" alt="Munir Jaya Abadi" loading="eager" width="800" height="600">
+                        src="/images/bg3.png" alt="Munir Jaya Abadi" loading="lazy" width="800" height="600"
+                        decoding="async">
                     <div
-                        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-xl mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0 animate-pulse-slow">
+                        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-xl mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 animate-pulse-slow">
                     </div>
 
                     <!-- SVG-->
                     <div class="absolute bottom-0 start-0">
-                        <svg class="w-2/3 ms-auto h-auto text-white dark:text-slate-900" width="630" height="451"
-                            viewBox="0 0 630 451" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-2/3 ms-auto h-auto text-white" width="630" height="451" viewBox="0 0 630 451"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="531" y="352" width="99" height="99" fill="currentColor" />
                             <rect x="140" y="352" width="106" height="99" fill="currentColor" />
                             <rect x="482" y="402" width="64" height="49" fill="currentColor" />
@@ -122,11 +123,11 @@
     </div>
     <!-- Hero Section End -->
     <!--Brand Section Start -->
-    <section class="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-900">
+    <section class="py-12 sm:py-16 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
                         Cari <span class="text-blue-500">Merek Populer</span>
                     </h1>
                     <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
@@ -135,7 +136,7 @@
                         <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
+                <p class="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto px-4">
                     Temukan beragam pilihan beras terbaik dan produk pertanian berkualitas dari merek terpercaya petani
                     lokal dan nasional.
                 </p>
@@ -143,7 +144,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
                 @foreach ($brands->take(8) as $brand)
-                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 dark:bg-gray-800 overflow-hidden group transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up"
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group transform hover:-translate-y-2 hover:scale-105 animate-fade-in-up"
                         wire:key="{{ $brand->id }}" style="animation-delay: {{ $loop->index * 100 }}ms">
                         <a href="/products?selected_brands[0]={{ $brand->id }}" class="block">
                             <div class="overflow-hidden relative">
@@ -156,10 +157,9 @@
                                     loading="lazy" width="300" height="256">
                             </div>
                         </a>
-                        <div
-                            class="p-4 sm:p-5 text-center bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900">
+                        <div class="p-4 sm:p-5 text-center bg-gradient-to-b from-transparent to-gray-50">
                             <a href="/products?selected_brands[0]={{ $brand->id }}"
-                                class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-all duration-300 dark:text-gray-300 dark:hover:text-blue-400 relative inline-block group-hover:scale-110">
+                                class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-all duration-300 relative inline-block group-hover:scale-110">
                                 {{ $brand->name }}
                                 <span
                                     class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
@@ -174,12 +174,11 @@
     <!--Brand Section End -->
 
     <!-- Categori Section Start-->
-    <section
-        class="bg-gradient-to-br from-orange-100 to-orange-200 dark:from-gray-800 dark:to-gray-900 py-12 sm:py-16 md:py-20">
+    <section class="bg-gradient-to-br from-orange-100 to-orange-200 py-12 sm:py-16 md:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
                         Cari <span class="text-blue-500">Kategori</span>
                     </h1>
                     <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
@@ -188,16 +187,15 @@
                         <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="text-sm sm:text-base lg:text-lg text-gray-700 dark:text-gray-400 max-w-3xl mx-auto px-4">
-                    Temukan berbagai kategori produk beras dan pertanian sesuai kebutuhan Anda. Belanja lebih mudah
-                    dengan pilihan yang terorganisir dan lengkap.
+                <p class="text-sm sm:text-base lg:text-lg text-gray-700 max-w-3xl mx-auto px-4">
+                    Temukan produk yang Anda cari berdasarkan kategori yang tersedia
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
                 @foreach ($categories as $category)
-                    <a class="group flex bg-white border-2 border-gray-100 shadow-lg hover:shadow-2xl rounded-2xl hover:border-blue-300 transition-all duration-500 dark:bg-slate-900 dark:border-gray-800 dark:hover:border-blue-600 transform hover:-translate-y-1 hover:scale-102 animate-fade-in-up overflow-hidden relative"
+                    <a class="group flex bg-white border-2 border-gray-100 shadow-lg hover:shadow-2xl rounded-2xl hover:border-blue-300 transition-all duration-500 transform hover:-translate-y-1 hover:scale-102 animate-fade-in-up overflow-hidden relative"
                         href="/products?selected_category[0]={{ $category->id }}" wire:key="{{ $category->id }}"
                         style="animation-delay: {{ $loop->index * 100 }}ms">
                         <div
@@ -214,13 +212,13 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <h3
-                                            class="group-hover:text-blue-600 text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 transition-all duration-300 truncate dark:group-hover:text-blue-400 dark:text-gray-200 transform group-hover:translate-x-1">
+                                            class="group-hover:text-blue-600 text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 transition-all duration-300 truncate transform group-hover:translate-x-1">
                                             {{ $category->name }}
                                         </h3>
                                     </div>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-2 transition-all duration-300 dark:group-hover:text-blue-400 animate-bounce-x"
+                                    <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-2 transition-all duration-300 animate-bounce-x"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
@@ -238,11 +236,11 @@
     <!-- Categori Section End -->
 
     <!-- Customer Review Section Start -->
-    <section class="bg-white dark:bg-gray-900 py-12 sm:py-16 md:py-20">
+    <section class="bg-white py-12 sm:py-16 md:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-200">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
                         Penilaian <span class="text-blue-500">Pelanggan</span>
                     </h1>
                     <div class="flex w-32 sm:w-40 mt-3 mb-6 overflow-hidden rounded">
@@ -251,7 +249,7 @@
                         <div class="flex-1 h-2 bg-blue-600"></div>
                     </div>
                 </div>
-                <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4">
+                <p class="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl mx-auto px-4">
                     Lihat apa kata pelanggan kami tentang produk dan layanan yang kami berikan. Kepuasan Anda adalah
                     prioritas kami.
                 </p>
@@ -261,7 +259,7 @@
 
                 @forelse($storeReviews as $review)
                     <div
-                        class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 p-4 sm:p-6">
+                        class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 p-4 sm:p-6">
                         <!-- User Info & Rating -->
                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                             <div class="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
@@ -269,7 +267,7 @@
                                     @if ($review->user->avatar)
                                         <img src="{{ Storage::url($review->user->avatar) }}"
                                             alt="{{ $review->user->name }}"
-                                            class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900 shadow-lg"
+                                            class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-4 border-blue-100 shadow-lg"
                                             loading="lazy" width="64" height="64">
                                     @else
                                         <div
@@ -279,11 +277,10 @@
                                     @endif
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white truncate">
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 truncate">
                                         {{ $review->user->name }}
                                     </h3>
-                                    <p
-                                        class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                                    <p class="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
                                         <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -296,8 +293,7 @@
                             </div>
 
                             <!-- Rating Stars -->
-                            <div
-                                class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-lg w-fit">
+                            <div class="flex items-center gap-1 bg-yellow-50 px-3 py-2 rounded-lg w-fit">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}"
                                         fill="currentColor" viewBox="0 0 20 20">
@@ -311,7 +307,7 @@
 
                         <!-- Review Text -->
                         <div class="mb-4">
-                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
                                 {{ Str::limit($review->review, 250) }}
                             </p>
                         </div>
@@ -332,15 +328,14 @@
                     </div>
 
                 @empty
-                    <div
-                        class="bg-white border-2 shadow-lg rounded-2xl p-8 sm:p-12 text-center dark:bg-slate-900 dark:border-gray-800">
+                    <div class="bg-white border-2 shadow-lg rounded-2xl p-8 sm:p-12 text-center">
                         <svg class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-gray-400" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
                             </path>
                         </svg>
-                        <p class="text-gray-600 dark:text-gray-400 text-base sm:text-lg mb-6">Belum ada ulasan
+                        <p class="text-gray-600 text-base sm:text-lg mb-6">Belum ada ulasan
                             pelanggan.</p>
                         <a href="{{ route('store.reviews') }}"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-xl text-sm sm:text-base">

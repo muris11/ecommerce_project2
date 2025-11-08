@@ -34,4 +34,11 @@ class EditReview extends EditRecord
 
         return $data;
     }
+
+    protected function afterSave(): void
+    {
+        // Clear product reviews cache when admin reply is added/updated
+        $cacheKey = 'product_reviews_' . $this->record->product_id;
+        cache()->forget($cacheKey);
+    }
 }

@@ -62,6 +62,7 @@ class UserResource extends Resource
                         Forms\Components\FileUpload::make('avatar')
                             ->label('Foto Profil')
                             ->image()
+                            ->disk('public')
                             ->directory('avatars')
                             ->visibility('public')
                             ->imageEditor()
@@ -69,7 +70,13 @@ class UserResource extends Resource
 
                         Forms\Components\DateTimePicker::make('email_verified_at')
                             ->label('Email Terverifikasi')
-                            ->default(now()),
+                            ->nullable()
+                            ->helperText('Kosongkan jika user belum verified'),
+
+                        Forms\Components\Toggle::make('is_admin')
+                            ->label('Admin')
+                            ->default(false)
+                            ->helperText('Berikan akses ke panel admin'),
 
                         Forms\Components\TextInput::make('password')
                             ->label('Password')
@@ -89,7 +96,7 @@ class UserResource extends Resource
                 Tables\Columns\ImageColumn::make('avatar')
                     ->label('Foto')
                     ->circular()
-                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->name) . '&color=7F9CF5&background=EBF4FF'),
+                    ->defaultImageUrl(url('images/default-avatar.svg')),
                 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Lengkap')

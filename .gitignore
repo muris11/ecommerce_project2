@@ -21,3 +21,18 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Deployment temporary files
+check_admin.php
+check_reviews.php
+debug_admin.php
+setup.php
+setup-admin.php
+install.php
+
+# Logs & debug files
+/storage/logs/*.log
+/storage/debugbar/
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*

@@ -31,17 +31,19 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Informasi Kategori')
-                    ->description('Masukkan informasi kategori produk')
+                Forms\Components\Section::make('Informasi Dasar')
+                    ->description('Informasi utama kategori produk')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Kategori')
                             ->required()
                             ->maxLength(255)
+                            ->placeholder('Masukkan nama kategori')
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
                                 $operation === 'create' ? $set('slug', Str::slug($state)) : null
-                            ),
+                            )
+                            ->columnSpan(1),
                         
                         Forms\Components\TextInput::make('slug')
                             ->label('Slug')
@@ -49,26 +51,62 @@ class CategoryResource extends Resource
                             ->maxLength(255)
                             ->disabled()
                             ->dehydrated()
-                            ->unique(Category::class, 'slug', ignoreRecord: true),
+                            ->unique(Category::class, 'slug', ignoreRecord: true)
+                            ->helperText('URL-friendly name (auto-generated)')
+                            ->columnSpan(1),
                         
+                        Forms\Components\Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->maxLength(1000)
+                            ->placeholder('Deskripsi kategori (opsional)')
+                            ->rows(3)
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2)
+                    ->compact(),
+
+                Forms\Components\Section::make('Media & Dokumentasi')
+                    ->description('Upload gambar atau ikon kategori')
+                    ->schema([
                         Forms\Components\FileUpload::make('image')
-                            ->label('Ikon Kategori')
+                            ->label('Gambar Kategori')
                             ->disk('public')
                             ->directory('categories')
                             ->visibility('public')
                             ->image()
                             ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
                             ->maxSize(2048)
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg', 'image/webp'])
-                            ->helperText('Upload ikon kategori (Maks. 2MB)')
+                            ->helperText('Format: JPG, PNG, WebP. Maksimal 2MB')
                             ->columnSpanFull(),
-                        
+                    ])
+                    ->columns(1)
+                    ->compact()
+                    ->collapsible(),
+
+                Forms\Components\Section::make('Pengaturan')
+                    ->schema([
                         Forms\Components\Toggle::make('is_active')
                             ->label('Status Aktif')
                             ->default(true)
-                            ->required(),
+                            ->helperText('Nonaktifkan untuk menyembunyikan kategori')
+                            ->inline(false)
+                            ->columnSpan(1),
+                        
+                        Forms\Components\TextInput::make('sort_order')
+                            ->label('Urutan Tampilan')
+                            ->numeric()
+                            ->default(0)
+                            ->helperText('Urutan tampilan (0 = default)')
+                            ->columnSpan(1),
                     ])
-                    ->columns(2),
+                    ->columns(2)
+                    ->compact(),
             ]);
     }
 
@@ -81,17 +119,33 @@ class CategoryResource extends Resource
                     ->disk('public')
                     ->size(50)
                     ->circular()
-                    ->defaultImageUrl(url('images/no-image.png')),
+                    ->defaultImageUrl(url('images/default-category.svg')),
                 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Kategori')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->weight('bold'),
+                
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->limit(50)
+                    ->tooltip(function (Tables\Columns\TextColumn $column): ?string {
+                        $state = $column->getState();
+                        return strlen($state) > 50 ? $state : null;
+                    })
+                    ->toggleable(),
                 
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                
+                Tables\Columns\TextColumn::make('products_count')
+                    ->label('Produk')
+                    ->counts('products')
+                    ->badge()
+                    ->color('success'),
                 
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')

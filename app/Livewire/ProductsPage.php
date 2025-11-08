@@ -14,14 +14,11 @@ use App\Livewire\Partials\Navbar;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Traits\WithAlert;
 
-
 #[Title('Produk - Munir Jaya Abadi')]
-class ProductsPage extends Component{
-
+class ProductsPage extends Component
+{
     use WithPagination;
-
     use LivewireAlert, WithAlert;
-
 
     #[Url]
     public $selected_categories = [];
@@ -30,31 +27,21 @@ class ProductsPage extends Component{
     public $selected_brands = [];
 
     #[Url]
-    public $featured;
-
-    #[Url]
-    public $on_sale;
-
-    #[Url]
     public $price_range = 10000000;
 
     #[Url]
     public $sort = 'latest';
 
-    //add product to cart method
     public function addToCart($product_id) {
         $total_count = CartManagement::addItemToCart($product_id);
-
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
-
         $this->alertSuccess('Berhasil menambahkan produk ke keranjang');
     }
     
     public function render()
     {
-        // Select only needed columns for better performance
         $productQuery = Product::query()
-            ->select('id', 'name', 'slug', 'image', 'price', 'is_active', 'is_featured', 'on_sale', 'category_id', 'brand_id')
+            ->select('id', 'name', 'slug', 'image', 'price', 'is_active', 'category_id', 'brand_id')
             ->where('is_active', 1);
 
         if(!empty($this->selected_categories)) {
@@ -63,14 +50,6 @@ class ProductsPage extends Component{
 
         if(!empty($this->selected_brands)) {
             $productQuery->whereIn('brand_id', $this->selected_brands);
-        }
-
-        if($this->featured) {
-            $productQuery->where('is_featured', 1);
-        }
-
-        if($this->on_sale) {
-            $productQuery->where('on_sale', 1);
         }
 
         if($this->price_range) {
@@ -85,14 +64,21 @@ class ProductsPage extends Component{
             $productQuery->orderBy('price');
         }
 
-        // Cache brands and categories for better performance
-        $brands = cache()->remember('filter_brands', 3600, function () {
-            return Brand::where('is_active', 1)->get(['id', 'name', 'slug']);
-        });
+        $brands = cache()->remember(
+            config('cache_keys.keys.filter_brands'),
+            config('cache_keys.ttl.filters'),
+            function () {
+                return Brand::where('is_active', 1)->get(['id', 'name', 'slug']);
+            }
+        );
 
-        $categories = cache()->remember('filter_categories', 3600, function () {
-            return Category::where('is_active', 1)->get(['id', 'name', 'slug']);
-        });
+        $categories = cache()->remember(
+            config('cache_keys.keys.filter_categories'),
+            config('cache_keys.ttl.filters'),
+            function () {
+                return Category::where('is_active', 1)->get(['id', 'name', 'slug']);
+            }
+        );
 
         return view('livewire.products-page', [
             'products' => $productQuery->paginate(9),

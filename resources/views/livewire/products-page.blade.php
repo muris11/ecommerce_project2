@@ -8,27 +8,27 @@
 
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
     <section
-        class="py-10 bg-gradient-to-br from-gray-50 to-blue-50 font-poppins dark:from-gray-800 dark:to-gray-900 rounded-lg animate-fade-in">
+        class="py-10 bg-gradient-to-br from-gray-50 to-blue-50 font-poppins   rounded-lg animate-fade-in">
         <div class="px-4 py-4 mx-auto max-w-7xl lg:py-6 md:px-6">
             <div class="flex flex-wrap mb-24 -mx-3">
                 <div class="w-full pr-2 lg:w-1/4 lg:block">
                     <div
-                        class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up">
-                        <h2 class="text-2xl font-bold dark:text-gray-400 flex items-center gap-2">
+                        class="p-4 mb-5 bg-white border border-gray-200   rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up">
+                        <h2 class="text-2xl font-bold  flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
                             Kategori
                         </h2>
-                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 dark:border-blue-400"></div>
+                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 "></div>
                         <ul>
 
                             @foreach ($categories as $category)
                                 <li class="mb-4 transform hover:translate-x-2 transition-all duration-300" wire:key
                                     {{ $category->id }}>
                                     <label for="{{ $category->slug }}"
-                                        class="flex items-center dark:text-gray-400 cursor-pointer group">
+                                        class="flex items-center  cursor-pointer group">
                                         <input type="checkbox" wire:model.live="selected_categories"
                                             id="{{ $category->slug }}" value="{{ $category->id }}"
                                             class="w-4 h-4 mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-all">
@@ -41,8 +41,8 @@
 
                     </div>
                     <div
-                        class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-200">
-                        <h2 class="text-2xl font-bold dark:text-gray-400 flex items-center gap-2">
+                        class="p-4 mb-5 bg-white border border-gray-200   rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-200">
+                        <h2 class="text-2xl font-bold  flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
@@ -50,49 +50,49 @@
                             </svg>
                             Merek
                         </h2>
-                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 dark:border-blue-400"></div>
+                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 "></div>
                         <ul>
                             @foreach ($brands as $brand)
                                 <li class="mb-4 transform hover:translate-x-2 transition-all duration-300" wire:key
                                     {{ $brand->id }}>
                                     <label for="{{ $brand->slug }}"
-                                        class="flex items-center dark:text-gray-300 cursor-pointer group">
+                                        class="flex items-center  cursor-pointer group">
                                         <input type="checkbox" wire:model.live="selected_brands"
                                             id="{{ $brand->slug }}" value="{{ $brand->id }}"
                                             class="w-4 h-4 mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-all">
                                         <span
-                                            class="text-lg dark:text-gray-400 group-hover:text-blue-600 transition-colors duration-300">{{ $brand->name }}</span>
+                                            class="text-lg  group-hover:text-blue-600 transition-colors duration-300">{{ $brand->name }}</span>
                                     </label>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
                     <div
-                        class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-400">
-                        <h2 class="text-2xl font-bold dark:text-gray-400 flex items-center gap-2">
+                        class="p-4 mb-5 bg-white border border-gray-200   rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-400">
+                        <h2 class="text-2xl font-bold  flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             Status Produk
                         </h2>
-                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 dark:border-blue-400"></div>
+                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 "></div>
                         <ul>
                             <li class="mb-4 transform hover:translate-x-2 transition-all duration-300">
-                                <label for="featured" class="flex items-center dark:text-gray-300 cursor-pointer group">
+                                <label for="featured" class="flex items-center  cursor-pointer group">
                                     <input type="checkbox" id="featured" wire:model.live="featured" value="1"
                                         class="w-4 h-4 mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-all">
                                     <span
-                                        class="text-lg dark:text-gray-400 group-hover:text-blue-600 transition-colors duration-300">Produk
+                                        class="text-lg  group-hover:text-blue-600 transition-colors duration-300">Produk
                                         Unggulan</span>
                                 </label>
                             </li>
                             <li class="mb-4 transform hover:translate-x-2 transition-all duration-300">
-                                <label for="on_sale" class="flex items-center dark:text-gray-300 cursor-pointer group">
+                                <label for="on_sale" class="flex items-center  cursor-pointer group">
                                     <input type="checkbox" id="on_sale" wire:model.live="on_sale" value="1"
                                         class="w-4 h-4 mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-all">
                                     <span
-                                        class="text-lg dark:text-gray-400 group-hover:text-blue-600 transition-colors duration-300">Di
+                                        class="text-lg  group-hover:text-blue-600 transition-colors duration-300">Di
                                         Jual</span>
                                 </label>
                             </li>
@@ -100,8 +100,8 @@
                     </div>
 
                     <div
-                        class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-600">
-                        <h2 class="text-2xl font-bold dark:text-gray-400 flex items-center gap-2">
+                        class="p-4 mb-5 bg-white border border-gray-200   rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-600">
+                        <h2 class="text-2xl font-bold  flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
@@ -109,7 +109,7 @@
                             </svg>
                             Harga
                         </h2>
-                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 dark:border-blue-400"></div>
+                        <div class="w-16 pb-2 mb-6 border-b-2 border-blue-600 "></div>
                         <div>
                             <div class="font-semibold">{{ Number::currency($price_range, 'IDR') }}</div>
                             <input type="range" wire:model.live="price_range"
@@ -128,10 +128,10 @@
                 <div class="w-full px-3 lg:w-3/4">
                     <div class="px-3 mb-4">
                         <div
-                            class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex dark:bg-gray-900 ">
+                            class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex  ">
                             <div class="flex items-center justify-between">
                                 <select wire:model.live="sort"
-                                    class="block w-75 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
+                                    class="block w-75 text-base bg-gray-100 cursor-pointer  ">
                                     <option value="latest">Urutan Terbaru</option>
                                     <option value="price">Urutan Harga Terendah</option>
                                 </select>
@@ -144,8 +144,8 @@
                             <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3 animate-fade-in-up"
                                 wire:key={{ $product->id }} style="animation-delay: {{ $loop->index * 50 }}ms">
                                 <div
-                                    class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700 overflow-hidden group transform hover:-translate-y-2 hover:scale-105">
-                                    <div class="relative bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                                    class="bg-white  rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200  overflow-hidden group transform hover:-translate-y-2 hover:scale-105">
+                                    <div class="relative bg-gray-100  overflow-hidden">
                                         <a href="{{ route('products.show', $product->slug) }}" class="block">
                                             <div
                                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -160,13 +160,13 @@
                                     <div class="p-4">
                                         <div class="mb-3">
                                             <h3
-                                                class="text-lg font-semibold text-gray-800 dark:text-gray-200 line-clamp-2 min-h-[3.5rem] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                                class="text-lg font-semibold text-gray-800  line-clamp-2 min-h-[3.5rem] hover:text-blue-600  transition-colors">
                                                 <a
                                                     href="{{ route('products.show', $product->slug) }}">{{ $product->name }}</a>
                                             </h3>
                                         </div>
                                         <div class="flex items-center justify-between mb-4">
-                                            <p class="text-xl font-bold text-green-600 dark:text-green-500">
+                                            <p class="text-xl font-bold text-green-600 ">
                                                 {{ Number::currency($product->price, 'IDR') }}
                                             </p>
                                         </div>
